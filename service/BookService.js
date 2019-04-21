@@ -13,7 +13,7 @@ exports.bookIdGET = function(id) {
     examples['application/json'] = {
   "id" : 0,
   "title" : "Harry Potter 1",
-  "author" : 5,
+  "authorId" : 5,
   "price" : 10,
   "isbn" : "9780747532743",
   "quantity" : 3
@@ -39,18 +39,18 @@ exports.booksGET = function() {
     examples['application/json'] = [ {
   "id" : 0,
   "title" : "Harry Potter 1",
-  "author" : 5,
+  "authorId" : 5,
   "price" : 10,
   "isbn" : "9780747532743",
   "quantity" : 3
-}, {
+}/*, {
   "id" : 0,
   "title" : "Harry Potter 1",
-  "author" : 5,
+  "authorId" : 5,
   "price" : 10,
   "isbn" : "9780747532743",
   "quantity" : 3
-} ];
+}*/ ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {

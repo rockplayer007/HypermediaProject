@@ -12,7 +12,7 @@
                         for(let i = 0; i< json.length; i++) {
                            let listItem = document.createElement("li");
                            let { title, authorId, price } = json[i];
-                                listItem.innerHTML = `${title} - ${author} - ${price}`;
+                                listItem.innerHTML = `${title} - ${authorId} - ${price}`;
                            document.querySelector("ul").append(listItem);
                         }
                  });

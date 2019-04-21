@@ -521,7 +521,7 @@ definitions:
     example:
       id: 0
       title: "Harry Potter 1"
-      author: 5
+      authorId: 5
       price: 10
       isbn: "9780747532743"
       quantity: 3
