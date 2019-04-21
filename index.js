@@ -10,6 +10,8 @@ var jsyaml = require('js-yaml');
 var serverPort = process.env.PORT || 8080
 //var serverPort = 8080;
 
+let serveStatic = require("serve-static");
+
 // swaggerRouter configuration
 var options = {
   swaggerUi: path.join(__dirname, '/swagger.json'),
@@ -20,6 +22,8 @@ var options = {
 // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
 var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
+
+app.use(serveStatic(__dirname + "/website"));
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
