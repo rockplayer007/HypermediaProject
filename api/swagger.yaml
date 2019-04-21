@@ -1,0 +1,601 @@
+---
+swagger: "2.0"
+info:
+  description: "This is an online bookstore with books, writers and users"
+  version: "1.0.0"
+  title: "BookStore"
+  contact:
+    email: "maildiroland@yahoo.it"
+  license:
+    name: "Apache-2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/ApiDiRoland/BookStore/1.0.0"
+tags:
+- name: "book"
+  description: "Books availble"
+- name: "author"
+  description: "Writers of the books"
+- name: "user"
+  description: "Users subscribed"
+- name: "cart"
+  description: "Cart of an user"
+schemes:
+- "https"
+paths:
+  /books:
+    get:
+      tags:
+      - "book"
+      summary: "Books availble in the store"
+      description: "List of books available in the inventory"
+      operationId: "booksGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Collection of books"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Book"
+    post:
+      tags:
+      - "book"
+      summary: "Adds a new book to the store"
+      operationId: "booksPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Book will be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Book"
+    put:
+      tags:
+      - "book"
+      summary: "Update an existing book"
+      operationId: "booksPUT"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Book to be modify in the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Book not found"
+        405:
+          description: "Validation exception"
+      x-swagger-router-controller: "Book"
+  /books/{id}:
+    get:
+      tags:
+      - "book"
+      summary: "Find book with the book's id"
+      operationId: "bookIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the book you are searching"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "operation was successful"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "wrond id"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /books/{id}/author:
+    get:
+      tags:
+      - "book"
+      summary: "Get the author of a book"
+      operationId: "booksIdAuthorGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the book you want the author of"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Author"
+        400:
+          description: "Wrong id"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /authors:
+    get:
+      tags:
+      - "author"
+      summary: "Finds authors"
+      description: "Get author"
+      operationId: "authorGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Author"
+      x-swagger-router-controller: "Author"
+    post:
+      tags:
+      - "author"
+      summary: "Add a new author to the store"
+      operationId: "authorPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Author to add to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Author"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Author"
+    put:
+      tags:
+      - "author"
+      summary: "Update an existing author"
+      operationId: "authorPUT"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Author to add to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/Author"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Author not found"
+        405:
+          description: "Validation exception"
+      x-swagger-router-controller: "Author"
+  /authors/{id}:
+    get:
+      tags:
+      - "author"
+      summary: "Find authors by ID"
+      operationId: "authorIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id to get the author"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Author"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Author"
+  /authors/{id}/books:
+    get:
+      tags:
+      - "author"
+      summary: "Get the books of an author"
+      operationId: "authorsIdBooksGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of author of which to get the books"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Author not found"
+      x-swagger-router-controller: "Author"
+  /users:
+    get:
+      tags:
+      - "user"
+      summary: "get all users of the system"
+      operationId: "userGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+      x-swagger-router-controller: "User"
+    post:
+      tags:
+      - "user"
+      summary: "Add a new user to the store"
+      operationId: "userPOST"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User to add to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "user"
+      summary: "Update an existing user"
+      operationId: "userPUT"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User to add to the database"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"
+        405:
+          description: "Validation exception"
+      x-swagger-router-controller: "User"
+  /users/{id}:
+    get:
+      tags:
+      - "user"
+      summary: "Find user with id"
+      description: "Returns a single user"
+      operationId: "usersIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of user to get"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"
+      x-swagger-router-controller: "User"
+  /users/{id}/cart:
+    get:
+      tags:
+      - "user"
+      summary: "Get the cart of an user"
+      operationId: "usersIdCartGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the user to get the cart from"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cart"
+      x-swagger-router-controller: "User"
+  /users/login:
+    get:
+      tags:
+      - "user"
+      summary: "Logs user into the system"
+      description: ""
+      operationId: "userLoginGET"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "email"
+        in: "query"
+        description: "The email for login"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        description: "The password for login in clear text"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          headers:
+            X-Rate-Limit:
+              type: "integer"
+              format: "int32"
+              description: "calls per hour allowed by the user"
+            X-Expires-After:
+              type: "string"
+              format: "date-time"
+              description: "date in UTC when token expires"
+          schema:
+            type: "string"
+        400:
+          description: "Invalid username/password supplied"
+      x-swagger-router-controller: "User"
+  /users/logout:
+    get:
+      tags:
+      - "user"
+      summary: "Logs out current logged in user session"
+      description: ""
+      operationId: "userLogoutGET"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      x-swagger-router-controller: "User"
+  /cart:
+    get:
+      tags:
+      - "cart"
+      summary: "Finds a cart"
+      description: "Get a cart from the system"
+      operationId: "cartGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "userId"
+        in: "query"
+        description: "The id of the user of the cart to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cart"
+        400:
+          description: "Invalid userId value"
+      x-swagger-router-controller: "Cart"
+  /cart/{id}:
+    get:
+      tags:
+      - "cart"
+      summary: "Finds a cart by ID"
+      operationId: "cartIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of the cart to get"
+        required: true
+        type: "integer"
+        format: "i\"nt64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cart"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "Cart not found"
+      x-swagger-router-controller: "Cart"
+    put:
+      tags:
+      - "cart"
+      summary: "Updates a cart in the store with form data"
+      operationId: "cartIdPUT"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of cart that needs to be updated"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "books"
+        in: "formData"
+        description: "Updated array of books in the cart"
+        required: true
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+        collectionFormat: "multi"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Cart"
+definitions:
+  Book:
+    type: "object"
+    required:
+    - "authorId"
+    - "id"
+    - "price"
+    - "title"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      title:
+        type: "string"
+      authorId:
+        type: "integer"
+        format: "int64"
+      price:
+        type: "number"
+        format: "double"
+      isbn:
+        type: "string"
+      quantity:
+        type: "integer"
+        format: "int32"
+    title: "Book"
+    xml:
+      name: "Book"
+    description: "A book for sale in the store"
+    example:
+      id: 0
+      title: "Harry Potter 1"
+      author: 5
+      price: 10
+      isbn: "9780747532743"
+      quantity: 3
+  Author:
+    type: "object"
+    required:
+    - "id"
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      biography:
+        type: "string"
+    xml:
+      name: "Author"
+    description: "Book writer"
+    example:
+      id: 5
+      name: "Joanne"
+      surname: "Rowling"
+      biography: "Author of the famous Harry Potter books"
+  User:
+    type: "object"
+    required:
+    - "email"
+    - "name"
+    - "password"
+    - "surname"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      surname:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      cartId:
+        type: "integer"
+        format: "int64"
+        description: "The id of the user's cart"
+    xml:
+      name: "User"
+    example:
+    - id: 1
+    - name: "Harry"
+    - surname: "Potter"
+    - email: "harry.potter@gmail.com"
+    - password: "wingardiumleviosa"
+  Cart:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      userId:
+        type: "integer"
+        format: "int64"
+      books:
+        type: "array"
+        items:
+          type: "integer"
+          format: "int64"
+    example:
+      id: 0
+      userId: 0
+      books:
+      - 0
+      - 1
+      - 2
