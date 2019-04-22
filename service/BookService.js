@@ -1,5 +1,30 @@
 'use strict';
 
+let sqlDb;
+
+exports.booksDbSetup = function(database) {
+  sqlDb = database;
+  console.log("Checking if books table exists");
+  return database.schema.hasTable("books").then(exists => {
+    if (!exists) {
+      console.log("It doesn't so we create it");
+      return database.schema.createTable("books", table => {
+        table.increments();
+        table.integer("id");
+        table.text("title");
+        table.integer("authorId");
+        table.float("price");
+        table.string("isbn");
+        table.integer("quantity");
+      });
+    }
+    else{
+        console.log("table already exists");
+    }
+  });
+};
+
+
 
 /**
  * Find book with the book's id
@@ -35,6 +60,13 @@ exports.bookIdGET = function(id) {
  **/
 exports.booksGET = function() {
   return new Promise(function(resolve, reject) {
+      
+      return sqlDb("books");
+  });
+}
+      
+      
+      /*
     var examples = {};
     examples['application/json'] = [ {
   "id" : 0,
@@ -43,21 +75,22 @@ exports.booksGET = function() {
   "price" : 10,
   "isbn" : "9780747532743",
   "quantity" : 3
-}/*, {
+}, {
   "id" : 0,
   "title" : "Harry Potter 1",
   "authorId" : 5,
   "price" : 10,
   "isbn" : "9780747532743",
   "quantity" : 3
-}*/ ];
+} ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-}
+  */
+                     
 
 
 /**
