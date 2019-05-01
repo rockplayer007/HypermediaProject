@@ -9,7 +9,7 @@ exports.booksDbSetup = function(database) {
     if (!exists) {
       console.log("It doesn't so we create it");
       return database.schema.createTable("books", table => {
-        table.increments();
+        //table.increments();
         table.integer("id");
         table.text("title");
         table.integer("authorId");
@@ -61,35 +61,32 @@ exports.bookIdGET = function(id) {
 exports.booksGET = function() {
   return new Promise(function(resolve, reject) {
       
-      return sqlDb("books");
-  });
-}
+
       
-      
-      /*
     var examples = {};
-    examples['application/json'] = [ {
+    examples['application/json'] = [{
   "id" : 0,
   "title" : "Harry Potter 1",
   "authorId" : 5,
   "price" : 10,
   "isbn" : "9780747532743",
   "quantity" : 3
-}, {
-  "id" : 0,
+},
+{
+  "id" : 1,
   "title" : "Harry Potter 1",
   "authorId" : 5,
   "price" : 10,
   "isbn" : "9780747532743",
   "quantity" : 3
-} ];
+}];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
       resolve();
     }
   });
-  */
+}
                      
 
 

@@ -50,5 +50,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
         console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
       });
   });
-
+  
 });
+console.log("arrivato");
