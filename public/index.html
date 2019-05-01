@@ -11,8 +11,8 @@
                  }).then(function(json) {
                         for(let i = 0; i< json.length; i++) {
                            let listItem = document.createElement("li");
-                           let { title, authorId, price } = json[i];
-                                listItem.innerHTML = `${title} - ${authorId} - ${price}`;
+                           let { title, authorId } = json[i];
+                                listItem.innerHTML = `${title} - ${authorId} - `;
                            document.querySelector("ul").append(listItem);
                         }
                  });

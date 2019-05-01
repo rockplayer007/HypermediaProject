@@ -4,10 +4,9 @@ let sqlDb;
 
 exports.booksDbSetup = function(database) {
   sqlDb = database;
-  console.log("Checking if books table exists");
   return database.schema.hasTable("books").then(exists => {
     if (!exists) {
-      console.log("It doesn't so we create it");
+      //console.log("It doesn't so we create it");
       return database.schema.createTable("books", table => {
         //table.increments();
         table.integer("id");
@@ -19,7 +18,7 @@ exports.booksDbSetup = function(database) {
       });
     }
     else{
-        console.log("table already exists");
+        //console.log("table already exists");
     }
   });
 };
@@ -52,17 +51,18 @@ exports.bookIdGET = function(id) {
 }
 
 
+
+
+
 /**
  * Books availble in the store
  * List of books available in the inventory
  *
  * returns List
  **/
+/*
 exports.booksGET = function() {
   return new Promise(function(resolve, reject) {
-      
-
-      
     var examples = {};
     examples['application/json'] = [{
   "id" : 0,
@@ -87,7 +87,20 @@ exports.booksGET = function() {
     }
   });
 }
-                     
+*/
+/*
+exports.booksGET = function(offset, limit) {
+  //console.log(sqlDb.from("books").select('title', 'authorID'));
+  return sqlDb.from("books").select('title', 'authorID');
+};
+*/
+
+exports.booksGET = function(offset, limit) {
+  return sqlDb("books")
+    .then(data => {
+      return data
+    });
+};
 
 
 /**
