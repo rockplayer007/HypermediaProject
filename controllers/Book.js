@@ -15,7 +15,6 @@ module.exports.bookIdGET = function bookIdGET (req, res, next) {
 };
 
 module.exports.booksGET = function booksGET (req, res, next) {
-  console.log("Ciaoaooaoaoaoao   function booksGET (req, res, next)");
   Book.booksGET()
     .then(function (response) {
       utils.writeJson(res, response);

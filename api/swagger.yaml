@@ -135,7 +135,7 @@ paths:
               $ref: "#/definitions/Event"
         404:
           description: "Unexpected error"
-      x-swagger-router-controller: "Book"
+      x-swagger-router-controller: "Event"
   /events/{id}:
     get:
       tags:

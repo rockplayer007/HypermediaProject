@@ -42,27 +42,13 @@ exports.booksDbSetup = function(database) {
  * returns Book
  **/
 exports.bookIdGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "id" : 0,
-      "title" : "Harry Potter 1",
-      "authorId" : 5,
-      "price" : 10,
-      "isbn" : "9780747532743",
-      "genre" : "fantasy",
-      "event" : "0",
-      "quantity" : 3,
-      "publisher" : "Bloomsbury Publishing",
-      "language" : "english",
-      "release" : "1997-06-26"
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from('books')
+      .select()
+      .where({ id: id })
+      .then(data => {
+        return data
+      });
 }
 
 
@@ -76,7 +62,6 @@ exports.bookIdGET = function(id) {
  * returns List
  **/
 exports.booksGET = function() {
-  console.log("helooooooooooooo");
   return sqlDb("books")
     .then(data => {
       return data
@@ -91,20 +76,13 @@ exports.booksGET = function() {
  * returns Author
  **/
 exports.booksIdAuthorGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "id" : 5,
-      "name" : "Joanne",
-      "surname" : "Rowling",
-      "biography" : "Author of the famous Harry Potter books"
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from("authors")
+      .select()
+      .where("id", id)
+      .then(data => {
+        return data
+      });
 };
 
 
@@ -116,19 +94,11 @@ exports.booksIdAuthorGET = function(id) {
  * returns Event
  **/
 exports.booksIdEventGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "id" : 0,
-      "name" : "Harry Potter reunion",
-      "date" : "2017-07-21",
-      "location" : "London",
-      "description" : "All together to make magic"
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from("events")
+      .select()
+      .where("id", id)
+      .then(data => {
+        return data
+      });
 }

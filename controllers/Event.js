@@ -15,6 +15,7 @@ module.exports.eventIdGET = function eventIdGET (req, res, next) {
 };
 
 module.exports.eventsGET = function eventsGET (req, res, next) {
+  console.log("hellooooooooooooo");
   Event.eventsGET()
     .then(function (response) {
       utils.writeJson(res, response);

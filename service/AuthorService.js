@@ -46,20 +46,13 @@ exports.authorGET = function() {
  * returns Author
  **/
 exports.authorIdGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 5,
-  "name" : "Joanne",
-  "surname" : "Rowling",
-  "biography" : "Author of the famous Harry Potter books"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from('author')
+      .select()
+      .where({ id: id })
+      .then(data => {
+        return data
+      });
 }
 
 
@@ -70,27 +63,13 @@ exports.authorIdGET = function(id) {
  * returns List
  **/
 exports.authorsIdBooksGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-      "id" : 0,
-      "title" : "Harry Potter 1",
-      "authorId" : 5,
-      "price" : 10,
-      "isbn" : "9780747532743",
-      "genre" : "fantasy",
-      "event" : "0",
-      "quantity" : 3,
-      "publisher" : "Bloomsbury Publishing",
-      "language" : "english",
-      "release" : "1997-06-26"
-    } ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from("books")
+      .select()
+      .where("id", id)
+      .then(data => {
+        return data
+      });
 }
 
 

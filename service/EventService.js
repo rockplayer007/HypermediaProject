@@ -1,6 +1,32 @@
 'use strict';
 
 
+let sqlDb;
+
+exports.eventsDbSetup = function(database) {
+  sqlDb = database;
+  return database.schema.hasTable("events").then(exists => {
+    if (!exists) {
+      //console.log("It doesn't so we create it");
+      return database.schema.createTable("events", table => {
+        //table.increments();
+        table.increments("id").primary();
+        table.string("name");
+        table.integer("bookId");
+        table.date("date");
+        table.string("location");
+        table.text("description");
+
+        table.foreign("bookId").references("books.id");
+      });
+    }
+    else{
+      //console.log("table already exists");
+    }
+  });
+};
+
+
 /**
  * Find event with the event's id
  *
@@ -8,21 +34,13 @@
  * returns Event
  **/
 exports.eventIdGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "name" : "Harry Potter reunion",
-  "date" : "2017-07-21",
-  "location" : "London",
-  "description" : "All together to make magic"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from('events')
+      .select()
+      .where({ id: id })
+      .then(data => {
+        return data
+      });
 }
 
 
@@ -33,27 +51,11 @@ exports.eventIdGET = function(id) {
  * returns List
  **/
 exports.eventsGET = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "id" : 0,
-  "name" : "Harry Potter reunion",
-  "date" : "2017-07-21",
-  "location" : "London",
-  "description" : "All together to make magic"
-}, {
-  "id" : 0,
-  "name" : "Harry Potter reunion",
-  "date" : "2017-07-21",
-  "location" : "London",
-  "description" : "All together to make magic"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  console.log("hellooooooooooooo");
+  return sqlDb("events")
+      .then(data => {
+        return data
+      });
 }
 
 
@@ -64,26 +66,12 @@ exports.eventsGET = function() {
  * returns Book
  **/
 exports.eventsIdBookGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "title" : "Harry Potter 1",
-  "authorId" : 5,
-  "price" : 10,
-  "isbn" : "9780747532743",
-  "genre" : "fantasy",
-  "event" : "0",
-  "quantity" : 3,
-  "publisher" : "Bloomsbury Publishing",
-  "language" : "english",
-  "release" : "1997-06-26"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from('books')
+      .select()
+      .where({ id: id })
+      .then(data => {
+        return data
+      });
 }
 
