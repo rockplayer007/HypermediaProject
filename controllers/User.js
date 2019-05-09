@@ -46,17 +46,6 @@ module.exports.userPOST = function userPOST (req, res, next) {
     });
 };
 
-module.exports.userPUT = function userPUT (req, res, next) {
-  var body = req.swagger.params['body'].value;
-  User.userPUT(body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
 module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   User.usersIdCartGET(id)
