@@ -1,10 +1,11 @@
 'use strict';
 
 var utils = require('../utils/writer.js');
-var Author = require('../service/AuthorService');
+var Event = require('../service/EventService');
 
-module.exports.authorGET = function authorGET (req, res, next) {
-  Author.authorGET()
+module.exports.eventIdGET = function eventIdGET (req, res, next) {
+  var id = req.swagger.params['id'].value;
+  Event.eventIdGET(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -13,9 +14,9 @@ module.exports.authorGET = function authorGET (req, res, next) {
     });
 };
 
-module.exports.authorIdGET = function authorIdGET (req, res, next) {
-  var id = req.swagger.params['id'].value;
-  Author.authorIdGET(id)
+module.exports.eventsGET = function eventsGET (req, res, next) {
+  console.log("hellooooooooooooo");
+  Event.eventsGET()
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -24,9 +25,9 @@ module.exports.authorIdGET = function authorIdGET (req, res, next) {
     });
 };
 
-module.exports.authorsIdBooksGET = function authorsIdBooksGET (req, res, next) {
+module.exports.eventsIdBookGET = function eventsIdBookGET (req, res, next) {
   var id = req.swagger.params['id'].value;
-  Author.authorsIdBooksGET(id)
+  Event.eventsIdBookGET(id)
     .then(function (response) {
       utils.writeJson(res, response);
     })

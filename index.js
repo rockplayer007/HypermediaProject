@@ -9,7 +9,7 @@ let { setupDataLayer } = require("./service/DataLayer");
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
-var serverPort = process.env.PORT || 8080
+var serverPort = process.env.PORT || 8080;
 //var serverPort = 8080;
 
 let serveStatic = require("serve-static");
@@ -25,7 +25,7 @@ var options = {
 var spec = fs.readFileSync(path.join(__dirname,'api/swagger.yaml'), 'utf8');
 var swaggerDoc = jsyaml.safeLoad(spec);
 
-app.use(serveStatic(__dirname + "/website"));
+app.use(serveStatic(__dirname + "/public"));
 
 // Initialize the Swagger middleware
 swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
@@ -52,4 +52,4 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   });
   
 });
-console.log("arrivato");
+

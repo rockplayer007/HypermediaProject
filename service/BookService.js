@@ -4,22 +4,31 @@ let sqlDb;
 
 exports.booksDbSetup = function(database) {
   sqlDb = database;
-  console.log("Checking if books table exists");
   return database.schema.hasTable("books").then(exists => {
     if (!exists) {
-      console.log("It doesn't so we create it");
+      //console.log("It doesn't so we create it");
       return database.schema.createTable("books", table => {
         //table.increments();
-        table.integer("id");
-        table.text("title");
+        table.increments("id").primary();
+        table.string("title");
         table.integer("authorId");
-        table.float("price");
+        table.decimal("price");
         table.string("isbn");
         table.integer("quantity");
+        table.string("genre");
+        table.integer("event");
+        table.text("description");
+        table.string("publisher");
+        table.string("language");
+        table.date("date");
+
+        table.foreign("authorId").references("authors.id");
+        table.foreign("event").references("events.id");
+
       });
     }
     else{
-        console.log("table already exists");
+        //console.log("table already exists");
     }
   });
 };
@@ -33,23 +42,17 @@ exports.booksDbSetup = function(database) {
  * returns Book
  **/
 exports.bookIdGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "title" : "Harry Potter 1",
-  "authorId" : 5,
-  "price" : 10,
-  "isbn" : "9780747532743",
-  "quantity" : 3
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb
+      .from('books')
+      .select()
+      .where({ id: id })
+      .then(data => {
+        return data
+      });
 }
+
+
+
 
 
 /**
@@ -59,35 +62,11 @@ exports.bookIdGET = function(id) {
  * returns List
  **/
 exports.booksGET = function() {
-  return new Promise(function(resolve, reject) {
-      
-
-      
-    var examples = {};
-    examples['application/json'] = [{
-  "id" : 0,
-  "title" : "Harry Potter 1",
-  "authorId" : 5,
-  "price" : 10,
-  "isbn" : "9780747532743",
-  "quantity" : 3
-},
-{
-  "id" : 1,
-  "title" : "Harry Potter 1",
-  "authorId" : 5,
-  "price" : 10,
-  "isbn" : "9780747532743",
-  "quantity" : 3
-}];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-                     
+  return sqlDb("books")
+    .then(data => {
+      return data
+    });
+};
 
 
 /**
@@ -97,45 +76,29 @@ exports.booksGET = function() {
  * returns Author
  **/
 exports.booksIdAuthorGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 5,
-  "name" : "Joanne",
-  "surname" : "Rowling",
-  "biography" : "Author of the famous Harry Potter books"
+  return sqlDb
+      .from("authors")
+      .select()
+      .where("id", id)
+      .then(data => {
+        return data
+      });
 };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
+
 
 
 /**
- * Adds a new book to the store
+ * Get the event of a book
  *
- * body Book Book will be added to the store
- * no response value expected for this operation
+ * id Long id of the book you want the event of
+ * returns Event
  **/
-exports.booksPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.booksIdEventGET = function(id) {
+  return sqlDb
+      .from("events")
+      .select()
+      .where("id", id)
+      .then(data => {
+        return data
+      });
 }
-
-
-/**
- * Update an existing book
- *
- * body Book Book to be modify in the database
- * no response value expected for this operation
- **/
-exports.booksPUT = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-

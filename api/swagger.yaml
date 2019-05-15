@@ -10,11 +10,12 @@ info:
     name: "Apache-2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "hypermedia-app.herokuapp.com"
-#host: "localhost:8080"
 basePath: "/v2"
 tags:
 - name: "book"
   description: "Books availble"
+- name: "event"
+  description: "Events of the books"
 - name: "author"
   description: "Writers of the books"
 - name: "user"
@@ -43,50 +44,6 @@ paths:
               $ref: "#/definitions/Book"
         404:
           description: "Unexpected error"
-      x-swagger-router-controller: "Book"
-    post:
-      tags:
-      - "book"
-      summary: "Adds a new book to the store"
-      operationId: "booksPOST"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Book will be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Book"
-      responses:
-        405:
-          description: "Invalid input"
-      x-swagger-router-controller: "Book"
-    put:
-      tags:
-      - "book"
-      summary: "Update an existing book"
-      operationId: "booksPUT"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Book to be modify in the database"
-        required: true
-        schema:
-          $ref: "#/definitions/Book"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Book not found"
-        405:
-          description: "Validation exception"
       x-swagger-router-controller: "Book"
   /books/{id}:
     get:
@@ -136,6 +93,97 @@ paths:
         404:
           description: "Book not found"
       x-swagger-router-controller: "Book"
+  /books/{id}/event:
+    get:
+      tags:
+      - "book"
+      summary: "Get the event of a book"
+      operationId: "booksIdEventGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the book you want the event of"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "Wrong id"
+        404:
+          description: "Book not found"
+      x-swagger-router-controller: "Book"
+  /events:
+    get:
+      tags:
+      - "event"
+      summary: "Events related to a book"
+      description: "List of all the events"
+      operationId: "eventsGET"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Collection of events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Event"
+        404:
+          description: "Unexpected error"
+      x-swagger-router-controller: "Event"
+  /events/{id}:
+    get:
+      tags:
+      - "event"
+      summary: "Find event with the event's id"
+      operationId: "eventIdGET"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the event you are searching"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "operation was successful"
+          schema:
+            $ref: "#/definitions/Event"
+        400:
+          description: "wrond id"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
+  /events/{id}/book:
+    get:
+      tags:
+      - "event"
+      summary: "Get the book of an event"
+      operationId: "eventsIdBookGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "id of the event you want the book of"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Wrong id"
+        404:
+          description: "Event not found"
+      x-swagger-router-controller: "Event"
   /authors:
     get:
       tags:
@@ -153,50 +201,6 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Author"
-      x-swagger-router-controller: "Author"
-    post:
-      tags:
-      - "author"
-      summary: "Add a new author to the store"
-      operationId: "authorPOST"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Author to add to the database"
-        required: true
-        schema:
-          $ref: "#/definitions/Author"
-      responses:
-        405:
-          description: "Invalid input"
-      x-swagger-router-controller: "Author"
-    put:
-      tags:
-      - "author"
-      summary: "Update an existing author"
-      operationId: "authorPUT"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Author to add to the database"
-        required: true
-        schema:
-          $ref: "#/definitions/Author"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Author not found"
-        405:
-          description: "Validation exception"
       x-swagger-router-controller: "Author"
   /authors/{id}:
     get:
@@ -286,30 +290,6 @@ paths:
       responses:
         405:
           description: "Invalid input"
-      x-swagger-router-controller: "User"
-    put:
-      tags:
-      - "user"
-      summary: "Update an existing user"
-      operationId: "userPUT"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "User to add to the database"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "User not found"
-        405:
-          description: "Validation exception"
       x-swagger-router-controller: "User"
   /users/{id}:
     get:
@@ -511,9 +491,23 @@ definitions:
         format: "double"
       isbn:
         type: "string"
+      genre:
+        type: "string"
+      event:
+        type: "integer"
+        format: "int64"
       quantity:
         type: "integer"
         format: "int32"
+      description:
+        type: "string"
+      publisher:
+        type: "string"
+      language:
+        type: "string"
+      release:
+        type: "string"
+        format: "date"
     title: "Book"
     xml:
       name: "Book"
@@ -524,7 +518,46 @@ definitions:
       authorId: 5
       price: 10
       isbn: "9780747532743"
+      genre: "fantasy"
+      event: "0"
       quantity: 3
+      publisher: "Bloomsbury Publishing"
+      language: "english"
+      release: "1997-06-26"
+  Event:
+    type: "object"
+    required:
+    - "book"
+    - "date"
+    - "id"
+    - "location"
+    - "name"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      book:
+        type: "integer"
+        format: "int64"
+      date:
+        type: "string"
+        format: "date"
+      location:
+        type: "string"
+      descritpion:
+        type: "string"
+    title: "Event"
+    xml:
+      name: "Event"
+    description: "An event related to a book"
+    example:
+      id: 0
+      name: "Harry Potter reunion"
+      date: "2017-07-21"
+      location: "London"
+      description: "All together to make magic"
   Author:
     type: "object"
     required:
