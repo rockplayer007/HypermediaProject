@@ -6,7 +6,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="author" content="Ferraiuolo-Roland-Meng" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="cssstyle.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- TODO: modify display: none; w/ z-index & opacity modificators -->
+  <link rel="stylesheet" href="/assets/css/style.css">
 	<title>BuuK</title>
 </head>
 
@@ -14,59 +16,67 @@
 	<!-- HEADER -->
 	<div id="header">
 		<nav class="navbar navbar-light sticky-top">
-			<div class="navbar-nav">
-				<div class="left-nav">
-					<button class="navbar-toggler" data-toggle="collapse" data-target="#menu"></button>
-					<a class="navbar-brand" href="/index.html">BuuK</a>
-				</div>
-				<div class="right-nav">
-					<a class="nav-item nav-link" href="/pages/login.html" title="login">Login</a>
-					<a class="nav-item nav-link" href="/pages/cart.html" title="cart">Cart</a>
-					<a class="nav-item nav-link" href="/pages/wheretodeliver.html" title="wheretodeliver">Deliver to <span class="destination"></span></a>
-				</div>
-			</div>
+      <button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
+      <a class="navbar-brand nav-left" href="/index.html">BuuK</a>
+      <a class="nav-item nav-link ml-auto nav-right" href="/pages/login.html" title="login">Login</a>
+      <button class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
 		</nav>
 	</div>
 	<!-- CONTENT -->
 	<div id="content">
 		<!-- PAGE CONTENT -->
 		<div id="main-content">
-			<!-- VENUE OF BuuK BACKGROUND LOGO-->
+			<!-- VENUE OF BuuK BACKGROUND LOGO -->
 			<div id="main-bg-content">
 				<!-- CAROUSEL OF BOOKS-->
-				<div id="books-container">
-				<a href="1st-book-link" title="1st-book-name">
-					<img src="1st-book-image" alt="1st-book-name" />
-				</a>
-				<a href="2nd-book-link" title="2nd-book-name">
-					<img src="2nd-book-image" alt="2nd-book-name" />
-				</a>
-				<a href="3rd-book-link" title="3rd-book-name">
-					<img src="3rd-book-image" alt="3rd-book-name" />
-				</a>
-				<a href="4th-book-link" title="4th-book-name">
-					<img src="4th-book-image" alt="4th-book-name" />
-				</a>
-				<a href="5th-book-link" title="5th-book-name">
-					<img src="5th-book-image" alt="5th-book-name" />
-				</a>
-			</div>
+				<div id="books-container" class="row justify-content-center">
+				  <a href="1st-book-link" title="1st-book-name">
+            <img src="1st-book-image" alt="1st-book-name" />
+				  </a>
+				  <a href="2nd-book-link" title="2nd-book-name">
+            <img src="2nd-book-image" alt="2nd-book-name" />
+				  </a>
+				  <a href="3rd-book-link" title="3rd-book-name">
+            <img src="3rd-book-image" alt="3rd-book-name" />
+				  </a>
+				  <a href="4th-book-link" title="4th-book-name">
+            <img src="4th-book-image" alt="4th-book-name" />
+				  </a>
+				  <a href="5th-book-link" title="5th-book-name">
+            <img src="5th-book-image" alt="5th-book-name" />
+				  </a>
+        </div>
 			</div>
 		</div>
-		<!-- MENU VOICES TODO: replace style attr w/ 'class="hide"'-->
-		<div id="menu-content" style="display: none;">
+    <!-- MENU CONTENT -->
+		<div id="menu-content">
 			<ul id="menu-list">
+        <li><a href="/pages/books.html">Books</li>
 				<li><a href="/pages/bestsellers.html">Bestsellers</a></li>
 				<li><a href="/pages/ourfavouritereadings.html">Our favourite readings</li>
 				<li><a href="/pages/events.html">Events</li>
 				<li><a href="/pages/themes.html">Themes</li>
 				<li><a href="/pages/literarygenres.html">Literary genres</li>
 				<li><a href="/pages/authors.html">Authors</li>
-				<li><a href="/pages/orderingandshipping.html">Ordering and shipping information</li>
 			</ul>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+    $('.navbar-toggler').on('click', function() {
+      var $main = $('#main-content');
+      var $menu = $('#menu-content');
+
+      if ($menu.is(":hidden")) {
+        $main.hide();
+        $menu.fadeIn(400);
+      } else {
+        $menu.hide();
+        $main.fadeIn(400);
+      }
+    });
+  </script>
 </body>
 
 </html>
