@@ -9,19 +9,18 @@
  * returns Cart
  **/
 exports.cartGET = function(userId) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "userId" : 0,
-  "books" : [ 0, 1, 2 ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+    return new Promise(function(resolve, reject) {
+        var examples = {};
+        examples['application/json'] = {
+            "id" : 0,
+            "userId" : 0
+        };
+        if (Object.keys(examples).length > 0) {
+            resolve(examples[Object.keys(examples)[0]]);
+        } else {
+            resolve();
+        }
+    });
 }
 
 
@@ -32,19 +31,18 @@ exports.cartGET = function(userId) {
  * returns Cart
  **/
 exports.cartIdGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "id" : 0,
-  "userId" : 0,
-  "books" : [ 0, 1, 2 ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+    return new Promise(function(resolve, reject) {
+        var examples = {};
+        examples['application/json'] = {
+            "id" : 0,
+            "userId" : 0
+        };
+        if (Object.keys(examples).length > 0) {
+            resolve(examples[Object.keys(examples)[0]]);
+        } else {
+            resolve();
+        }
+    });
 }
 
 
@@ -56,8 +54,8 @@ exports.cartIdGET = function(id) {
  * no response value expected for this operation
  **/
 exports.cartIdPUT = function(id,books) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+    return new Promise(function(resolve, reject) {
+        resolve();
+    });
 }
 

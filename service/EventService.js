@@ -51,7 +51,7 @@ exports.eventIdGET = function(id) {
  * returns List
  **/
 exports.eventsGET = function() {
-  console.log("hellooooooooooooo");
+
   return sqlDb("events")
       .then(data => {
         return data
@@ -67,11 +67,16 @@ exports.eventsGET = function() {
  **/
 exports.eventsIdBookGET = function(id) {
   return sqlDb
-      .from('books')
-      .select()
-      .where({ id: id })
+      .select("books.id", "title", "authorId", "price", "isbn",
+          "quantity", "genre", "books.event", "books.description",
+          "publisher", "language", "books.date")
+      .from("events")
+      .innerJoin('books', 'events.id', 'books.event')
+      .where("events.id", id)
       .then(data => {
-        return data
+          return data
       });
+
+
 }
 

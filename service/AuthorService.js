@@ -47,7 +47,7 @@ exports.authorGET = function() {
  **/
 exports.authorIdGET = function(id) {
   return sqlDb
-      .from('author')
+      .from('authors')
       .select()
       .where({ id: id })
       .then(data => {
@@ -63,13 +63,18 @@ exports.authorIdGET = function(id) {
  * returns List
  **/
 exports.authorsIdBooksGET = function(id) {
-  return sqlDb
-      .from("books")
-      .select()
-      .where("id", id)
-      .then(data => {
-        return data
-      });
+
+    return sqlDb
+        .from("authors")
+        .join('writes', 'authors.bookId', 'writes.authorId')
+        .join('books', 'books.authorId', 'writes.bookId')
+        .select("books.id", "title", "books.authorId", "price", "isbn",
+            "quantity", "genre", "event", "description",
+            "publisher", "language", "date")
+        .where("books.id", id)
+        .then(data => {
+            return data
+        });
 }
 
 

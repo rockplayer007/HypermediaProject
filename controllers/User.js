@@ -5,65 +5,78 @@ var User = require('../service/UserService');
 
 module.exports.userGET = function userGET (req, res, next) {
   User.userGET()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
-module.exports.userLoginGET = function userLoginGET (req, res, next) {
-  var email = req.swagger.params['email'].value;
+module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
+  var username = req.swagger.params['username'].value;
   var password = req.swagger.params['password'].value;
-  User.userLoginGET(email,password)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  if(!req.session.loggedin) {
+      req.session.loggedin = true;
+  }
+  else {
+        req.session.loggedin = !req.session.loggedin;
+  }
+
+  User.userLoginPOST(username,password)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
+
 
 module.exports.userLogoutGET = function userLogoutGET (req, res, next) {
-  User.userLogoutGET()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+    //needed to logout the user
+    req.session.loggedin = false;
+    User.userLogoutGET()
+      .then(function (response) {
+
+          utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
-module.exports.userPOST = function userPOST (req, res, next) {
+module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
   var body = req.swagger.params['body'].value;
-  User.userPOST(body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+  User.userRegisterPOST(body)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   User.usersIdCartGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
 
 module.exports.usersIdGET = function usersIdGET (req, res, next) {
   var id = req.swagger.params['id'].value;
   User.usersIdGET(id)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
 };
+
+

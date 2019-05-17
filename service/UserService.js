@@ -1,5 +1,28 @@
 'use strict';
 
+let sqlDb;
+
+exports.usersDbSetup = function(database) {
+  sqlDb = database;
+  return database.schema.hasTable("users").then(exists => {
+    if (!exists) {
+      //console.log("It doesn't so we create it");
+      return database.schema.createTable("users", table => {
+        //table.increments();
+        table.string("email").primary();
+        table.string("name");
+        table.string("surname");
+        table.string("password");
+        table.integer("cartId");
+      });
+    }
+    else{
+      //console.log("table already exists");
+    }
+  });
+};
+
+
 
 /**
  * get all users of the system
@@ -7,62 +30,32 @@
  * returns List
  **/
 exports.userGET = function() {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ [ {
-  "id" : 1
-}, {
-  "name" : "Harry"
-}, {
-  "surname" : "Potter"
-}, {
-  "email" : "harry.potter@gmail.com"
-}, {
-  "password" : "wingardiumleviosa"
-} ], [ {
-  "id" : 1
-}, {
-  "name" : "Harry"
-}, {
-  "surname" : "Potter"
-}, {
-  "email" : "harry.potter@gmail.com"
-}, {
-  "password" : "wingardiumleviosa"
-} ] ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  return sqlDb("users")
+      .then(data => {
+        return data
+      });
 }
 
 
 /**
- * Logs user into the system
- * 
+ * Login
+ * Login with a form
  *
- * email String The email for login
- * password String The password for login in clear text
- * returns String
+ * username String
+ * password String
+ * no response value expected for this operation
  **/
-exports.userLoginGET = function(email,password) {
+exports.userLoginPOST = function(username,password) {
+  console.log("ciaoooooooooooooooooooooooooooooooooooooooooooooooooooo")
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = "";
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    resolve();
   });
 }
 
 
 /**
  * Logs out current logged in user session
- * 
+ *
  *
  * no response value expected for this operation
  **/
@@ -74,25 +67,14 @@ exports.userLogoutGET = function() {
 
 
 /**
- * Add a new user to the store
+ * Register
+ * Register into the store
  *
- * body User User to add to the database
+ * body User
  * no response value expected for this operation
  **/
-exports.userPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-
-/**
- * Update an existing user
- *
- * body User User to add to the database
- * no response value expected for this operation
- **/
-exports.userPUT = function(body) {
+exports.userRegisterPOST = function(body) {
+  console.log(body);
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -109,10 +91,9 @@ exports.usersIdCartGET = function(id) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "id" : 0,
-  "userId" : 0,
-  "books" : [ 0, 1, 2 ]
-};
+      "id" : 0,
+      "userId" : 0
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -132,17 +113,12 @@ exports.usersIdCartGET = function(id) {
 exports.usersIdGET = function(id) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = [ {
-  "id" : 1
-}, {
-  "name" : "Harry"
-}, {
-  "surname" : "Potter"
-}, {
-  "email" : "harry.potter@gmail.com"
-}, {
-  "password" : "wingardiumleviosa"
-} ];
+    examples['application/json'] = {
+      "name" : "Harry",
+      "surname" : "Potter",
+      "email" : "harry.potter@gmail.com",
+      "password" : "wingardiumleviosa"
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {

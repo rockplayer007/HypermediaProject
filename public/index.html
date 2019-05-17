@@ -1,11 +1,13 @@
 <html>
+
   <head>
           <title>Book store</title>
   </head>
   <body>
           <h1>Our first server!</h1>
           <ul></ul>
-         <script>       
+          <script>
+              /*
                  fetch('v2/books').then(function(response) {
                          return response.json();
                  }).then(function(json) {
@@ -16,5 +18,56 @@
                            document.querySelector("ul").append(listItem);
                         }
                  });
-</script>
+
+               */
+          </script>
+          <script>
+
+              const url = 'http://localhost:8080/v2/user/register';
+              // The data we are going to send in our request
+              let data = {
+                  name: "Harry",
+                  surname: "Potter",
+                  email: "harry.potter@gmail.com",
+                  password: "wingardiumleviosa"
+              }
+              // The parameters we are gonna pass to the fetch function
+              let fetchData = {
+                  method: 'POST',
+                  body: data,
+                  headers: new Headers()
+              }
+              fetch(url, fetchData)
+                  .then(function() {
+                      // Handle response you get from the server
+                  });
+
+
+          </script>
+
+          <button>Send an HTTP POST request to a page </button>
+          <script >
+              /*
+              console.log("ciao000000000000")
+              $(document).ready(function(){
+                  $("button").click(function(){
+                      $.post("http://localhost:8080/v2/user/register",
+                          {
+                              "name": "Harry",
+                              "surname": "Potter",
+                              "email": "harry.potter@gmail.com",
+                              "password": "wingardiumleviosa"
+                          }
+                          ,
+                          function(data,status){
+
+                              console.log(data);
+                              alert("Data: " + data + "\nStatus: " + status);
+                          });
+                  });
+              });
+
+               */
+
+          </script>
   </body>
