@@ -1,0 +1,71 @@
+body {
+  height: 100%;
+}
+.navbar a {
+  color: #888;
+}
+.navbar a:hover {
+  color: #222;
+}
+.nav-right {
+  padding: 1.5%;
+}
+.nav-left {
+  margin: 0 1%;
+}
+.navbar-toggler {
+  margin-left: 2%;
+}
+#books-container {
+  margin: 0 auto;
+}
+#books-container a {
+  width: 15%;
+  margin-top: 20%;
+}
+#menu-content {
+  display: none;
+  margin: 8% 4%;
+}
+#menu-content li {
+  margin-bottom: 4%;
+}
+@media (max-width: 768px) {
+  #books-container a {
+    width: 75%;
+    height: 15%;
+    margin: 6% 50%;
+  }
+  #menu-content li {
+    margin: 6% 4%;
+  }
+}
+.navbar-toggler-icon {
+  width: 40px;
+  height: 40px;
+}
+.navbar-button {
+  width: 80px;
+  height: 40px;
+  background: transparent;
+  border: 0;
+}
+.navbar-cart-icon {
+  width: 25px;
+  height: 25px;
+}
+/*BOOKS.html PAGE*/
+.book-list-container{
+  background-color: black;
+  border: solid;
+  margin-bottom: 20px;
+}
+.book {
+  border: solid #fff;
+  width: 100%;
+  height: 120px;
+}
+.book p {
+  color: #fff;
+  margin: 2%;
+}
