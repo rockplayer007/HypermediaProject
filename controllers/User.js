@@ -60,7 +60,7 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
     var password = req.swagger.params['password'].value;
     User.userRegisterPOST(email,password)
         .then(function (response) {
-            if(res.swagger.params['added']){
+            if(res.swagger.params['added'].value){
                 utils.writeJson(res, response, 200);
             }
             else {
