@@ -65,8 +65,106 @@
       		}
       	});
 	</script>
-	<script>       
-	    let ciccio = {"id":1,"title":"Gravitation","authorId":1,"price":"$45.90","isbn":"978-0691177793","quantity":100,"genre":"Science and Technology","event":1,"description":"Gravitation is a landmark graduate-level textbook that presents Einstein’'s general theory of relativity and offers a rigorous, full-year course on the physics of gravitation. Upon publication, Science called it “a pedagogic masterpiece,” and it has since become a classic, considered essential reading for every serious student and researcher in the field of relativity. With an emphasis on geometric interpretation, this masterful and comprehensive book introduces the theory of relativity; describes physical applications, from stars to black holes and gravitational waves; and portrays the field’s frontiers.","publisher":"Princeton University Press","language":"English","date":"2017-10-24T00:00:00.000Z"};
+	<script>
+		fetch('http://localhost:8080/v2/books').then(function(response) {
+			return response.json();
+		}).then(function(json) {
+			//json arrives as array
+			let books = [{}]
+			//this is how to loop the array
+			let target = $('.book-list-container');
+			for(let i = 0; i< json.length; i++) {
+				//to get each object do json[i]
+				let ciccio = books[i];
+
+				let listItem = document.createElement('div');
+				listItem.setAttribute('class', 'book');
+				target.append(listItem);
+				//target = listItem;
+				//listItem = document.createElement('p');
+				//target.append(listItem);
+				let {title, description, price} = ciccio;
+				text = `${title} - ${price}   - ${description}`;
+				listItem.append(text);
+				//target = $('.book-list-container').lastChild;
+			}
+			/*
+			for(let i = 0; i< json.length; i++) {
+				let listItem = document.createElement("li");
+				let { title, authorId } = json[i];
+				listItem.innerHTML = `${title} - ${authorId} - `;
+				document.querySelector("ul").append(listItem);
+			}
+			*/
+		});
+		/*
+	    let ciccio = [
+  {
+    "id": 1,
+    "title": "Gravitation",
+    "price": "$45.90",
+    "isbn": "978-0691177793",
+    "quantity": 100,
+    "genre": "Science and Technology",
+    "event": 1,
+    "description": "Gravitation is a landmark graduate-level textbook that presents Einstein’'s general theory of relativity and offers a rigorous, full-year course on the physics of gravitation. Upon publication, Science called it “a pedagogic masterpiece,” and it has since become a classic, considered essential reading for every serious student and researcher in the field of relativity. With an emphasis on geometric interpretation, this masterful and comprehensive book introduces the theory of relativity; describes physical applications, from stars to black holes and gravitational waves; and portrays the field’s frontiers.",
+    "publisher": "Princeton University Press",
+    "language": "English",
+    "date": "2017-10-24T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "Designing Data-Intensive Web Applications",
+    "price": "$74.95",
+    "isbn": "978-1558608436",
+    "quantity": 100,
+    "genre": "Science and Technology",
+    "event": 2,
+    "description": "Developing and maintaining data-intensive applications is an especially complex, multi-disciplinary activity, requiring all the tools and techniques that software engineering can provide. This book represents a breakthrough for Web application developers. Using hundreds of illustrations and an elegant intuitive modeling language, the authors— all internationally-known database researchers— present a methodology that fully exploits the conceptual modeling approach of software engineering, from idea to application. Readers will learn not only how to harness the design technologies of relational databases for use on the Web, but also how to transform their conceptual designs of data-intensive Web applications into effective software components.",
+    "publisher": "Morgan Kaufmann",
+    "language": "English",
+    "date": "2002-12-16T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "Nineteen Eighty-Four",
+    "price": "$7.47",
+    "isbn": "978-0451524935",
+    "quantity": 100,
+    "genre": "Fantasy",
+    "event": 3,
+    "description": "Who controls the past controls the future: who controls the present controls the past.' Hidden away in the Record Department of the sprawling Ministry of Truth, Winston Smith skilfully rewrites the past to suit the needs of the Party. Yet he inwardly rebels against the totalitarian world he lives in, which demands absolute obedience and controls him through the all-seeing telescreens and the watchful eye of Big Brother, symbolic head of the Party. In his longing for truth and liberty, Smith begins a secret love affair with a fellow-worker Julia, but soon discovers the true price of freedom is betrayal. George Orwell's dystopian masterpiece, Nineteen Eighty-Four is perhaps the most pervasively influential book of the twentieth century.",
+    "publisher": "Penguin",
+    "language": "English",
+    "date": "1991-06-27T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "title": "Harry Potter and the Deathly Hallows",
+    "price": "$17.59",
+    "isbn": "978-1408865453",
+    "quantity": 100,
+    "genre": "Fantasy",
+    "event": 4,
+    "description": "Harry Potter is preparing to leave the Dursleys and Privet Drive for the last time. But the future that awaits him is full of danger, not only for him, but for anyone close to him - and Harry has already lost so much. Only by destroying Voldemort's remaining Horcruxes can Harry free himself and overcome the Dark Lord's forces of evil. In this dramatic conclusion to the Harry Potter series, Harry must leave his most loyal friends behind, and in a final perilous journey find the strength and the will to face his terrifying destiny: a deadly confrontation that is his alone to fight.",
+    "publisher": "Bloomsbury Publishing",
+    "language": "English",
+    "date": "2015-08-13T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "title": "The Great Derangement: Climate Change and the Unthinkable",
+    "price": "$11.22",
+    "isbn": "978-0226526812",
+    "quantity": 100,
+    "genre": "Science and Technology",
+    "event": 5,
+    "description": "Are we deranged? The acclaimed Indian novelist Amitav Ghosh argues that future generations may well think so. How else to explain our imaginative failure in the face of global warming? In his first major book of nonfiction since In an Antique Land, Ghosh examines our inability—at the level of literature, history, and politics—to grasp the scale and violence of climate change. Ghosh ends by suggesting that politics, much like literature, has become a matter of personal moral reckoning rather than an arena of collective action. But to limit fiction and politics to individual moral adventure comes at a great cost. The climate crisis asks us to imagine other forms of human existence—a task to which fiction, Ghosh argues, is the best suited of all cultural forms. His book serves as a great writer’s summons to confront the most urgent task of our time.",
+    "publisher": "University of Chicago Press",
+    "language": "English",
+    "date": "2017-07-24T00:00:00.000Z"
+  }
+]
 	    let target = $('.book-list-container');
 
 	    let listItem = document.createElement('div');
@@ -78,6 +176,8 @@
 	    let { title, authorId } = ciccio;
 	    text = `${title} - ${authorId}`;
 	    listItem.append(text);
+
+		 */
 	</script>
 </body>
 

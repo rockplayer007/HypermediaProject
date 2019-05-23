@@ -23,7 +23,7 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
         req.session.loggedin = !req.session.loggedin;
   }
 
-  User.userLoginPOST(username,password)
+  User.userLoginPOST(email,password)
       .then(function (response) {
         utils.writeJson(res, response);
       })
@@ -47,14 +47,15 @@ module.exports.userLogoutGET = function userLogoutGET (req, res, next) {
 };
 
 module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
-  var body = req.swagger.params['body'].value;
-  User.userRegisterPOST(body)
-      .then(function (response) {
-        utils.writeJson(res, response);
-      })
-      .catch(function (response) {
-        utils.writeJson(res, response);
-      });
+    var email = req.swagger.params['email'].value;
+    var password = req.swagger.params['password'].value;
+    User.userRegisterPOST(email,password)
+        .then(function (response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
 };
 
 module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {

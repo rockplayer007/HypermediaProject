@@ -10,10 +10,7 @@ exports.usersDbSetup = function(database) {
       return database.schema.createTable("users", table => {
         //table.increments();
         table.string("email").primary();
-        table.string("name");
-        table.string("surname");
         table.string("password");
-        table.integer("cartId");
       });
     }
     else{
@@ -41,11 +38,11 @@ exports.userGET = function() {
  * Login
  * Login with a form
  *
- * username String
+ * email String
  * password String
  * no response value expected for this operation
  **/
-exports.userLoginPOST = function(username,password) {
+exports.userLoginPOST = function(email,password) {
   console.log("ciaoooooooooooooooooooooooooooooooooooooooooooooooooooo")
   return new Promise(function(resolve, reject) {
     resolve();
@@ -70,14 +67,48 @@ exports.userLogoutGET = function() {
  * Register
  * Register into the store
  *
- * body User
+ * email String
+ * password String
  * no response value expected for this operation
  **/
-exports.userRegisterPOST = function(body) {
-  console.log(body);
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
+exports.userRegisterPOST = function(email,password) {
+
+  return sqlDb('users')
+      .from('users')
+      .select()
+      .where({ email: email })
+      .then(data => {
+
+        if(data.length === 0){
+
+          console.log("ADDEDDDDDDDDDDDDDDDDDDDDDDDD");
+          return sqlDb('users')
+              .insert(
+                  {
+                    email: email,
+                    password: password
+                  }
+                  )
+              .then(() => {
+
+              });
+
+
+          console.log("OKOKOKOKOK");
+
+
+
+        }
+        else{
+          console.log("not logginggggggggggggg")
+        }
+
+
+        //return data;
+
+
+      });
+
 }
 
 
@@ -104,18 +135,16 @@ exports.usersIdCartGET = function(id) {
 
 
 /**
- * Find user with id
+ * Find user with email
  * Returns a single user
  *
- * id Long id of user to get
+ * email String of user to get
  * returns User
  **/
-exports.usersIdGET = function(id) {
+exports.usersIdGET = function(email) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-      "name" : "Harry",
-      "surname" : "Potter",
       "email" : "harry.potter@gmail.com",
       "password" : "wingardiumleviosa"
     };

@@ -12,28 +12,28 @@ info:
 host: "hypermedia-app.herokuapp.com"
 basePath: "/v2"
 tags:
-- name: "book"
-  description: "Books availble"
-- name: "event"
-  description: "Events of the books"
-- name: "author"
-  description: "Writers of the books"
-- name: "user"
-  description: "Users subscribed"
-- name: "cart"
-  description: "Cart of an user"
+  - name: "book"
+    description: "Books availble"
+  - name: "event"
+    description: "Events of the books"
+  - name: "author"
+    description: "Writers of the books"
+  - name: "user"
+    description: "Users subscribed"
+  - name: "cart"
+    description: "Cart of an user"
 schemes:
-- "https"
+  - "https"
 paths:
   /books:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Books availble in the store"
       description: "List of books available in the inventory"
       operationId: "booksGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -48,18 +48,18 @@ paths:
   /books/{id}:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Find book with the book's id"
       operationId: "bookIdGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id of the book you are searching"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id of the book you are searching"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "operation was successful"
@@ -73,16 +73,16 @@ paths:
   /books/{id}/author:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Get the author of a book"
       operationId: "booksIdAuthorGET"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id of the book you want the author of"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id of the book you want the author of"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -96,16 +96,16 @@ paths:
   /books/{id}/event:
     get:
       tags:
-      - "book"
+        - "book"
       summary: "Get the event of a book"
       operationId: "booksIdEventGET"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id of the book you want the event of"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id of the book you want the event of"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -119,12 +119,12 @@ paths:
   /events:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Events related to a book"
       description: "List of all the events"
       operationId: "eventsGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -139,18 +139,18 @@ paths:
   /events/{id}:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Find event with the event's id"
       operationId: "eventIdGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id of the event you are searching"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id of the event you are searching"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "operation was successful"
@@ -164,16 +164,16 @@ paths:
   /events/{id}/book:
     get:
       tags:
-      - "event"
+        - "event"
       summary: "Get the book of an event"
       operationId: "eventsIdBookGET"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id of the event you want the book of"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id of the event you want the book of"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -187,12 +187,12 @@ paths:
   /authors:
     get:
       tags:
-      - "author"
+        - "author"
       summary: "Finds authors"
       description: "Get author"
       operationId: "authorGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -205,18 +205,18 @@ paths:
   /authors/{id}:
     get:
       tags:
-      - "author"
+        - "author"
       summary: "Find authors by ID"
       operationId: "authorIdGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id to get the author"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id to get the author"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -230,18 +230,18 @@ paths:
   /authors/{id}/books:
     get:
       tags:
-      - "author"
+        - "author"
       summary: "Get the books of an author"
       operationId: "authorsIdBooksGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of author of which to get the books"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "ID of author of which to get the books"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -257,23 +257,23 @@ paths:
   /user/login:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Login"
       description: "Login with a form"
       operationId: "userLoginPOST"
       consumes:
-      - "application/x-www-form-urlencoded"
+        - "application/x-www-form-urlencoded"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "username"
-        in: "formData"
-        required: true
-        type: "string"
-      - name: "password"
-        in: "formData"
-        required: true
-        type: "string"
+        - name: "email"
+          in: "formData"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          required: true
+          type: "string"
       responses:
         200:
           description: "succesfull login"
@@ -283,20 +283,23 @@ paths:
   /user/register:
     post:
       tags:
-      - "user"
+        - "user"
       summary: "Register"
       description: "Register into the store"
       operationId: "userRegisterPOST"
       consumes:
-      - "application/x-www-form-urlencoded"
+        - "application/x-www-form-urlencoded"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
+        - name: "email"
+          in: "formData"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          required: true
+          type: "string"
       responses:
         200:
           description: "succesfull registration"
@@ -306,11 +309,11 @@ paths:
   /users:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "get all users of the system"
       operationId: "userGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters: []
       responses:
         200:
@@ -323,19 +326,19 @@ paths:
   /users/{id}:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Find user with id"
       description: "Returns a single user"
       operationId: "usersIdGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id of user to get"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id of user to get"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -349,18 +352,18 @@ paths:
   /users/{id}/cart:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Get the cart of an user"
       operationId: "usersIdCartGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "id of the user to get the cart from"
-        required: true
-        type: "integer"
-        format: "int64"
+        - name: "id"
+          in: "path"
+          description: "id of the user to get the cart from"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -370,13 +373,13 @@ paths:
   /users/logout:
     get:
       tags:
-      - "user"
+        - "user"
       summary: "Logs out current logged in user session"
       description: ""
       operationId: "userLogoutGET"
       produces:
-      - "application/xml"
-      - "application/json"
+        - "application/xml"
+        - "application/json"
       parameters: []
       responses:
         default:
@@ -385,18 +388,18 @@ paths:
   /cart:
     get:
       tags:
-      - "cart"
+        - "cart"
       summary: "Finds a cart"
       description: "Get a cart from the system"
       operationId: "cartGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "userId"
-        in: "query"
-        description: "The id of the user of the cart to retrieve"
-        required: true
-        type: "string"
+        - name: "userId"
+          in: "query"
+          description: "The id of the user of the cart to retrieve"
+          required: true
+          type: "string"
       responses:
         200:
           description: "successful operation"
@@ -408,18 +411,18 @@ paths:
   /cart/{id}:
     get:
       tags:
-      - "cart"
+        - "cart"
       summary: "Finds a cart by ID"
       operationId: "cartIdGET"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of the cart to get"
-        required: true
-        type: "integer"
-        format: "i\"nt64"
+        - name: "id"
+          in: "path"
+          description: "ID of the cart to get"
+          required: true
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
@@ -432,30 +435,30 @@ paths:
       x-swagger-router-controller: "Cart"
     put:
       tags:
-      - "cart"
+        - "cart"
       summary: "Updates a cart in the store with form data"
       operationId: "cartIdPUT"
       consumes:
-      - "application/x-www-form-urlencoded"
+        - "application/x-www-form-urlencoded"
       produces:
-      - "application/xml"
-      - "application/json"
+        - "application/xml"
+        - "application/json"
       parameters:
-      - name: "id"
-        in: "path"
-        description: "ID of cart that needs to be updated"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "books"
-        in: "formData"
-        description: "Updated array of books in the cart"
-        required: true
-        type: "array"
-        items:
+        - name: "id"
+          in: "path"
+          description: "ID of cart that needs to be updated"
+          required: true
           type: "integer"
           format: "int64"
-        collectionFormat: "multi"
+        - name: "books"
+          in: "formData"
+          description: "Updated array of books in the cart"
+          required: true
+          type: "array"
+          items:
+            type: "integer"
+            format: "int64"
+          collectionFormat: "multi"
       responses:
         405:
           description: "Invalid input"
@@ -464,19 +467,15 @@ definitions:
   Book:
     type: "object"
     required:
-    - "authorId"
-    - "id"
-    - "price"
-    - "title"
+      - "id"
+      - "price"
+      - "title"
     properties:
       id:
         type: "integer"
         format: "int64"
       title:
         type: "string"
-      authorId:
-        type: "integer"
-        format: "int64"
       price:
         type: "number"
         format: "double"
@@ -484,9 +483,6 @@ definitions:
         type: "string"
       genre:
         type: "string"
-      event:
-        type: "integer"
-        format: "int64"
       quantity:
         type: "integer"
         format: "int32"
@@ -506,11 +502,9 @@ definitions:
     example:
       id: 0
       title: "Harry Potter 1"
-      authorId: 5
       price: 10
       isbn: "9780747532743"
       genre: "fantasy"
-      event: "0"
       quantity: 3
       publisher: "Bloomsbury Publishing"
       language: "english"
@@ -518,11 +512,11 @@ definitions:
   Event:
     type: "object"
     required:
-    - "bookId"
-    - "date"
-    - "id"
-    - "location"
-    - "name"
+      - "bookId"
+      - "date"
+      - "id"
+      - "location"
+      - "name"
     properties:
       id:
         type: "integer"
@@ -552,8 +546,8 @@ definitions:
   Author:
     type: "object"
     required:
-    - "id"
-    - "name"
+      - "id"
+      - "name"
     properties:
       id:
         type: "integer"
@@ -575,30 +569,19 @@ definitions:
   User:
     type: "object"
     required:
-    - "email"
-    - "name"
-    - "password"
-    - "surname"
+      - "email"
+      - "password"
     properties:
-      name:
-        type: "string"
-      surname:
-        type: "string"
       email:
         type: "string"
       password:
         type: "string"
-      cartId:
-        type: "integer"
-        format: "int64"
-        description: "The id of the user's cart"
     xml:
       name: "User"
     example:
-      name: "Harry"
-      surname: "Potter"
       email: "harry.potter@gmail.com"
       password: "wingardiumleviosa"
+
   Cart:
     type: "object"
     properties:
