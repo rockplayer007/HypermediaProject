@@ -14,7 +14,7 @@ module.exports.userGET = function userGET (req, res, next) {
 };
 
 module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
-  var username = req.swagger.params['username'].value;
+  var email = req.swagger.params['email'].value;
   var password = req.swagger.params['password'].value;
   if(!req.session.loggedin) {
       req.session.loggedin = true;
@@ -25,6 +25,15 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
 
   User.userLoginPOST(email,password)
       .then(function (response) {
+          /*
+          if(response.length == 1){
+              utils.writeJson(res, response, 200);
+          }
+          else {
+              utils.writeJson(res, response, 404);
+          }
+
+           */
         utils.writeJson(res, response);
       })
       .catch(function (response) {

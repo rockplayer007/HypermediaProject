@@ -74,25 +74,11 @@ exports.userLogoutGET = function() {
 exports.userRegisterPOST = function(email,password) {
 
   return sqlDb('users')
-      .insert(
-          {
-            email: email,
-            password: password
-          }
-      )
-      .then(() => {
-
-      });
-
-      /*
-      .from('users')
-      .select()
       .where({ email: email })
       .then(data => {
 
         if(data.length === 0){
 
-          console.log("ADDEDDDDDDDDDDDDDDDDDDDDDDDD");
           return sqlDb('users')
               .insert(
                   {
@@ -101,15 +87,12 @@ exports.userRegisterPOST = function(email,password) {
                   }
                   )
               .then(() => {
-
+                return {"added": true}
               });
-
-
-          console.log("OKOKOKOKOK");
-
         }
         else{
-          console.log("not logginggggggggggggg")
+          return {"added": false};
+
         }
 
 
@@ -120,7 +103,7 @@ exports.userRegisterPOST = function(email,password) {
 
       });
 
-       */
+
 
 }
 

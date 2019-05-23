@@ -66,12 +66,12 @@ exports.authorsIdBooksGET = function(id) {
 
     return sqlDb
         .from("authors")
-        .join('writes', 'authors.bookId', 'writes.authorId')
-        .join('books', 'books.authorId', 'writes.bookId')
-        .select("books.id", "title", "books.authorId", "price", "isbn",
+        .join('writes', 'authors.id', 'writes.authorId')
+        .join('books', 'books.id', 'writes.bookId')
+        .select("books.id", "title", "price", "isbn",
             "quantity", "genre", "event", "description",
             "publisher", "language", "date")
-        .where("books.id", id)
+        .where("authors.id", id)
         .then(data => {
             return data
         });
