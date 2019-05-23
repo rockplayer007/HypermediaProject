@@ -74,6 +74,17 @@ exports.userLogoutGET = function() {
 exports.userRegisterPOST = function(email,password) {
 
   return sqlDb('users')
+      .insert(
+          {
+            email: email,
+            password: password
+          }
+      )
+      .then(() => {
+
+      });
+
+      /*
       .from('users')
       .select()
       .where({ email: email })
@@ -96,8 +107,6 @@ exports.userRegisterPOST = function(email,password) {
 
           console.log("OKOKOKOKOK");
 
-
-
         }
         else{
           console.log("not logginggggggggggggg")
@@ -107,7 +116,11 @@ exports.userRegisterPOST = function(email,password) {
         //return data;
 
 
+
+
       });
+
+       */
 
 }
 
