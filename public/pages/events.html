@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="author" content="Ferraiuolo-Roland-Meng" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  	<!-- TODO: modify display: none; w/ z-index & opacity modificators -->
+ 	<link rel="stylesheet" href="/assets/css/style.css">
+	<title>BuuK - events</title>
+</head>
+
+<body>
+	<!-- HEADER -->
+	<div id="header" class="sticky-top">
+		<nav class="navbar navbar-light">
+      		<button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
+     		<a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
+      		<a class="nav-item nav-link ml-auto nav-right" href="/pages/login.html" title="login">Login</a>
+      		<button class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
+		</nav>
+	</div>
+	<!-- CONTENT -->
+	<div id="content">
+		<!-- PAGE CONTENT -->
+		<div id="main-content">
+			<!-- VENUE OF BuuK BACKGROUND LOGO -->
+			<div id="main-bg-content">
+				<div class="event-list-header">
+					<p>Events</p>
+				</div>
+				<div class="event-list-container">
+
+				</div>
+			</div>
+		</div>
+    	<!-- MENU CONTENT -->
+		<div id="menu-content">
+			<ul id="menu-list">
+        		<li><a href="/pages/books.html">Books</a></li>
+				<li><a href="/pages/bestsellers.html">Bestsellers</a></li>
+				<li><a href="/pages/ourfavouritereadings.html">Our favourite readings</a></li>
+				<li><a href="/pages/events.html">Events</a></li>
+				<li><a href="/pages/themes.html">Themes</a></li>
+				<li><a href="/pages/literarygenres.html">Literary genres</a></li>
+				<li><a href="/pages/authors.html">Authors</a></li>
+			</ul>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script>
+    	$('.navbar-toggler').on('click', function() {
+      		var $main = $('#main-content');
+      		var $menu = $('#menu-content');
+
+      		if ($menu.is(":hidden")) {
+        		$main.hide();
+        		$menu.fadeIn(400);
+      		} else {
+        		$menu.hide();
+        		$main.fadeIn(400);
+      		}
+      	});
+	</script>
+</body>
+
+</html>

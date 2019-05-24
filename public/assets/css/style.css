@@ -1,10 +1,13 @@
 body {
   height: 100%;
 }
-.navbar a {
+a {
   color: #888;
 }
-.navbar a:hover {
+#header {
+  background-color: #fff;
+}
+a:hover {
   color: #222;
 }
 .nav-right {
@@ -25,20 +28,28 @@ body {
 }
 #menu-content {
   display: none;
-  margin: 8% 4%;
+  margin: 6% 4%;
 }
 #menu-content li {
   margin-bottom: 4%;
+}
+.navbar-brand-icon {
+  width: 160px;
+  height: 20px;
 }
 @media (max-width: 768px) {
   #books-container a {
     width: 75%;
     height: 15%;
-    margin: 6% 50%;
+    margin: 3% 50%;
   }
   #menu-content li {
     margin: 6% 4%;
   }
+  .navbar-brand-icon {
+  width: 120px;
+  height: 15px;
+}
 }
 .navbar-toggler-icon {
   width: 40px;
@@ -56,16 +67,109 @@ body {
 }
 /*BOOKS.html PAGE*/
 .book-list-container{
-  background-color: black;
+  background-color: #888;
   border: solid;
   margin-bottom: 20px;
 }
 .book {
   border: solid #fff;
+  background-color: #eee;
+  overflow: scroll;
+  margin: 0.5%;
+  padding: 2%;
+}
+.book div {
+  float: left;
+  margin-left: 2%;
+}
+.book img {
+  float: left;
+  width: 200px;
+  height: 307px;
+}
+@media (max-width: 768px) {
+  .book img {
+    display: block;
+    float: none;
+    margin-bottom: 2.5%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .book div {
+    margin-left: 0;
+  }
+  .mobile-centered {
+    text-align: center;
+  }
+}
+/*LOGIN.html PAGE*/
+label {
+  margin-top: 2%;
+  margin-bottom: 1%;
+}
+.log-in-box {
+  width: 50%;
+  padding: 2%;
+  margin-top: 5%;
+  border: 1px solid #e8e9ea;
+  background-color: #fdfdfd;
+}
+.register-box {
+  width: 50%;
+  padding: 2%;
+  margin-top: 5%;
+  border: 1px solid #e8e9ea;
+  background-color: #fdfdfd;
+}
+.login-account-button {
+  width: 350px;
+  height: 40px;
+  margin: 3%;
+}
+.create-account-button {
+  width: 351px;
+  height: 26px;
+  margin: 3%;
+}
+input {
+  display: block;
   width: 100%;
-  height: 120px;
 }
-.book p {
-  color: #fff;
-  margin: 2%;
+.goes-right {
+  float: right;
 }
+.smaller-font {
+  font-size: 85%;
+}
+@media (max-width: 768px) {
+  .log-in-box {
+    width: 75%;
+    margin-top: 15%;
+  }
+  .register-box {
+    width: 75%;
+    margin-top: 15%;
+  }
+  .log-in-box input {
+    border: 1px solid #c8c9ca;
+  }
+  .register-box input {
+    border: 1px solid #c8c9ca;
+  }
+  .login-account-button {
+    width: 248px;
+    height: 32px;
+  }
+  .create-account-button {
+    width: 248px;
+    height: 22px;
+  }
+}
+.checkbox {
+  display: inline;
+  width: auto;
+}
+hr {
+  width: 20%;
+}
+/*EVENTS.html PAGE*/
