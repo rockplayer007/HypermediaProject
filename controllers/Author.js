@@ -4,6 +4,7 @@ var utils = require('../utils/writer.js');
 var Author = require('../service/AuthorService');
 
 module.exports.authorGET = function authorGET (req, res, next) {
+
   Author.authorGET()
     .then(function (response) {
       utils.writeJson(res, response);

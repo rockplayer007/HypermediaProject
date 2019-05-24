@@ -3,6 +3,7 @@ const sqlDbFactory = require("knex");
 let { booksDbSetup } = require("./BookService");
 let { authorsDbSetup } = require("./AuthorService");
 let { eventsDbSetup } = require("./EventService");
+let { usersDbSetup } = require("./UserService");
 
 let sqlDb = sqlDbFactory({
   client: "pg",
@@ -18,7 +19,8 @@ let sqlDb = sqlDbFactory({
 function setupDataLayer() {
    return authorsDbSetup(sqlDb)
        .then(() => booksDbSetup(sqlDb)
-           .then(() => eventsDbSetup(sqlDb)));
+           .then(() => eventsDbSetup(sqlDb)
+               .then(() => usersDbSetup(sqlDb))));
   //return booksDbSetup(sqlDb);
 }
 

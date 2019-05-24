@@ -76,13 +76,18 @@ exports.booksGET = function() {
  * returns Author
  **/
 exports.booksIdAuthorGET = function(id) {
-  return sqlDb
-      .from("authors")
-      .select()
-      .where("id", id)
-      .then(data => {
-        return data
-      });
+
+    //needed for multiple authors
+    return sqlDb
+        .from("books")
+        .join('writes', 'books.id', 'writes.bookId')
+        .join('authors', 'authors.id', 'writes.authorId')
+        .select("authors.id", "name", "surname", "biography")
+        .where("books.id", id)
+        .then(data => {
+            return data
+        });
+
 };
 
 
@@ -94,11 +99,15 @@ exports.booksIdAuthorGET = function(id) {
  * returns Event
  **/
 exports.booksIdEventGET = function(id) {
-  return sqlDb
-      .from("events")
-      .select()
-      .where("id", id)
-      .then(data => {
-        return data
-      });
+    return sqlDb
+        .from("books")
+        .join('presents', 'books.id', 'presents.bookId')
+        .join('events', 'events.id', 'presents.eventId')
+        .select("events.id", "name", "events.bookId", "events.date", "location", "events.description")
+        .where("books.id", id)
+        .then(data => {
+            return data
+        });
+
+
 }
