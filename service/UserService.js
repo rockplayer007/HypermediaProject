@@ -29,6 +29,46 @@ exports.usersDbSetup = function(database) {
  **/
 exports.userBookPUT = function(userEmail,books) {
 
+    function checkBookInDb (sqlDb,book, user){
+        return sqlDb("cart")
+            .where({bookId : book,
+                    userEmail: user})
+            .then(data =>{
+                if(data.length === 0){
+                    return 0;
+                }
+                else{
+                    return data[0].quantity;
+                }
+
+        });
+    }
+
+
+    return checkBookInDb(sqlDb, books, userEmail).then( quantity =>{
+        if(quantity === 0){ //book is not it the cart
+            quantity++;
+            return sqlDb("cart")
+                .insert({"userEmail":userEmail ,
+                    "bookId": books,
+                    "quantity":quantity})
+                .then(data => {
+                    return data;
+                });
+        }
+        else{
+            quantity++;
+            return sqlDb("cart")
+                .update({"userEmail":userEmail ,
+                    "bookId": books,
+                    "quantity":quantity})
+                .then(data => {
+                    return data
+                });
+        }
+    });
+
+
 
 }
 
@@ -59,15 +99,9 @@ exports.userGET = function() {
  **/
 exports.userLoginPOST = function(email,password) {
     return sqlDb('users')
-        .where({ email: email,
-                password: password})
+        .where({ email: email})
         .then((data) => {
-            if(data.length === 0){
-                return false;
-            }
-            else{
-                return true;
-            }
+            return data;
         });
 };
 
@@ -130,18 +164,13 @@ exports.userRegisterPOST = function(email,password) {
  * returns Cart
  **/
 exports.usersIdCartGET = function(id) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "id" : 0,
-      "userId" : 0
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+
+    return sqlDb('cart')
+        .where({ userEmail: id})
+        .then((data) => {
+            return data;
+        });
+
 }
 
 

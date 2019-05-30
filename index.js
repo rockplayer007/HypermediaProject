@@ -3,6 +3,7 @@
 var fs = require('fs'),
     path = require('path'),
     http = require('http');
+var bcrypt = require('bcrypt');
 
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
