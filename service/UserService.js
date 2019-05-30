@@ -20,12 +20,26 @@ exports.usersDbSetup = function(database) {
 };
 
 
+/**
+ * Adds a book to the user's cart
+ *
+ * userEmail String Email of the user that wants a book
+ * books Long id of the book that the user wants
+ * no response value expected for this operation
+ **/
+exports.userBookPUT = function(userEmail,books) {
+
+
+}
+
+
 
 /**
  * get all users of the system
  *
  * returns List
  **/
+/*
 exports.userGET = function() {
   return sqlDb("users")
       .then(data => {
@@ -33,6 +47,7 @@ exports.userGET = function() {
       });
 }
 
+ */
 
 /**
  * Login
@@ -43,11 +58,18 @@ exports.userGET = function() {
  * no response value expected for this operation
  **/
 exports.userLoginPOST = function(email,password) {
-  console.log("ciaoooooooooooooooooooooooooooooooooooooooooooooooooooo")
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
+    return sqlDb('users')
+        .where({ email: email,
+                password: password})
+        .then((data) => {
+            if(data.length === 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        });
+};
 
 
 /**
@@ -87,19 +109,12 @@ exports.userRegisterPOST = function(email,password) {
                   }
                   )
               .then(() => {
-                return {"added": true}
+                return true;
               });
         }
         else{
-          return {"added": false};
-
+          return false;
         }
-
-
-        //return data;
-
-
-
 
       });
 
@@ -137,6 +152,7 @@ exports.usersIdCartGET = function(id) {
  * email String of user to get
  * returns User
  **/
+/*
 exports.usersIdGET = function(email) {
   return new Promise(function(resolve, reject) {
     var examples = {};
@@ -151,4 +167,6 @@ exports.usersIdGET = function(email) {
     }
   });
 }
+
+ */
 

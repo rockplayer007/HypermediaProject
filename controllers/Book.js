@@ -49,3 +49,14 @@ module.exports.booksIdEventGET = function booksIdEventGET (req, res, next) {
       utils.writeJson(res, response);
     });
 };
+
+module.exports.booksIdSimilarGET = function booksIdSimilarGET (req, res, next) {
+  var id = req.swagger.params['id'].value;
+  Book.booksIdSimilarGET(id)
+      .then(function (response) {
+        utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+        utils.writeJson(res, response);
+      });
+};

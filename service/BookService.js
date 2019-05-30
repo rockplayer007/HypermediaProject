@@ -111,3 +111,32 @@ exports.booksIdEventGET = function(id) {
 
 
 }
+
+
+/**
+ * Get similar books to the chosen one
+ *
+ * id Long id of the book you want the similars of
+ * returns Book
+ **/
+exports.booksIdSimilarGET = function(id) {
+    return new Promise(function(resolve, reject) {
+        var examples = {};
+        examples['application/json'] = {
+            "id" : 0,
+            "title" : "Harry Potter 1",
+            "price" : 10,
+            "isbn" : "9780747532743",
+            "genre" : "fantasy",
+            "quantity" : 3,
+            "publisher" : "Bloomsbury Publishing",
+            "language" : "english",
+            "release" : "1997-06-26"
+        };
+        if (Object.keys(examples).length > 0) {
+            resolve(examples[Object.keys(examples)[0]]);
+        } else {
+            resolve();
+        }
+    });
+}
