@@ -10,10 +10,6 @@ info:
     name: "Apache-2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "hypermedia-app.herokuapp.com"
-handlers:
-  - url: /.*
-    http_headers:
-      Access-Control-Allow-Origin: "*"
 basePath: "/v2"
 tags:
   - name: "book"
@@ -67,6 +63,9 @@ paths:
       responses:
         200:
           description: "operation was successful"
+          headers:
+            http_headers:
+              Access-Control-Allow-Origin: "*"
           schema:
             $ref: "#/definitions/Book"
         400:
