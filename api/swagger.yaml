@@ -50,6 +50,9 @@ paths:
       tags:
         - "book"
       summary: "Find book with the book's id"
+      headers:
+        http_headers:
+          Access-Control-Allow-Origin: "*"
       operationId: "bookIdGET"
       produces:
         - "application/json"
@@ -63,9 +66,6 @@ paths:
       responses:
         200:
           description: "operation was successful"
-          headers:
-            http_headers:
-              Access-Control-Allow-Origin: "*"
           schema:
             $ref: "#/definitions/Book"
         400:
