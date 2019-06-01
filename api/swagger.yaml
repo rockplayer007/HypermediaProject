@@ -63,9 +63,6 @@ paths:
       responses:
         200:
           description: "operation was successful"
-          headers:
-            http_requests:
-              Access-Control-Allow-Origin: "127.0.0.1:8887"
           schema:
             $ref: "#/definitions/Book"
         400:
