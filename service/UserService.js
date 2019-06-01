@@ -31,9 +31,10 @@ exports.userBookPUT = function(userEmail,books) {
 
     function checkBookInDb (sqlDb,book, user){
         return sqlDb("cart")
-            .where({bookId : book,
-                    userEmail: user})
+            .where({userEmail: user,
+                    bookId : book})
             .then(data =>{
+                console.log("data is: " + data[0].quantity)
                 if(data.length === 0){
                     return 0;
                 }
@@ -52,25 +53,25 @@ exports.userBookPUT = function(userEmail,books) {
                 .insert({"userEmail":userEmail ,
                     "bookId": books,
                     "quantity":quantity})
-                .then(data => {
-                    return data;
+                .then(() => {
+                    return {"added": true};
                 });
         }
         else{
             quantity++;
             return sqlDb("cart")
-                .update({"userEmail":userEmail ,
-                    "bookId": books,
-                    "quantity":quantity})
-                .then(data => {
-                    return data
+                .where({"userEmail":userEmail ,
+                    "bookId": books})
+                .update({"quantity":quantity})
+                .then(() => {
+                    return {"added": true};
                 });
         }
     });
 
 
 
-}
+};
 
 
 
