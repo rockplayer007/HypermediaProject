@@ -69,7 +69,7 @@ paths:
           schema:
             $ref: "#/definitions/Book"
         400:
-          description: "wrond id"
+          description: "wrong id"
         404:
           description: "Book not found"
       x-swagger-router-controller: "Book"
