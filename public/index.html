@@ -27,9 +27,9 @@
 		<!-- PAGE CONTENT -->
 		<div id="main-content">
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
-			<div id="main-bg-content">
+			<div id="main-bg-content" class="container justify-content-center align-items-center">
 				<!-- CAROUSEL OF BOOKS-->
-				<div id="books-container" class="row justify-content-center">
+				<div id="books-container" class="row">
 				  <a href="1st-book-link" title="1st-book-name">
             <img src="1st-book-image" alt="1st-book-name" />
 				  </a>
@@ -75,6 +75,13 @@
         $menu.hide();
         $main.fadeIn(400);
       }
+    });
+  </script>
+  <script>
+    $(function() {
+      $('div#books-container img').each(function(i) {
+        $(this).attr('src', '/assets/img/books/book'+(i+1)+'.png');
+      });
     });
   </script>
 </body>

@@ -136,7 +136,7 @@
     "language": "English",
     "date": "2017-07-24T00:00:00.000Z"
   }
-]
+];
 	  
 	  let authors = [
   {
@@ -162,6 +162,9 @@
 
       for(let i = 0; i< books.length; i++) {
 
+        //Needs to be fixed from here on
+        let {id, title, price} = books[i];
+
       	//Creates the container for the book element of the list
         let listItem = document.createElement('div');
         listItem.setAttribute('class', 'book');
@@ -169,17 +172,14 @@
 
         //Creates the link container that wraps up the book cover
         let link = document.createElement('a');
-        link.setAttribute('href', '#');
+        link.setAttribute('href', '/pages/book.html?id='+`${id}`);
         listItem.append(link);
 
         //Puts the book cover in the link wrapper
         let image = document.createElement('img');
-        image.setAttribute('src', '/assets/img/books/book'+(i+1)+'.png');
+        image.setAttribute('src', '/assets/img/books/book'+`${id}`+'.png');
         image.setAttribute('alt', 'book-cover');
         link.append(image);
-
-        //Needs to be fixed from here on
-        let {id, title, price} = books[i];
         
         /*fetch('http://localhost:8080/v2/books/'+`${id}`+'/author').then(function(response) {
       		return response.json();
@@ -207,9 +207,11 @@
 
         link = document.createElement('a');
         link.setAttribute('href', '#');
+        link.setAttribute('class', 'book-title');
 
+        //Here we were
         info.append(link);
-        info.append(`${title}`);
+        link.append(`${title}`);
         let newline = document.createElement('br');
         info.append(newline);
         info.append(text);
@@ -218,6 +220,9 @@
         info.append(`${price}`);
         listItem.append(info);
       };
+</script>
+<script>
+
 </script>
 </body>
 
