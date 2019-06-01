@@ -50,8 +50,6 @@ paths:
       tags:
         - "book"
       summary: "Find book with the book's id"
-      headers:
-        Access-Control-Allow-Origin: "*"
       operationId: "bookIdGET"
       produces:
         - "application/json"
