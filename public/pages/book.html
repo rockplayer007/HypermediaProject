@@ -9,7 +9,7 @@
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   	<!-- TODO: modify display: none; w/ z-index & opacity modificators -->
  	<link rel="stylesheet" href="/assets/css/style.css">
-	<title>BuuK - login</title>
+	<title>BuuK - book</title>
 </head>
 
 <body>
@@ -28,23 +28,11 @@
 		<div id="main-content">
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
 			<div id="main-bg-content">
-				<div class="container log-in-box">
-					<p>Log in</p>
-					<div class="email-log-in-box">
-						<label>Email</label>
-						<input type="email" name="email" placeholder="Enter email address" required="required" />
-					</div>
-					<div class="password-log-in-box">
-						<label>Password</label><a href="#" class="goes-right smaller-font">Forgot your password?</a>
-						<input type="password" name="password" placeholder="Enter password" required="required" />
-					</div>
-					<div class="sign">
-						<a href="#"><img src="/assets/img/buttons/sign-in.png" class="login-account-button mx-auto d-block" /></a>
-						<input type="checkbox" name="remember-user" value="remember" class="checkbox" /> Keep me signed in
-					</div>
-					<!-- TODO: modify this -->
-					<hr />New to Buuk?<hr />
-					<a href="/pages/register.html"><img src="/assets/img/buttons/create-your-buuk-account.png" class="create-account-button mx-auto d-block" /></a>
+				<div class="book-list-header">
+					<p>Books</p>
+				</div>
+				<div class="book-list-container">
+
 				</div>
 			</div>
 		</div>
@@ -77,4 +65,33 @@
       		}
       	});
 	</script>
+	<script>
+		let splits = (location.search).split("=");
+		let id = splits[1];
+
+		$.get(`http://hypermedia-app.herokuapp.com/v2/books/`+id)
+		.done(function(data) {
+			let target = $('.book-list-container');
+			let {title, date, genre, language, abstract, price, isbn, publisher} = data;
+
+			//Creates the container for the book element of the list
+	        let listItem = document.createElement('div');
+	        listItem.setAttribute('class', 'book');
+	        target.append(listItem);
+
+	        //Creates the link container that wraps up the book cover
+	        let link = document.createElement('a');
+	        link.setAttribute('href', '/pages/book.html?id='+id);
+	        listItem.append(link);
+
+	        //Puts the book cover in the link wrapper
+	        let image = document.createElement('img');
+	        image.setAttribute('src', '/assets/img/books/book'+id+'.png');
+	        image.setAttribute('alt', 'book-cover');
+	        link.append(image);
+		})
+		.catch(alert("An error has occured! Please refresh!"));
+	</script>
 </body>
+
+</html>

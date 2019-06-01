@@ -20,11 +20,17 @@ a:hover {
   margin-left: 2%;
 }
 #books-container {
+  float: left;
+  width: 100%;
   margin: 0 auto;
 }
 #books-container a {
   width: 15%;
-  margin-top: 20%;
+  margin-top: 5%;
+}
+#books-container img {
+  width: 300px;
+  height: 460px;
 }
 #menu-content {
   display: none;
@@ -74,7 +80,7 @@ a:hover {
 .book {
   border: solid #fff;
   background-color: #eee;
-  overflow: scroll;
+  overflow: hidden;
   margin: 0.5%;
   padding: 2%;
 }
@@ -86,6 +92,16 @@ a:hover {
   float: left;
   width: 200px;
   height: 307px;
+}
+.book a {
+  color: #666;
+}
+.book a:hover {
+  color: #222;
+  text-decoration: none;
+}
+.book-title {
+  font-size: 170%;
 }
 @media (max-width: 768px) {
   .book img {
@@ -172,4 +188,98 @@ input {
 hr {
   width: 20%;
 }
+/*AUTHORS.html PAGE*/
+.author-list-container{
+  background-color: #888;
+  border: solid;
+  margin-bottom: 20px;
+}
+.author {
+  border: solid #fff;
+  background-color: #eee;
+  overflow: scroll;
+  margin: 0.5%;
+  padding: 2%;
+}
+.author div {
+  float: left;
+  margin-left: 2%;
+}
+.author img {
+  float: left;
+  width: 170px;
+  height: 213px;
+}
+.author a {
+  color: #666;
+}
+.author a:hover {
+  color: #222;
+  text-decoration: none;
+}
+.author-name {
+  font-size: 200%;
+}
+@media (max-width: 768px) {
+  .author img {
+    display: block;
+    float: none;
+    margin-bottom: 2.5%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .author div {
+    float: none;
+    margin-left: 0;
+  }
+  .mobile-centered {
+    text-align: center;
+  }
+}
 /*EVENTS.html PAGE*/
+.event-list-container{
+  background-color: #888;
+  border: solid;
+  margin-bottom: 20px;
+}
+.event {
+  border: solid #fff;
+  background-color: #eee;
+  overflow: scroll;
+  margin: 0.5%;
+  padding: 2%;
+}
+.event div {
+  margin-left: 2%;
+}
+.event img {
+  display: block;
+  width: 350px;
+  height: 196px;
+  margin-bottom: 2.5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.event a {
+  color: #666;
+}
+.event a:hover {
+  color: #222;
+  text-decoration: none;
+}
+.event-name {
+  font-size: 150%;
+}
+.mobile-centered-event {
+    text-align: center;
+  }
+@media (max-width: 768px) {
+  .event img {
+    width: 300px;
+    height: 168px;
+  }
+  .event div {
+    float: none;
+    margin-left: 0;
+  }
+}

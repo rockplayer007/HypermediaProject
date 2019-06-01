@@ -9,7 +9,6 @@ info:
   license:
     name: "Apache-2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-#host: "localhost:8080"
 host: "hypermedia-app.herokuapp.com"
 basePath: "/v2"
 tags:
@@ -21,6 +20,8 @@ tags:
     description: "Writers of the books"
   - name: "user"
     description: "Users subscribed"
+  - name: "cart"
+    description: "Cart of an user"
 schemes:
   - "https"
 paths:
@@ -62,6 +63,9 @@ paths:
       responses:
         200:
           description: "operation was successful"
+          headers:
+            http_requests:
+              Access-Control-Allow-Origin: "127.0.0.1:8887"
           schema:
             $ref: "#/definitions/Book"
         400:
@@ -110,29 +114,6 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/Event"
-        400:
-          description: "Wrong id"
-        404:
-          description: "Book not found"
-      x-swagger-router-controller: "Book"
-  /books/{id}/similar:
-    get:
-      tags:
-        - "book"
-      summary: "Get similar books to the chosen one"
-      operationId: "booksIdSimilarGET"
-      parameters:
-        - name: "id"
-          in: "path"
-          description: "id of the book you want the similars of"
-          required: true
-          type: "integer"
-          format: "int64"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Book"
         400:
           description: "Wrong id"
         404:
@@ -328,7 +309,50 @@ paths:
         404:
           description: "unauthorized"
       x-swagger-router-controller: "User"
-  /users/{id}/books:
+  /users:
+    get:
+      tags:
+        - "user"
+      summary: "get all users of the system"
+      operationId: "userGET"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+      x-swagger-router-controller: "User"
+  /users/{id}:
+    get:
+      tags:
+        - "user"
+      summary: "Find user with id"
+      description: "Returns a single user"
+      operationId: "usersIdGET"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "id of user to get"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid ID supplied"
+        404:
+          description: "User not found"
+      x-swagger-router-controller: "User"
+  /users/{id}/cart:
     get:
       tags:
         - "user"
@@ -341,12 +365,13 @@ paths:
           in: "path"
           description: "id of the user to get the cart from"
           required: true
-          type: "string"
+          type: "integer"
+          format: "int64"
       responses:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Book"
+            $ref: "#/definitions/Cart"
       x-swagger-router-controller: "User"
   /users/logout:
     get:
@@ -356,40 +381,91 @@ paths:
       description: ""
       operationId: "userLogoutGET"
       produces:
+        - "application/xml"
         - "application/json"
       parameters: []
       responses:
         default:
           description: "successful operation"
       x-swagger-router-controller: "User"
-  /user/addBook:
-    put:
+  /cart:
+    get:
       tags:
-        - "user"
-      summary: "Adds a book to the user's cart"
-      operationId: "userBookPUT"
-      consumes:
-        - "application/x-www-form-urlencoded"
+        - "cart"
+      summary: "Finds a cart"
+      description: "Get a cart from the system"
+      operationId: "cartGET"
       produces:
         - "application/json"
       parameters:
-        - name: "userEmail"
-          in: "formData"
-          description: "Email of the user that wants a book"
+        - name: "userId"
+          in: "query"
+          description: "The id of the user of the cart to retrieve"
           required: true
           type: "string"
-        - name: "books"
-          in: "formData"
-          description: "id of the book that the user wants"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cart"
+        400:
+          description: "Invalid userId value"
+      x-swagger-router-controller: "Cart"
+  /cart/{id}:
+    get:
+      tags:
+        - "cart"
+      summary: "Finds a cart by ID"
+      operationId: "cartIdGET"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of the cart to get"
           required: true
           type: "integer"
           format: "int64"
       responses:
         200:
-          description: "succesfull registration"
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Cart"
+        400:
+          description: "Invalid ID supplied"
         404:
-          description: "unauthorized"
-      x-swagger-router-controller: "User"
+          description: "Cart not found"
+      x-swagger-router-controller: "Cart"
+    put:
+      tags:
+        - "cart"
+      summary: "Updates a cart in the store with form data"
+      operationId: "cartIdPUT"
+      consumes:
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of cart that needs to be updated"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "books"
+          in: "formData"
+          description: "Updated array of books in the cart"
+          required: true
+          type: "array"
+          items:
+            type: "integer"
+            format: "int64"
+          collectionFormat: "multi"
+      responses:
+        405:
+          description: "Invalid input"
+      x-swagger-router-controller: "Cart"
 definitions:
   Book:
     type: "object"
@@ -508,3 +584,15 @@ definitions:
     example:
       email: "harry.potter@gmail.com"
       password: "wingardiumleviosa"
+
+  Cart:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      userId:
+        type: "string"
+    example:
+      id: 0
+      userId: 0

@@ -65,6 +65,109 @@
       		}
       	});
 	</script>
+	<script>
+		/*fetch('http://localhost:8080/v2/authors').then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      //json arrives as array
+      */let authors = [
+  {
+    "id": 1,
+    "name": "Charles",
+    "surname": "Misner",
+    "biography": "( born June 13, 1932) is an American physicist and one of the authors of Gravitation. His specialties include general relativity and cosmology. His work has also provided early foundations for studies of quantum gravity and numerical relativity."
+  },
+  {
+    "id": 2,
+    "name": "Stefano",
+    "surname": "Ceri",
+    "biography": "(born 14 February 1955) is an Italian computer engineer and professor of database managementat Politecnico di Milano. He has been visiting professor at Stanford University between 1983 and 1990, and received the ACM SIGMOD Edward Codd Innovations Award in 2013."
+  },
+  {
+    "id": 3,
+    "name": "Eric Arthur",
+    "surname": "Blair",
+    "biography": " (25 June 1903 – 21 January 1950), better known by his pen name George Orwell, was an English novelist, essayist, journalist and critic, whose work is marked by lucid prose, awareness of social injustice, opposition to totalitarianism, and outspoken support of democratic socialism."
+  },
+  {
+    "id": 4,
+    "name": "Joanne",
+    "surname": "Rowling",
+    "biography": "(born 31 July 1965), writing under the pen names J. K. Rowling and Robert Galbraith, is a British novelist, philanthropist, film producer, television producer and screenwriter, best known for writing the Harry Potter fantasy series. The books have won multiple awards, and sold more than 500 million copies, becoming the best-selling book series in history. They have also been the basis for a film series, over which Rowling had overall approval on the scripts and was a producer on the final films in the series"
+  },
+  {
+    "id": 5,
+    "name": "Amitav",
+    "surname": "Ghosh",
+    "biography": " born in Calcutta on 11 July 1956 to a Bengali Hindu family and was educated at the all-boys boarding school The Doon School in Dehradun. His contemporaries at Doon included author Vikram Sethand historian Ram Guha. While at school, he regularly contributed fiction and poetry to The Doon School Weekly (then edited by Seth) and founded the magazine History Times along with Guha. After Doon, he received degrees from St. Stephen's College, Delhi University, and Delhi School of Economics. He then won the Inlaks Foundation scholarship to complete a D. Phil. in social anthropology at St Edmund Hall, Oxford, under the supervision of Peter Lienhardt. His first job was at the Indian Express newspaper in New Delhi"
+  },
+  {
+    "id": 6,
+    "name": "Kip",
+    "surname": "Thorne",
+    "biography": "(July 9, 1911 – April 13, 2008) was an American theoretical physicist. He was largely responsible for reviving interest in general relativity in the United States after World War II. Wheeler also worked with Niels Bohr in explaining the basic principles behind nuclear fission. Together with Gregory Breit, Wheeler developed the concept of the Breit–Wheeler process. He is best known for linking the term \"black hole\" to objects with gravitational collapse already predicted early in the 20th century, for coining the terms \"quantum foam\", \"neutron moderator\", \"wormhole\" and \"it from bit\", and for hypothesizing the \"one-electron universe\"."
+  },
+  {
+    "id": 7,
+    "name": "John Archibald",
+    "surname": "Wheeler",
+    "biography": "(July 9, 1911 – April 13, 2008) was an American theoretical physicist. He was largely responsible for reviving interest in general relativity in the United States after World War II. Wheeler also worked with Niels Bohr in explaining the basic principles behind nuclear fission. Together with Gregory Breit, Wheeler developed the concept of the Breit–Wheeler process. He is best known for linking the term \"black hole\" to objects with gravitational collapse already predicted early in the 20th century, for coining the terms \"quantum foam\", \"neutron moderator\", \"wormhole\" and \"it from bit\", and for hypothesizing the \"one-electron universe\"."
+  },
+  {
+    "id": 8,
+    "name": "Piero",
+    "surname": "Fraternali",
+    "biography": "Full professor at the Dipartimento di Elettronica e Informazione, Politecnico di Milano and Head of the Degree Course in Computer Engineering of the Como Campus of the Politecnico di Milano. He received a Laurea Degree in Electrical Engineering (cum laude) in 1989 and a PhD in Computer Science from the Politecnico di Milano in 1994. His main research interests concern database integrity, active databases, software engineering, and methodologies and tools for WEB application development. "
+  }
+];
+		let target = $('.author-list-container');
+
+		for(let i = 0; i< authors.length; i++) {
+
+      	//Creates the container for the author element of the list
+        let listItem = document.createElement('div');
+        listItem.setAttribute('class', 'author');
+        target.append(listItem);
+
+        //Creates the link container that wraps up the author cover
+        let link = document.createElement('a');
+        link.setAttribute('href', '#');
+        listItem.append(link);
+
+        //Puts the author portrait in the link wrapper
+        let image = document.createElement('img');
+        image.setAttribute('src', '/assets/img/authors/author'+(i+1)+'.png');
+        image.setAttribute('alt', 'author-portrait');
+        link.append(image);
+
+        //Needs to be fixed from here on
+        let {id, name, surname} = authors[i];
+        
+        /*fetch('http://localhost:8080/v2/authors/'+`${id}`).then(function(response) {
+      		return response.json();
+    	}).then(function(json) {
+    		let text = "";
+    		for (var j = 0; j < json.length; j++) {
+    			text += json[j].name;
+    			text += json[j].surname;
+    			if (!json[j].lastChild) {
+    				text += ',';
+    			}
+    		}
+    	});*/
+    	let info = document.createElement('div');
+        info.setAttribute('class', 'mobile-centered');
+
+        link = document.createElement('a');
+        link.setAttribute('href', '#');
+        link.setAttribute('class', 'author-name');
+
+        //Here we were
+        info.append(link);
+        link.append(`${name} ${surname}`);
+        listItem.append(info);
+    };
+	</script>
 </body>
 
 </html>
