@@ -34,7 +34,6 @@ exports.userBookPUT = function(userEmail,books) {
             .where({userEmail: user,
                     bookId : book})
             .then(data =>{
-                console.log("data is: " + data[0].quantity)
                 if(data.length === 0){
                     return 0;
                 }
@@ -117,6 +116,19 @@ exports.userLogoutGET = function() {
   return new Promise(function(resolve, reject) {
     resolve();
   });
+};
+
+
+/**
+ * Logged user
+ * Gives the currently logged user
+ *
+ * no response value expected for this operation
+ **/
+exports.userIsLoggedGET = function() {
+    return new Promise(function(resolve, reject) {
+        resolve();
+    });
 }
 
 
@@ -171,6 +183,23 @@ exports.usersIdCartGET = function(id) {
         .then((data) => {
             return data;
         });
+
+};
+
+
+/**
+ * Delete the cart of an user
+ *
+ * id String id of the user to delte the cart from
+ * no response value expected for this operation
+ **/
+exports.usersIdCartDELETE = function(id) {
+
+    return sqlDb
+        .from("cart")
+        .where({"userEmail" : id})
+        .del()
+        .then(data => {return data});
 
 }
 

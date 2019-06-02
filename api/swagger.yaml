@@ -9,8 +9,8 @@ info:
   license:
     name: "Apache-2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-#host: "localhost:8080"
 host: "hypermedia-app.herokuapp.com"
+#host: "localhost:8080"
 basePath: "/v2"
 tags:
   - name: "book"
@@ -23,6 +23,7 @@ tags:
     description: "Users subscribed"
 schemes:
   - "https"
+  #- "http"
 paths:
   /books:
     get:
@@ -348,6 +349,23 @@ paths:
           schema:
             $ref: "#/definitions/Book"
       x-swagger-router-controller: "User"
+    delete:
+      tags:
+        - "user"
+      summary: "Delete the cart of an user"
+      operationId: "usersIdCartDELETE"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "id of the user to delte the cart from"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+      x-swagger-router-controller: "User"
   /users/logout:
     get:
       tags:
@@ -355,6 +373,20 @@ paths:
       summary: "Logs out current logged in user session"
       description: ""
       operationId: "userLogoutGET"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+      x-swagger-router-controller: "User"
+  /users/logged:
+    get:
+      tags:
+        - "user"
+      summary: "Logged user"
+      description: "Gives the currently logged user"
+      operationId: "userIsLoggedGET"
       produces:
         - "application/json"
       parameters: []
@@ -422,6 +454,10 @@ definitions:
       release:
         type: "string"
         format: "date"
+      field:
+        type: "string"
+      theme:
+        type: "string"
     title: "Book"
     xml:
       name: "Book"
@@ -436,6 +472,8 @@ definitions:
       publisher: "Bloomsbury Publishing"
       language: "english"
       release: "1997-06-26"
+      field: "Wizardry"
+      theme: "Harry Potter Exhibition"
   Event:
     type: "object"
     required:

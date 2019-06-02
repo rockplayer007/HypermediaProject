@@ -9,7 +9,7 @@ module.exports.userBookPUT = function userBookPUT (req, res, next) {
     var userEmail = req.swagger.params['userEmail'].value;
     var books = req.swagger.params['books'].value;
 
-    if(/*req.session.userid === userEmail*/true) {
+    if(req.session.userid === userEmail) {
         User.userBookPUT(userEmail, books)
             .then(function (response) {
                 utils.writeJson(res, response);
@@ -23,7 +23,6 @@ module.exports.userBookPUT = function userBookPUT (req, res, next) {
     }
 
 };
-
 
 
 module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
@@ -63,6 +62,24 @@ module.exports.userLogoutGET = function userLogoutGET (req, res, next) {
         utils.writeJson(res, {"loggedOut": false});
       });
 };
+
+module.exports.userIsLoggedGET = function userIsLoggedGET (req, res, next) {
+    User.userIsLoggedGET()
+        .then(function (response) {
+
+            if(req.session.userid === false){
+                utils.writeJson(res, {"loggedIn" : false});
+            }
+            else{
+                utils.writeJson(res, {"loggedIn" : req.session.userid});
+            }
+
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
+};
+
 
 module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
     var email = req.swagger.params['email'].value;
@@ -108,5 +125,24 @@ module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 };
 
 
+module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
+    var id = req.swagger.params['id'].value;
 
+    if(req.session.userid === id){
+        //utils.writeJson(res, {"loggedIn" : true}, 200);
+
+        User.usersIdCartDELETE(id)
+            .then(function (response) {
+                utils.writeJson(res, response);
+            })
+            .catch(function (response) {
+                utils.writeJson(res, response);
+            });
+
+
+    }
+    else{
+        utils.writeJson(res, {"loggedIn" : false}, 403);
+    }
+};
 

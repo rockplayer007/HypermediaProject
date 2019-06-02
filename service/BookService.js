@@ -21,6 +21,8 @@ exports.booksDbSetup = function(database) {
         table.string("publisher");
         table.string("language");
         table.date("date");
+        table.string("field");
+        table.string("theme");
 
         table.foreign("authorId").references("authors.id");
         table.foreign("event").references("events.id");
@@ -120,23 +122,20 @@ exports.booksIdEventGET = function(id) {
  * returns Book
  **/
 exports.booksIdSimilarGET = function(id) {
-    return new Promise(function(resolve, reject) {
-        var examples = {};
-        examples['application/json'] = {
-            "id" : 0,
-            "title" : "Harry Potter 1",
-            "price" : 10,
-            "isbn" : "9780747532743",
-            "genre" : "fantasy",
-            "quantity" : 3,
-            "publisher" : "Bloomsbury Publishing",
-            "language" : "english",
-            "release" : "1997-06-26"
-        };
-        if (Object.keys(examples).length > 0) {
-            resolve(examples[Object.keys(examples)[0]]);
-        } else {
-            resolve();
-        }
-    });
-}
+
+    return sqlDb
+        .from("books")
+        .where({"id" : id})
+        .select("genre")
+        .then(data => {
+            console.log("genre is: " + data[0].genre);
+            return sqlDb
+                .from("books")
+                .select()
+                .where({"genre" : data[0].genre})
+                .whereNot({"id" : id})
+                .then(x => {return x})
+        })
+
+
+};
