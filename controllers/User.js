@@ -35,12 +35,10 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
 
           if (bcrypt.compareSync(password, response[0].password)) {
               req.session.userid = email;
-              utils.writeJson(res, {"loggedIn": true}, 200);
+              utils.writeJson(res, {"loggedIn": true});
           } else {
-              utils.writeJson(res, {"loggedIn": false}, 403);
+              utils.writeJson(res, {"loggedIn": false});
           }
-          //utils.writeJson(res, { error: "sorry, you must be authorized" }, 404);
-
 
       })
       .catch(function (response) {

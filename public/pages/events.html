@@ -159,13 +159,10 @@
         link.append(`${name}`);
         let newline = document.createElement('br');
         info.append(newline);
-		var d = new Date(`${date}`);
+		let d = new Date(date);
 
-		info.append(d.getUTCHours()); // Hours
-		info.append(d.getUTCMinutes());
-		info.append(d.getUTCSeconds());
-
-        info.append(date.toDate);
+		let eventDate = d.getDate() + "-" + d.getMonth() + "-" + d.getUTCFullYear();
+        info.append(`${eventDate}`);
         newline = document.createElement('br');
         info.append(newline);
         info.append(`${location}`);
