@@ -83,7 +83,7 @@
 			datas += document.getElementById("emailxxx").value;
 			datas += "&password=";
 			datas += document.getElementById("passwordxxx").value;
-			$.post('http://localhost:8080/v2/user/register', datas, function (result) {
+			$.post('https://hypermedia-app.herokuapp.com/v2/user/register', datas, function (result) {
 				var {added} = result;
 				if (added) {
 					//alert("logged = " + `${added}`);

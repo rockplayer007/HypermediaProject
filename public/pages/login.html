@@ -85,7 +85,7 @@
 			datas += "&password=";
 			datas += document.getElementById("passwordxxx").value;
 
-			$.post('http://localhost:8080/v2/user/login', datas, function(result) {
+			$.post('https://hypermedia-app.herokuapp.com/v2/user/login', datas, function(result) {
 
 				var {loggedIn} = result;
 				if(loggedIn){
