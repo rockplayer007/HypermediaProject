@@ -32,15 +32,14 @@
 					<p>Log in</p>
 					<div class="email-log-in-box">
 						<label>Email</label>
-						<input type="email" name="email" placeholder="Enter email address" required="required" />
+						<input type="email" id="email" name="email" placeholder="Enter email address" required="required" />
 					</div>
 					<div class="password-log-in-box">
-						<label>Password</label><a href="#" class="goes-right smaller-font">Forgot your password?</a>
-						<input type="password" name="password" placeholder="Enter password" required="required" />
+						<label>Password</label>
+						<input type="password" id="password" name="password" placeholder="Enter password" required="required" />
 					</div>
 					<div class="sign">
 						<a href="#"><img src="/assets/img/buttons/sign-in.png" class="login-account-button mx-auto d-block" /></a>
-						<input type="checkbox" name="remember-user" value="remember" class="checkbox" /> Keep me signed in
 					</div>
 					<!-- TODO: modify this -->
 					<hr />New to Buuk?<hr />
@@ -76,5 +75,17 @@
         		$main.fadeIn(400);
       		}
       	});
+	</script>
+	<script>
+		$('.sign').on('submit', function() {
+			var datas = "email=";
+			datas += getElementById("email").value;
+			datas += "&password=";
+			datas += getElementById("password").value;
+			$.post('https://hypermedia-app.herokuapp.com/v2/user/login', datas, function(result) {
+				var {loggedIn} = result;
+				alert("loggedIn = " + `${loggedIn}`);
+			});
+		});
 	</script>
 </body>
