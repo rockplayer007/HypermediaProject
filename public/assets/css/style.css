@@ -157,6 +157,9 @@ input {
 .smaller-font {
   font-size: 85%;
 }
+.error {
+  border: 1px solid #dd6666;
+}
 @media (max-width: 768px) {
   .log-in-box {
     width: 75%;
