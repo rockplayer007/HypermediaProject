@@ -69,7 +69,8 @@
 		let splits = (location.search).split("=");
 		let id = splits[1];
 
-		$.get(`https://hypermedia-app.herokuapp.com/v2/books/`+id)
+		//$.get(`https://hypermedia-app.herokuapp.com/v2/books/`+id)
+		$.get(`http://localhost:8080/v2/books/`+id)
 		.done(function(data) {
 			let target = $('.book-list-container');
 			let {title, date, genre, language, abstract, price, isbn, publisher} = data;
