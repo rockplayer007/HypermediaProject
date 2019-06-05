@@ -197,7 +197,7 @@ hr {
 .author {
   border: solid #fff;
   background-color: #eee;
-  overflow: scroll;
+  overflow: hidden;
   margin: 0.5%;
   padding: 2%;
 }
@@ -245,7 +245,7 @@ hr {
 .event {
   border: solid #fff;
   background-color: #eee;
-  overflow: scroll;
+  overflow: hidden;
   margin: 0.5%;
   padding: 2%;
 }
