@@ -10,7 +10,7 @@ module.exports.userBookPUT = function userBookPUT (req, res, next) {
     var books = req.swagger.params['books'].value;
 
     if(req.session.userid === userEmail) {
-        User.userBookPUT(userEmail, books)
+        User.userBookPUT(req.session.userid, books)
             .then(function (response) {
                 utils.writeJson(res, response);
             })
@@ -19,7 +19,7 @@ module.exports.userBookPUT = function userBookPUT (req, res, next) {
             });
     }
     else{
-        utils.writeJson(res, {"loggedIn" : false}, 403);
+        utils.writeJson(res, {"loggedIn" : false});
     }
 
 };
@@ -89,9 +89,9 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 
             if (response) {
                 req.session.userid = email;
-                utils.writeJson(res, {"added": true}, 200);
+                utils.writeJson(res, {"added": true});
             } else {
-                utils.writeJson(res, {"added": false}, 404);
+                utils.writeJson(res, {"added": false});
             }
 
         })
@@ -117,7 +117,7 @@ module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 
   }
   else{
-      utils.writeJson(res, {"loggedIn" : false}, 403);
+      utils.writeJson(res, {"loggedIn" : false});
   }
 
 };
@@ -140,7 +140,7 @@ module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
 
     }
     else{
-        utils.writeJson(res, {"loggedIn" : false}, 403);
+        utils.writeJson(res, {"loggedIn" : false});
     }
 };
 

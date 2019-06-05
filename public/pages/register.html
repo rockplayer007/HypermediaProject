@@ -29,26 +29,20 @@
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
 			<div id="main-bg-content">
 				<div class="container register-box">
-					<p>Create account</p>
-					<div class="name-register-box">
-						<label>Your Name</label>
-						<input type="text" name="username" placeholder="Enter your name" required="required" />
-					</div>
-					<div class="email-register-box">
-						<label>Email</label>
-						<input type="email" name="email" placeholder="Enter email address" required="required" />
-					</div>
-					<div class="password-register-box">
-						<label>Password</label>
-						<input type="password" name="password" placeholder="At least 6 characters" required="required" />
-					</div>
-					<div class="password-register-box">
-						<label>Re-enter Password</label>
-						<input type="password" name="password" placeholder="Re-enter your password" required="required" />
-					</div>
-					<a href="#"><img src="/assets/img/buttons/create-account.png" class="login-account-button mx-auto d-block" /></a>
-					<!-- TODO: modify this -->
-					<hr />Already have an account? <a href="/pages/login.html" title="login">sign in</a><hr />
+					<form id="registertry" >
+						<p id="formHeader">Create account</p>
+						<div class="email-register-box">
+							<label>Email</label>
+							<input type="email" id="emailxxx" name="email" placeholder="Enter email address" required="required" />
+						</div>
+						<div class="password-register-box">
+							<label>Password</label>
+							<input type="password" id="passwordxxx" name="password" placeholder="Enter password" required="required" />
+						</div>
+						<button type="submit"><a class="sign"><img src="/assets/img/buttons/create-account.png" class="login-account-button mx-auto d-block" /></a></button>
+						<!-- TODO: modify this -->
+						<span><hr />Already have an account? <a href="/pages/login.html" title="login">sign in</a><hr /></span>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -80,5 +74,28 @@
         		$main.fadeIn(400);
       		}
       	});
+	</script>
+	<script>
+		$('#registertry').on('submit', function(e) {
+
+			e.preventDefault();
+			let datas = "email=";
+			datas += document.getElementById("emailxxx").value;
+			datas += "&password=";
+			datas += document.getElementById("passwordxxx").value;
+			$.post('http://localhost:8080/v2/user/register', datas, function (result) {
+				var {added} = result;
+				if (added) {
+					//alert("logged = " + `${added}`);
+					window.location.href = "/index.html"
+				} else {
+					//alert("not logged = " + `${added}`);
+					$('#formHeader').html("Register ERROR - email already exists!!");
+					$('form input').addClass('error');
+				}
+
+			})
+
+		});
 	</script>
 </body>

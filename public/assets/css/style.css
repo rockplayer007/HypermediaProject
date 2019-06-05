@@ -124,14 +124,14 @@ label {
   margin-bottom: 1%;
 }
 .log-in-box {
-  width: 50%;
+  width: 40%;
   padding: 2%;
   margin-top: 5%;
   border: 1px solid #e8e9ea;
   background-color: #fdfdfd;
 }
 .register-box {
-  width: 50%;
+  width: 40%;
   padding: 2%;
   margin-top: 5%;
   border: 1px solid #e8e9ea;
@@ -156,6 +156,9 @@ input {
 }
 .smaller-font {
   font-size: 85%;
+}
+.error {
+  border: 1px solid #dd6666;
 }
 @media (max-width: 768px) {
   .log-in-box {
