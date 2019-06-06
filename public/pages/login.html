@@ -29,7 +29,7 @@
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
 			<div id="main-bg-content">
 				<div class="container log-in-box">
-					<form id="signtry" method="post" action="https://hypermedia-app.herokuapp.com/v2/user/login">
+					<form id="signtry">
 						<p id="formHeader">Log in</p>
 						<div class="email-log-in-box">
 							<label>Email</label>
@@ -42,7 +42,6 @@
 						<div class="submit">
 							<button type="submit"><a href="/index.html"><img src="/assets/img/buttons/sign-in.png" class="login-account-button mx-auto d-block" /></a></button>
 						</div>
-						<!-- TODO: modify this -->
 						<hr />New to Buuk?<hr />
 						<a href="/pages/register.html"><img src="/assets/img/buttons/create-your-buuk-account.png" class="create-account-button mx-auto d-block" /></a>
 					</form>
@@ -85,11 +84,20 @@
 			datas += document.getElementById("emailxxx").value;
 			datas += "&password=";
 			datas += document.getElementById("passwordxxx").value;
-			$.post('https://hypermedia-app.herokuapp.com/v2/user/login', datas, function() {
-				window.location.href = "/index.html"
-			}).fail(function(e) {
-				$('#formHeader').html("Log in - WRONG CREDENTIALS");
-				$('form input').addClass('error');
+
+			$.post('https://hypermedia-app.herokuapp.com/v2/user/login', datas, function(result) {
+
+				var {loggedIn} = result;
+				if(loggedIn){
+					//alert("logged = " + `${loggedIn}`);
+					window.location.href = "/index.html"
+				}
+				else {
+					//alert("not logged = " + `${loggedIn}`);
+					$('#formHeader').html("Log in - WRONG CREDENTIALS");
+					$('form input').addClass('error');
+				}
+
 			});
 		});
 	</script>

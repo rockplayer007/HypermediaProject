@@ -29,7 +29,7 @@
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
 			<div id="main-bg-content">
 				<div class="container register-box">
-					<form id="registertry" method="post" action="https://hypermedia-app.herokuapp.com/v2/user/register">
+					<form id="registertry" >
 						<p id="formHeader">Create account</p>
 						<div class="email-register-box">
 							<label>Email</label>
@@ -79,17 +79,25 @@
 	</script>
 	<script>
 		$('#registertry').on('submit', function(e) {
+
 			e.preventDefault();
-			var datas = "email=";
+			let datas = "email=";
 			datas += document.getElementById("emailxxx").value;
 			datas += "&password=";
 			datas += document.getElementById("passwordxxx").value;
-			$.post('https://hypermedia-app.herokuapp.com/v2/user/register', datas, function() {
-				window.location.href = "/index.html"
-			}).fail(function(e) {
-				$('#formHeader').html("Register ERROR - email already exists!!");
-				$('form input').addClass('error');
-			});
+			$.post('https://hypermedia-app.herokuapp.com/v2/user/register', datas, function (result) {
+				var {added} = result;
+				if (added) {
+					//alert("logged = " + `${added}`);
+					window.location.href = "/index.html"
+				} else {
+					//alert("not logged = " + `${added}`);
+					$('#formHeader').html("Register ERROR - email already exists!!");
+					$('form input').addClass('error');
+				}
+
+			})
+
 		});
 	</script>
 </body>
