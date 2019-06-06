@@ -112,7 +112,7 @@ exports.booksIdEventGET = function(id) {
         });
 
 
-}
+};
 
 
 /**
@@ -138,4 +138,66 @@ exports.booksIdSimilarGET = function(id) {
         })
 
 
+};
+
+
+
+/**
+ * Get books with a given genre
+ *
+ * genre Long genre of the book you want
+ * returns Book
+ **/
+exports.booksByGenreGET = function(genre) {
+    return sqlDb("books")
+        .where({"genre" : genre})
+        .then(data => {
+            return data
+        });
+};
+
+
+/**
+ * Get books with a given theme
+ *
+ * theme Long theme of the book you want
+ * returns Book
+ **/
+exports.booksByThemeGET = function(theme) {
+    return sqlDb("books")
+        .where({"theme" : theme})
+        .then(data => {
+            return data
+        });
+};
+
+
+
+/**
+ * Get all the themes that are present
+ *
+ * id Long all book themes
+ * no response value expected for this operation
+ **/
+exports.booksThemesGET = function() {
+    return sqlDb("books")
+        .distinct("theme")
+        .then(data => {
+            return data
+        });
+};
+
+
+/**
+ * Get all the genres that are present
+ *
+ * id Long all book genres
+ * no response value expected for this operation
+ **/
+exports.booksGenresGET = function() {
+    return sqlDb("books")
+        .distinct("genre")
+        .then(data => {
+            return data
+        });
 };

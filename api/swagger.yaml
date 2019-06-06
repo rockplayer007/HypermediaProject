@@ -1,17 +1,21 @@
----
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "This is an online bookstore with books, writers and users"
-  version: "1.0.0"
-  title: "BookStore"
+  version: '1.0.0'
+  title: 'BookStore'
+  description: 'This is an online bookstore with books, writers and users'
   contact:
     email: "maildiroland@yahoo.it"
   license:
     name: "Apache-2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "hypermedia-app.herokuapp.com"
-#host: "localhost:8080"
+# host: "localhost:8080"
 basePath: "/v2"
+
+schemes:
+  - "https"
+  - "http"
+
 tags:
   - name: "book"
     description: "Books available"
@@ -21,9 +25,8 @@ tags:
     description: "Writers of the books"
   - name: "user"
     description: "Users subscribed"
-schemes:
-  - "https"
-  #- "http"
+
+
 paths:
   /books:
     get:
@@ -34,15 +37,15 @@ paths:
       operationId: "booksGET"
       produces:
         - "application/json"
-      parameters: []
       responses:
-        200:
+        '200':
           description: "Collection of books"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Book"
       x-swagger-router-controller: "Book"
+
   /books/{id}:
     get:
       tags:
@@ -62,8 +65,8 @@ paths:
         200:
           description: "operation was successful"
           schema:
-            $ref: "#/definitions/Book"
-      x-swagger-router-controller: "Book"
+            $ref: '#/definitions/Book'
+
   /books/{id}/author:
     get:
       tags:
@@ -78,11 +81,11 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        200:
+        '200':
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Author"
-      x-swagger-router-controller: "Book"
+            $ref: '#/definitions/Author'
+
   /books/{id}/event:
     get:
       tags:
@@ -97,11 +100,10 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        200:
+        '200':
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Event"
-      x-swagger-router-controller: "Book"
+            $ref: '#/definitions/Event'
   /books/{id}/similar:
     get:
       tags:
@@ -116,11 +118,79 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        200:
+        '200':
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Book"
+            $ref: '#/definitions/Book'
+
+  /books/themes:
+    get:
+      tags:
+        - "book"
+      summary: "Get all the themes that are present"
+      operationId: "booksThemesGET"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "All themes"
       x-swagger-router-controller: "Book"
+
+  /books/themes/{theme}:
+    get:
+      tags:
+        - "book"
+      summary: "Get books with a given theme"
+      operationId: "booksByThemeGET"
+      parameters:
+        - name: "theme"
+          in: "path"
+          description: "theme of the book you want"
+          required: true
+          type: "string"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "successful operation"
+      x-swagger-router-controller: "Book"
+
+  /books/genres:
+    get:
+      tags:
+        - "book"
+      summary: "Get all the genres that are present"
+      operationId: "booksGenresGET"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "successful operation"
+      x-swagger-router-controller: "Book"
+
+  /books/genres/{genre}:
+    get:
+      tags:
+        - "book"
+      summary: "Get books with a given genre"
+      operationId: "booksByGenreGET"
+      parameters:
+        - name: "genre"
+          in: "path"
+          description: "genre of the book you want"
+          required: true
+          type: "string"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+      x-swagger-router-controller: "Book"
+
   /events:
     get:
       tags:
@@ -130,15 +200,15 @@ paths:
       operationId: "eventsGET"
       produces:
         - "application/json"
-      parameters: []
       responses:
-        200:
+        '200':
           description: "Collection of events"
           schema:
             type: "array"
             items:
               $ref: "#/definitions/Event"
       x-swagger-router-controller: "Event"
+
   /events/{id}:
     get:
       tags:
@@ -155,11 +225,11 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        200:
+        '200':
           description: "operation was successful"
           schema:
-            $ref: "#/definitions/Event"
-      x-swagger-router-controller: "Event"
+            $ref: '#/definitions/Event'
+
   /events/{id}/book:
     get:
       tags:
@@ -174,11 +244,12 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        200:
+        '200':
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Book"
-      x-swagger-router-controller: "Event"
+            $ref: '#/definitions/Book'
+
+
   /authors:
     get:
       tags:
@@ -188,15 +259,14 @@ paths:
       operationId: "authorGET"
       produces:
         - "application/json"
-      parameters: []
       responses:
-        200:
-          description: "successful operation"
+        '200':
+          description: successful operation
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/Author"
-      x-swagger-router-controller: "Author"
+              $ref: '#/definitions/Author'
+
   /authors/{id}:
     get:
       tags:
@@ -213,11 +283,11 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        200:
+        '200':
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Author"
-      x-swagger-router-controller: "Author"
+            $ref: '#/definitions/Author'
+
   /authors/{id}/books:
     get:
       tags:
@@ -234,13 +304,13 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        200:
+        '200':
           description: "successful operation"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Book"
-      x-swagger-router-controller: "Author"
+              $ref: '#/definitions/Book'
+
   /user/login:
     post:
       tags:
@@ -263,8 +333,9 @@ paths:
           type: "string"
       responses:
         200:
-          description: "succesfull login"
+          description: "login status"
       x-swagger-router-controller: "User"
+
   /user/register:
     post:
       tags:
@@ -287,8 +358,9 @@ paths:
           type: "string"
       responses:
         200:
-          description: "succesfull registration"
+          description: "registration status"
       x-swagger-router-controller: "User"
+
   /users/{id}/books:
     get:
       tags:
@@ -304,11 +376,11 @@ paths:
           required: true
           type: "string"
       responses:
-        200:
+        '200':
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Book"
-      x-swagger-router-controller: "User"
+            $ref: '#/definitions/Book'
+
     delete:
       tags:
         - "user"
@@ -323,9 +395,10 @@ paths:
           required: true
           type: "string"
       responses:
-        200:
-          description: "successful operation"
-      x-swagger-router-controller: "User"
+        '200':
+          description: "operation status"
+
+
   /users/logout:
     get:
       tags:
@@ -338,8 +411,8 @@ paths:
       parameters: []
       responses:
         default:
-          description: "successful operation"
-      x-swagger-router-controller: "User"
+          description: "logout status"
+
   /users/logged:
     get:
       tags:
@@ -352,8 +425,8 @@ paths:
       parameters: []
       responses:
         default:
-          description: "successful operation"
-      x-swagger-router-controller: "User"
+          description: "logged"
+
   /user/addBook:
     put:
       tags:
@@ -378,15 +451,15 @@ paths:
           format: "int64"
       responses:
         200:
-          description: "succesfull registration"
+          description: "operation status"
       x-swagger-router-controller: "User"
 definitions:
   Book:
     type: "object"
     required:
       - "id"
-      - "price"
       - "title"
+      - "price"
     properties:
       id:
         type: "integer"
@@ -416,9 +489,10 @@ definitions:
         type: "string"
       theme:
         type: "string"
-    title: "Book"
+
     xml:
       name: "Book"
+    title: "Book"
     description: "A book for sale in the store"
     example:
       id: 0
@@ -432,14 +506,15 @@ definitions:
       release: "1997-06-26"
       field: "Wizardry"
       theme: "Harry Potter Exhibition"
+
   Event:
     type: "object"
     required:
+      - "id"
+      - "name"
       - "bookId"
       - "date"
-      - "id"
       - "location"
-      - "name"
     properties:
       id:
         type: "integer"
@@ -456,9 +531,9 @@ definitions:
         type: "string"
       descritpion:
         type: "string"
-    title: "Event"
     xml:
       name: "Event"
+    title: "Event"
     description: "An event related to a book"
     example:
       id: 0
@@ -466,6 +541,8 @@ definitions:
       date: "2017-07-21"
       location: "London"
       description: "All together to make magic"
+
+
   Author:
     type: "object"
     required:
@@ -489,6 +566,7 @@ definitions:
       name: "Joanne"
       surname: "Rowling"
       biography: "Author of the famous Harry Potter books"
+
   User:
     type: "object"
     required:
