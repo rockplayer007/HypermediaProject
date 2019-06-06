@@ -87,9 +87,21 @@
 
 	        //Puts the author portrait in the link wrapper
 	        let image = document.createElement('img');
-	        image.setAttribute('src', '/assets/img/author'+id+'.png');
+	        image.setAttribute('src', '/assets/img/authors'+id+'.png');
 	        image.setAttribute('alt', 'author-portrit');
 	        link.append(image);
+
+			$.get(`https://hypermedia-app.herokuapp.com/v2/authors/`+id + '/books')
+			.done(function(books) {
+
+				for(var i = 0; i < books.length ; i++){
+					let book = books[i];
+
+					//TODO fill here
+				}
+			});
+
+
 		});
 	</script>
 </body>

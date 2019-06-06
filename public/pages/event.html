@@ -70,10 +70,14 @@
 		let splits = (location.search).split("=");
 		let id = splits[1];
 
-		$.get(`https://hypermedia-app.herokuapp.com/v2/events/`+id)
+		$.get('https://hypermedia-app.herokuapp.com/v2/events/'+id)
 		.done(function(data) {
+			$.get('https://hypermedia-app.herokuapp.com/v2/events/'+id +'/book' )
+			.done(function(book) {
 			let target = $('.event-list-container');
 			let {name, bookId, date, location, description} = data;
+
+			let {title} = book;
 
 			//Creates the container for the event element of the list
 	        let listItem = document.createElement('div');
@@ -87,7 +91,7 @@
 
 	        //Puts the event portrait in the link wrapper
 	        let image = document.createElement('img');
-	        image.setAttribute('src', '/assets/img/event'+id+'.png');
+	        image.setAttribute('src', '/assets/img/events'+id+'.png');
 	        image.setAttribute('alt', 'event-portrit');
 	        link.append(image);
 		});

@@ -116,21 +116,21 @@
           info.append(newline);
           
       		for (var j = 0; j < authors.length; j++) {
-            let text = "";
-            let linkAuthor = document.createElement('a');
-            linkAuthor.setAttribute('href', '/pages/author.html?id='+(j+1));
-            listItem.append(linkAuthor);
+				let text = "";
+				let linkAuthor = document.createElement('a');
+				linkAuthor.setAttribute('href', '/pages/author.html?id='+(j+1));
+				listItem.append(linkAuthor);
 
-      			text += authors[j].name + ' ';
-      			text += authors[j].surname;
-            
+					text += authors[j].name + ' ';
+					text += authors[j].surname;
 
 
-      			if (authors[j+1]) {
-      				text += ', ';
-      			}
-            linkAuthor.append(text);
-            info.append(linkAuthor);
+
+					if (authors[j+1]) {
+						text += ', ';
+					}
+				linkAuthor.append(text);
+				info.append(linkAuthor);
       		}
 
           
