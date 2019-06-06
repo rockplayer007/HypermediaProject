@@ -68,7 +68,7 @@
 	<script>
 
 		$.get('https://hypermedia-app.herokuapp.com/v2/authors/')
-		//$.get('http://localhost:8080/v2/events/')
+		//$.get('http://localhost:8080/v2/authors/')
 		.done(function(e) {
 
 			let authors = e;
@@ -85,7 +85,7 @@
 
 				//Creates the link container that wraps up the author cover
 				let link = document.createElement('a');
-				link.setAttribute('href', '/pages/event.html?id='+`${id}`);
+				link.setAttribute('href', '/pages/author.html?id='+`${id}`);
 				listItem.append(link);
 
 				//Puts the author portrait in the link wrapper
