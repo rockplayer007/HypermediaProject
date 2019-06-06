@@ -6,21 +6,16 @@ var bcrypt = require('bcrypt');
 
 
 module.exports.userBookPUT = function userBookPUT (req, res, next) {
-    var userEmail = req.swagger.params['userEmail'].value;
     var books = req.swagger.params['books'].value;
 
-    if(req.session.userid === userEmail) {
-        User.userBookPUT(req.session.userid, books)
-            .then(function (response) {
-                utils.writeJson(res, response);
-            })
-            .catch(function (response) {
-                utils.writeJson(res, response);
-            });
-    }
-    else{
-        utils.writeJson(res, {"loggedIn" : false});
-    }
+
+    User.userBookPUT(req.session.userid, books)
+        .then(function (response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
 
 };
 
@@ -101,46 +96,28 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 };
 
 module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
-  var id = req.swagger.params['id'].value;
 
-  if(req.session.userid === id){
-      //utils.writeJson(res, {"loggedIn" : true}, 200);
+  User.usersIdCartGET(req.session.userid)
+      .then(function (response) {
+          utils.writeJson(res, response);
+      })
+      .catch(function (response) {
+          utils.writeJson(res, response);
+      });
 
-      User.usersIdCartGET(id)
-          .then(function (response) {
-              utils.writeJson(res, response);
-          })
-          .catch(function (response) {
-              utils.writeJson(res, response);
-          });
-
-
-  }
-  else{
-      utils.writeJson(res, {"loggedIn" : false});
-  }
 
 };
 
 
 module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
-    var id = req.swagger.params['id'].value;
 
-    if(req.session.userid === id){
-        //utils.writeJson(res, {"loggedIn" : true}, 200);
+    User.usersIdCartDELETE(req.session.userid)
+        .then(function (response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
 
-        User.usersIdCartDELETE(id)
-            .then(function (response) {
-                utils.writeJson(res, response);
-            })
-            .catch(function (response) {
-                utils.writeJson(res, response);
-            });
-
-
-    }
-    else{
-        utils.writeJson(res, {"loggedIn" : false});
-    }
 };
 

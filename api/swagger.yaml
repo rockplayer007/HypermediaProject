@@ -364,7 +364,7 @@ paths:
           description: "registration status"
       x-swagger-router-controller: "User"
 
-  /users/{id}/books:
+  /users/books:
     get:
       tags:
         - "user"
@@ -372,12 +372,6 @@ paths:
       operationId: "usersIdCartGET"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          description: "id of the user to get the cart from"
-          required: true
-          type: "string"
       responses:
         '200':
           description: "successful operation"
@@ -392,12 +386,6 @@ paths:
       operationId: "usersIdCartDELETE"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          description: "id of the user to delte the cart from"
-          required: true
-          type: "string"
       responses:
         '200':
           description: "operation status"
@@ -444,11 +432,6 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "userEmail"
-          in: "formData"
-          description: "Email of the user that wants a book"
-          required: true
-          type: "string"
         - name: "books"
           in: "formData"
           description: "id of the book that the user wants"
