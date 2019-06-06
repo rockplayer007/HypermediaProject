@@ -73,7 +73,7 @@
 		$.get(`https://hypermedia-app.herokuapp.com/v2/authors/`+id)
 		.done(function(data) {
 			let target = $('.author-list-container');
-			let {title, date, genre, language, abstract, price, isbn, publisher} = data;
+			let {name, surname, biography} = data;
 
 			//Creates the container for the author element of the list
 	        let listItem = document.createElement('div');

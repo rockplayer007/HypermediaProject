@@ -73,7 +73,7 @@
 		$.get(`https://hypermedia-app.herokuapp.com/v2/events/`+id)
 		.done(function(data) {
 			let target = $('.event-list-container');
-			let {title, date, genre, language, abstract, price, isbn, publisher} = data;
+			let {name, bookId, date, location, description} = data;
 
 			//Creates the container for the event element of the list
 	        let listItem = document.createElement('div');
