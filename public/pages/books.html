@@ -67,6 +67,7 @@
 	</script>
 	<script>
     $.get('https://hypermedia-app.herokuapp.com/v2/books')
+	//$.get('http://localhost:8080/v2/books')
     .done(function(json) {
       //json arrives as array
       let books = json;
@@ -77,6 +78,7 @@
       for(let i = 0; i< books.length; i++) {
 
         $.get('https://hypermedia-app.herokuapp.com/v2/books/'+(i+1)+'/author')
+		//$.get('http://localhost:8080/v2/books/'+(i+1)+'/author')
         .done(function(aut) {
 
           let authors = aut ; 
