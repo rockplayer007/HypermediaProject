@@ -14,7 +14,7 @@ host: "hypermedia-app.herokuapp.com"
 basePath: "/v2"
 tags:
   - name: "book"
-    description: "Books availble"
+    description: "Books available"
   - name: "event"
     description: "Events of the books"
   - name: "author"

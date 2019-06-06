@@ -86,10 +86,11 @@
   </script>
   <script>
     $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
+	//$.get('http://localhost:8080/v2/users/logged')
     .done(function(response) {
       let {loggedIn} = response;
       console.log(response);
-      if (`${loggedIn}` == false) {
+      if (response.loggedIn === false) {
         let target = $('#cartbutton');
         target.hide();
       }
@@ -103,10 +104,14 @@
     $('.loginbutton').on('click', function() {
       let name = document.getElementById('loginbutton');
       if (name.textContent === "Logout") {
-        name.setAttribute('href', '/index.html');
 
         $.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
-        .done();
+		//$.get('http://localhost:8080/v2/users/logout')
+        .done(function (data) {
+        	if(data.loggedOut === true){
+				name.setAttribute('href', '/index.html');
+			}
+		});
       }
 
     });

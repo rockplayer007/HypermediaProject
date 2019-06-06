@@ -78,7 +78,7 @@
       	});
 	</script>
 	<script>
-		$('.sign').on('click', function(e) {
+		$('#signtry').on('submit', function(e) {
 			e.preventDefault();
 			var datas = "email=";
 			datas += document.getElementById("emailxxx").value;
@@ -86,6 +86,7 @@
 			datas += document.getElementById("passwordxxx").value;
 
 			$.post('https://hypermedia-app.herokuapp.com/v2/user/login', datas, function(result) {
+			//$.post('http://localhost:8080/v2/user/login', datas, function(result) {
 
 				var {loggedIn} = result;
 				if(loggedIn){
