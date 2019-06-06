@@ -9,7 +9,7 @@
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   	<!-- TODO: modify display: none; w/ z-index & opacity modificators -->
  	<link rel="stylesheet" href="/assets/css/style.css">
-	<title>BuuK - register</title>
+	<title>BuuK - event</title>
 </head>
 
 <body>
@@ -28,23 +28,11 @@
 		<div id="main-content">
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
 			<div id="main-bg-content">
-				<div class="container register-box">
-					<form id="registertry" method="post" action="https://hypermedia-app.herokuapp.com/v2/user/register">
-						<p id="formHeader">Create account</p>
-						<div class="email-register-box">
-							<label>Email</label>
-							<input type="email" id="emailxxx" name="email" placeholder="Enter email address" required="required" />
-						</div>
-						<div class="password-register-box">
-							<label>Password</label>
-							<input type="password" id="passwordxxx" name="password" placeholder="Enter password" required="required" />
-						</div>
-						<div class="submit">
-							<button type="submit"><a class="sign"><img src="/assets/img/buttons/create-account.png" class="login-account-button mx-auto d-block" /></a></button>
-						</div>
-						<!-- TODO: modify this -->
-						<span><hr />Already have an account? <a href="/pages/login.html" title="login">sign in</a><hr /></span>
-					</form>
+				<div class="event-list-header">
+					<p>Author</p>
+				</div>
+				<div class="event-list-container">
+
 				</div>
 			</div>
 		</div>
@@ -78,18 +66,32 @@
       	});
 	</script>
 	<script>
-		$('#registertry').on('submit', function(e) {
-			e.preventDefault();
-			var datas = "email=";
-			datas += document.getElementById("emailxxx").value;
-			datas += "&password=";
-			datas += document.getElementById("passwordxxx").value;
-			$.post('https://hypermedia-app.herokuapp.com/v2/user/register', datas, function() {
-				window.location.href = "/index.html"
-			}).fail(function(e) {
-				$('#formHeader').html("Register ERROR - email already exists!!");
-				$('form input').addClass('error');
-			});
+		//Gets the id of the element
+		let splits = (location.search).split("=");
+		let id = splits[1];
+
+		$.get(`https://hypermedia-app.herokuapp.com/v2/events/`+id)
+		.done(function(data) {
+			let target = $('.event-list-container');
+			let {title, date, genre, language, abstract, price, isbn, publisher} = data;
+
+			//Creates the container for the event element of the list
+	        let listItem = document.createElement('div');
+	        listItem.setAttribute('class', 'event');
+	        target.append(listItem);
+
+	        //Creates the link container that wraps up the event portrait
+	        let link = document.createElement('a');
+	        link.setAttribute('href', '/pages/event.html?id='+id);
+	        listItem.append(link);
+
+	        //Puts the event portrait in the link wrapper
+	        let image = document.createElement('img');
+	        image.setAttribute('src', '/assets/img/event'+id+'.png');
+	        image.setAttribute('alt', 'event-portrit');
+	        link.append(image);
 		});
 	</script>
 </body>
+
+</html>
