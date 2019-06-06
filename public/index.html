@@ -96,7 +96,7 @@
       else{
           let target = $('#loginbutton');
           target.html("Logout");
-		  document.getElementById('loginbutton').setAttribute('href', '/index.html');
+		  document.getElementById('loginbutton').setAttribute('href', '#');
 		  document.getElementById('loginbutton').setAttribute('title', 'logout');
 
       }
@@ -108,7 +108,11 @@
       if (name.textContent === "Logout") {
         $.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
 		//$.get('http://localhost:8080/v2/users/logout')
-        .done();
+        .done(() => {
+			let target = $('#cartbutton');
+			target.hide();
+			$('#loginbutton').html("Login");
+		});
       }
 
     });
