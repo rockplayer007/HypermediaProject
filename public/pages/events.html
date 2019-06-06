@@ -66,108 +66,56 @@
       	});
 	</script>
 	<script>
-		/*fetch('http://localhost:8080/v2/books').then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      //json arrives as array
-      */let events = [
-  {
-    "id": 1,
-    "name": "Nobel lecture:LIGO and Gravitational Waves III",
-    "bookId": 1,
-    "date": "2017-12-08T00:00:00.000Z",
-    "location": "Aula Magna, Stockholm University",
-    "description": "LIGO and Gravitational Waves III Kip S. Thorne delivered his Nobel Lecture on 8 December 2017 at the Aula Magna, Stockholm University. He was introduced by Professor Nils Mårtensson, Chairman of the Nobel Committee for Physics."
-  },
-  {
-    "id": 2,
-    "name": "Advances in database technology: International Conference on Extending Database Technology",
-    "bookId": 2,
-    "date": "2006-03-26T00:00:00.000Z",
-    "location": "Munich, Germany",
-    "description": "This volume represents the outcome of the International Conference on 'Extending Database Technology', held in Munich, Germany in March 2006. It contains the major dimensions into which database technology is currently being pushed by the needs of new applications and pulled by the chances of novel developments in hardware and systems architecture. "
-  },
-  {
-    "id": 3,
-    "name": "BBC Lecture: Why Orwell's 1984 could be about now",
-    "bookId": 3,
-    "date": "2018-05-07T00:00:00.000Z",
-    "location": "London, England",
-    "description": "Audiences around the world are re-reading George Orwell’s 1984, which is ‘a handbook for difficult times’, writes Jean Seaton.Reading 1984, George Orwell’s claustrophobic fable of totalitarianism, is still a shock. First comes the start of recognition: we recognise what he describes. Doublethink (holding two contradictory thoughts at the same time), Newspeak, the Thought Police, the Ministry of Love that deals in pain, despair and annihilates any dissident, the Ministry of Peace that wages war, the novel-writing machines that pump out pornography to buy off the masses: Orwell opened our eyes to how regimes worked."
-  },
-  {
-    "id": 4,
-    "name": "Welcome to harry potter: the exhibition",
-    "bookId": 4,
-    "date": "2019-04-27T00:00:00.000Z",
-    "location": "Ciudad de las Artes y las Ciencias, Av. del Professor López Piñero, 7, 46013 València, Spain",
-    "description": "In this amazing exhibition, guests will get an up close and personal look at the artistry and craftsmanship that went into creating the iconic props and costumes that appeared throughout the Harry Potter™ films. These authentic artifacts will be displayed in elaborate settings inspired by locations from Hogwarts™ School of Witchcraft and Wizardry including the Gryffindor™ common room, Hagrid’s hut and the Great Hall."
-  },
-  {
-    "id": 5,
-    "name": "Amitav Ghosh - A Conversation on The Great Derangement",
-    "bookId": 5,
-    "date": "2017-04-27T00:00:00.000Z",
-    "location": "University Verginia Library",
-    "description": "A conversation with Amitav Ghosh on April 27, 2017, presented by the Institute of the Humanities and Global Cultures. Amitav Ghosh was born in Calcutta and grew up in India, Bangladesh and Sri Lanka. He studied in Delhi, Oxford and Alexandria and is the author of The Circle of Reason, The Shadow Lines, In An Antique Land, Dancing in Cambodia, The Calcutta Chromosome, The Glass Palace, The Hungry Tide, and the first two volumes of The Ibis Trilogy; Sea of Poppies, and River of Smoke. In this evening event, Distinguished Writer-in-Residence Amitav Ghosh spoke about his newest book, The Great Derangement: Climate Change and the Unthinkable (2016)."
-  }
-];
-		let target = $('.event-list-container');
+		$.get('https://hypermedia-app.herokuapp.com/v2/events/')
+		//$.get('http://localhost:8080/v2/events/')
+		.done(function(e) {
+			let events = e;
+			let	target = $('.event-list-container');
 
-		for(let i = 0; i< events.length; i++) {
+			for (let i = 0; i < events.length; i++) {
 
-      	//Creates the container for the event element of the list
-        let listItem = document.createElement('div');
-        listItem.setAttribute('class', 'event');
-        target.append(listItem);
+				let {id, name, date, location} = events[i];
 
-        //Creates the link container that wraps up the event image
-        let link = document.createElement('a');
-        link.setAttribute('href', '#');
-        listItem.append(link);
+				//Creates the container for the event element of the list
+				let listItem = document.createElement('div');
+				listItem.setAttribute('class', 'event');
+				target.append(listItem);
 
-        //Puts the event image in the link wrapper
-        let image = document.createElement('img');
-        image.setAttribute('src', '/assets/img/events/event'+(i+1)+'.png');
-        image.setAttribute('alt', 'event-cover');
-        link.append(image);
+				//Creates the link container that wraps up the event image
+				let link = document.createElement('a');
+				link.setAttribute('href', '/pages/event.html?id='+`${id}`);
+				listItem.append(link);
 
-        //Needs to be fixed from here on
-        let {id, name, date, location} = events[1];
+				//Puts the event image in the link wrapper
+				let image = document.createElement('img');
+				image.setAttribute('src', '/assets/img/events/event' + (i + 1) + '.png');
+				image.setAttribute('alt', 'event-cover');
+				link.append(image);
 
-        /*fetch('http://localhost:8080/v2/events/'+`${id}`).then(function(response) {
-      		return response.json();
-    	}).then(function(json) {
-    		let text = "";
-    		for (var j = 0; j < json.length; j++) {
-    			text += json[j].name;
-    			text += json[j].surname;
-    			if (!json[j].lastChild) {
-    				text += ',';
-    			}
-    		}
-    	});*/
-    	let info = document.createElement('div');
-        info.setAttribute('class', 'mobile-centered-event');
 
-        link = document.createElement('a');
-        link.setAttribute('href', '#');
-        link.setAttribute('class', 'event-name');
+				let info = document.createElement('div');
+				info.setAttribute('class', 'mobile-centered-event');
 
-        //Here we were
-        info.append(link);
-        link.append(`${name}`);
-        let newline = document.createElement('br');
-        info.append(newline);
-		let d = new Date(date);
+				link = document.createElement('a');
+				link.setAttribute('href', '/pages/event.html?id='+`${id}`);
+				link.setAttribute('class', 'event-name');
 
-		let eventDate = d.getDate() + "-" + d.getMonth() + "-" + d.getUTCFullYear();
-        info.append(`${eventDate}`);
-        newline = document.createElement('br');
-        info.append(newline);
-        info.append(`${location}`);
-        listItem.append(info);
-    };
+				//Here we were
+				info.append(link);
+				link.append(`${name}`);
+				let newline = document.createElement('br');
+				info.append(newline);
+				let d = new Date(date);
+
+				let eventDate = d.getDate() + "-" + d.getMonth() + "-" + d.getUTCFullYear();
+				info.append(`${eventDate}`);
+				newline = document.createElement('br');
+				info.append(newline);
+				info.append(`${location}`);
+				listItem.append(info);
+			}
+
+		});
 	</script>
 </body>
 
