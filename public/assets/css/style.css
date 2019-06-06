@@ -141,6 +141,7 @@ label {
   width: 350px;
   height: 40px;
   margin: 3%;
+  background-color: Transparent;
 }
 .create-account-button {
   width: 351px;
