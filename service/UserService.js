@@ -238,7 +238,7 @@ exports.usersIdCartBookDELETE = function(userEmail, bookId) {
             quantity--;
             return sqlDb("cart")
                 .where({"userEmail":userEmail ,
-                    "bookId": books})
+                    "bookId": bookId})
                 .update({"quantity":quantity})
                 .then(() => {
                     return {"quantity": quantity};

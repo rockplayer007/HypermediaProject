@@ -368,7 +368,7 @@ paths:
     get:
       tags:
         - "user"
-      summary: "Get the cart of an user"
+      summary: "Get the cart of the currently logged user"
       operationId: "usersIdCartGET"
       produces:
         - "application/json"
