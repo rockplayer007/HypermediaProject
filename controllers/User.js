@@ -121,3 +121,16 @@ module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
 
 };
 
+
+module.exports.usersIdCartBookDELETE = function usersIdCartBookDELETE (req, res, next) {
+    var id = req.swagger.params['id'].value;
+
+    User.usersIdCartBookDELETE(req.session.userid, id)
+        .then(function (response) {
+            utils.writeJson(res, response);
+        })
+        .catch(function (response) {
+            utils.writeJson(res, response);
+        });
+};
+

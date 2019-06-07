@@ -382,7 +382,7 @@ paths:
     delete:
       tags:
         - "user"
-      summary: "Delete the cart of an user"
+      summary: "Delete the cart of the current logged in user"
       operationId: "usersIdCartDELETE"
       produces:
         - "application/json"
@@ -390,6 +390,27 @@ paths:
         '200':
           description: "operation status"
       x-swagger-router-controller: "User"
+
+  /users/books/{id}:
+    delete:
+      tags:
+        - "user"
+      summary: "Decrease the quantity of the given"
+      operationId: "usersIdCartBookDELETE"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "id of the book to decrease the qunatity"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        '200':
+          description: "operation status"
+      x-swagger-router-controller: "User"
+
 
   /users/logout:
     get:

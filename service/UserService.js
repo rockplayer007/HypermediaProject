@@ -53,7 +53,7 @@ exports.userBookPUT = function(userEmail,books) {
                     "bookId": books,
                     "quantity":quantity})
                 .then(() => {
-                    return {"added": true};
+                    return {"quantity": quantity};
                 });
         }
         else{
@@ -63,7 +63,7 @@ exports.userBookPUT = function(userEmail,books) {
                     "bookId": books})
                 .update({"quantity":quantity})
                 .then(() => {
-                    return {"added": true};
+                    return {"quantity": quantity};
                 });
         }
     });
@@ -201,7 +201,52 @@ exports.usersIdCartDELETE = function(id) {
         .del()
         .then(data => {return data});
 
-}
+};
+
+
+
+/**
+ * Decrease the quantity of the given
+ *
+ * id Long id of the book to decrease the qunatity
+ * no response value expected for this operation
+ **/
+exports.usersIdCartBookDELETE = function(userEmail, bookId) {
+
+    function checkBookInDb (sqlDb,book, user){
+        return sqlDb("cart")
+            .where({userEmail: user,
+                bookId : book})
+            .then(data =>{
+                return data[0].quantity;
+            });
+    }
+
+
+    return checkBookInDb(sqlDb, bookId, userEmail).then( quantity =>{
+        if(quantity === 1){ //delete book
+
+            return sqlDb("cart")
+                .where({userEmail: userEmail,
+                    bookId : bookId})
+                .del()
+                .then(() => {
+                    return {"quantity": 0}
+                });
+        }
+        else{
+            quantity--;
+            return sqlDb("cart")
+                .where({"userEmail":userEmail ,
+                    "bookId": books})
+                .update({"quantity":quantity})
+                .then(() => {
+                    return {"quantity": quantity};
+                });
+        }
+    });
+
+};
 
 
 /**
