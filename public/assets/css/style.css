@@ -85,13 +85,14 @@ a:hover {
   padding: 2%;
 }
 .book div {
-  float: left;
+  /*float: left;*/
   margin-left: 2%;
 }
 .book img {
   float: left;
   width: 200px;
   height: 307px;
+  margin-right: 20px;
 }
 .book a {
   color: #666;
@@ -104,9 +105,15 @@ a:hover {
   font-size: 170%;
 }
 .fitincorrectly {
-  overflow: scroll;
+  padding: 0 0 0 200px;
+  position: absolute;
 }
 @media (max-width: 768px) {
+  .mobile-centered.fitincorrectly {
+    padding: 0 0 0 0;
+    position: inherit;
+    margin: auto;
+  }
   .book img {
     display: block;
     float: none;

@@ -52,12 +52,12 @@
 		<div id="menu-content">
 			<ul id="menu-list">
         <li><a href="pages/books.html">Books</a></li>
-				<li><a href="/pages/bestsellers.html">Bestsellers</a></li>
-				<li><a href="/pages/ourfavouritereadings.html">Our favourite readings</a></li>
-				<li><a href="/pages/events.html">Events</a></li>
-				<li><a href="/pages/themes.html">Themes</a></li>
-				<li><a href="/pages/literarygenres.html">Literary genres</a></li>
-				<li><a href="/pages/authors.html">Authors</a></li>
+				<li><a href="pages/bestsellers.html">Bestsellers</a></li>
+				<li><a href="pages/ourfavouritereadings.html">Our favourite readings</a></li>
+				<li><a href="pages/events.html">Events</a></li>
+				<li><a href="pages/themes.html">Themes</a></li>
+				<li><a href="pages/literarygenres.html">Literary genres</a></li>
+				<li><a href="pages/authors.html">Authors</a></li>
 			</ul>
 		</div>
 	</div>
@@ -80,10 +80,10 @@
   <script>
     $(function() {
       $('div#books-container a').each(function(i) {
-        $(this).attr('href', '/pages/book.html?id='+(i+1));
+        $(this).attr('href', 'pages/book.html?id='+(i+1));
       });
       $('div#books-container img').each(function(i) {
-        $(this).attr('src', '/assets/img/books/book'+(i+1)+'.png');
+        $(this).attr('src', 'assets/img/books/book'+(i+1)+'.png');
       });
     });
   </script>
