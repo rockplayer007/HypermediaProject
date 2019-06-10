@@ -79,6 +79,9 @@
   </script>
   <script>
     $(function() {
+      $('div#books-container a').each(function(i) {
+        $(this).attr('href', '/pages/book.html?id='+(i+1));
+      });
       $('div#books-container img').each(function(i) {
         $(this).attr('src', '/assets/img/books/book'+(i+1)+'.png');
       });

@@ -103,6 +103,9 @@ a:hover {
 .book-title {
   font-size: 170%;
 }
+.fitincorrectly {
+  overflow: scroll;
+}
 @media (max-width: 768px) {
   .book img {
     display: block;
@@ -295,4 +298,8 @@ hr {
     float: none;
     margin-left: 0;
   }
+}
+/*CART.html PAGE*/
+.cart-list-header p {
+  text-align: center;
 }

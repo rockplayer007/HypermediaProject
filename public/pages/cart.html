@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="author" content="Ferraiuolo-Roland-Meng" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- TODO: modify display: none; w/ z-index & opacity modificators -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+	<title>BuuK - cart</title>
+</head>
+
+<body>
+	<!-- HEADER -->
+	<div id="header" class="sticky-top">
+		<nav class="navbar navbar-light">
+      <button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
+      <a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
+      <a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login">Login</a>
+      <button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
+		</nav>
+	</div>
+	<!-- CONTENT -->
+	<div id="content">
+		<!-- PAGE CONTENT -->
+		<div id="main-content">
+			<!-- VENUE OF BuuK BACKGROUND LOGO -->
+			<div id="main-bg-content">
+        <div class="cart-list-header">
+          <p>Your Cart</p>
+        </div>
+        <hr />
+        <div class="cart-list-container">
+          
+        </div>
+			</div>
+		</div>
+    <!-- MENU CONTENT -->
+		<div id="menu-content">
+			<ul id="menu-list">
+        <li><a href="/pages/books.html">Books</a></li>
+				<li><a href="/pages/bestsellers.html">Bestsellers</a></li>
+				<li><a href="/pages/ourfavouritereadings.html">Our favourite readings</a></li>
+				<li><a href="/pages/events.html">Events</a></li>
+				<li><a href="/pages/themes.html">Themes</a></li>
+				<li><a href="/pages/literarygenres.html">Literary genres</a></li>
+				<li><a href="/pages/authors.html">Authors</a></li>
+			</ul>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+    $('.navbar-toggler').on('click', function() {
+      var $main = $('#main-content');
+      var $menu = $('#menu-content');
+
+      if ($menu.is(":hidden")) {
+        $main.hide();
+        $menu.fadeIn(400);
+      } else {
+        $menu.hide();
+        $main.fadeIn(400);
+      }
+    });
+  </script>
+  <script>
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
+	//$.get('http://localhost:8080/v2/users/logged')
+    .done(function(response) {
+      console.log(response);
+      if (response.loggedIn === false) {
+        let target = $('#cartbutton');
+        target.hide();
+      }
+      else{
+          let target = $('#loginbutton');
+          target.html("Logout");
+		  document.getElementById('loginbutton').setAttribute('href', '#');
+		  document.getElementById('loginbutton').setAttribute('title', 'logout');
+
+      }
+    });
+  </script>
+  <script>
+    $('.loginbutton').on('click', function() {
+      let name = document.getElementById('loginbutton');
+      if (name.textContent === "Logout") {
+        $.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
+		//$.get('http://localhost:8080/v2/users/logout')
+        .done(() => {
+        	let target = $('#cartbutton');
+        	target.hide();
+        	$('#loginbutton').html("Login");
+        });
+      }
+
+    });
+  </script>
+  <script>
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+  //$.get('http://localhost:8080/v2/books')
+    .done(function(booksjson) {
+      let items = booksjson;
+
+      let target = $('.cart-list-container');
+      for(let i = 0; i< items.length; i++) {
+        $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].id+'/author')
+        .done(function(authorsjson) {
+          let authors = authorsjson;
+
+          let listItem = document.createElement('div');
+          listItem.setAttribute('class', 'item');
+          target.append(listItem);
+
+          let link = document.createElement('a');
+          link.setAttribute('href', '/pages/book.html?id='+items[i].id);
+          listItem.append(link);
+
+          let image = document.createElement('img');
+          image.setAttribute('src', '/assets/img/books/book'+items[i].id+'.png');
+          image.setAttribute('alt', 'item-cover');
+          link.append(image);
+
+          let info = document.createElement('div');
+          info.setAttribute('class', 'mobile-centered fitincorrectly');
+
+          link = document.createElement('a');
+          link.setAttribute('href', '/pages/book.html?id='+items[i].id);
+          link.setAttribute('class', 'item-title');
+
+          //Here we were
+          info.append(link);
+          link.append(items[i].title);
+          let newline = document.createElement('br');
+          info.append(newline);
+
+          for (var j = 0; j < authors.length; j++) {
+            let text = "";
+            let linkAuthor = document.createElement('a');
+            linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
+            
+            text += authors[j].name + ' ';
+            text += authors[j].surname;
+
+            if (authors[j+1]) {
+              text += ', ';
+            }
+            linkAuthor.append(text);
+            info.append(linkAuthor);
+          }
+
+          listItem.append(info);
+
+          let variations = document.createElement('div');
+          let itemsNum = document.createElement('span');
+          itemsNum.setAttribute('class', 'badge');
+          variations.append(itemsNum);
+
+          listItem.append(variations);
+        });
+      }
+    });
+  </script>
+  <script>
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+  //$.get('http://localhost:8080/v2/books')
+    .done(function(json) {
+      $('.badge').text(json.length);
+    });
+  </script>
+</body>
+
+</html>
