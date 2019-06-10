@@ -107,8 +107,8 @@
 		console.log("the id is:  "+ items);
       let target = $('.cart-list-container');
       for(let i = 0; i< items.length; i++) {
-      	console.log("id is:  "+ items[i].id);
-        $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].id+'/author')
+      	console.log("id is:  "+ items[i].bookId);
+        $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].bookId+'/author')
         .done(function(authorsjson) {
           let authors = authorsjson;
 
