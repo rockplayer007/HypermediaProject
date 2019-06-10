@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- TODO: modify display: none; w/ z-index & opacity modificators -->
   <link rel="stylesheet" href="/assets/css/style.css">
-	<title>BuuK</title>
+	<title>BuuK - cart</title>
 </head>
 
 <body>
@@ -27,24 +27,13 @@
 		<!-- PAGE CONTENT -->
 		<div id="main-content">
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
-			<div id="main-bg-content" class="container justify-content-center align-items-center">
-				<!-- CAROUSEL OF BOOKS-->
-				<div id="books-container" class="row justify-content-center">
-				  <a href="1st-book-link" title="1st-book-name">
-            <img src="1st-book-image" alt="1st-book-name" />
-				  </a>
-				  <a href="2nd-book-link" title="2nd-book-name">
-            <img src="2nd-book-image" alt="2nd-book-name" />
-				  </a>
-				  <a href="3rd-book-link" title="3rd-book-name">
-            <img src="3rd-book-image" alt="3rd-book-name" />
-				  </a>
-				  <a href="4th-book-link" title="4th-book-name">
-            <img src="4th-book-image" alt="4th-book-name" />
-				  </a>
-				  <a href="5th-book-link" title="5th-book-name">
-            <img src="5th-book-image" alt="5th-book-name" />
-				  </a>
+			<div id="main-bg-content">
+        <div class="cart-list-header">
+          <p>Your Cart</p>
+        </div>
+        <hr />
+        <div class="cart-list-container">
+          
         </div>
 			</div>
 		</div>
@@ -78,16 +67,6 @@
     });
   </script>
   <script>
-    $(function() {
-      $('div#books-container a').each(function(i) {
-        $(this).attr('href', '/pages/book.html?id='+(i+1));
-      });
-      $('div#books-container img').each(function(i) {
-        $(this).attr('src', '/assets/img/books/book'+(i+1)+'.png');
-      });
-    });
-  </script>
-  <script>
     $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
 	//$.get('http://localhost:8080/v2/users/logged')
     .done(function(response) {
@@ -112,12 +91,84 @@
         $.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
 		//$.get('http://localhost:8080/v2/users/logout')
         .done(() => {
-			let target = $('#cartbutton');
-			target.hide();
-			$('#loginbutton').html("Login");
-		});
+        	let target = $('#cartbutton');
+        	target.hide();
+        	$('#loginbutton').html("Login");
+        });
       }
 
+    });
+  </script>
+  <script>
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+  //$.get('http://localhost:8080/v2/books')
+    .done(function(booksjson) {
+      let items = booksjson;
+
+      let target = $('.cart-list-container');
+      for(let i = 0; i< items.length; i++) {
+        $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].id+'/author')
+        .done(function(authorsjson) {
+          let authors = authorsjson;
+
+          let listItem = document.createElement('div');
+          listItem.setAttribute('class', 'item');
+          target.append(listItem);
+
+          let link = document.createElement('a');
+          link.setAttribute('href', '/pages/book.html?id='+items[i].id);
+          listItem.append(link);
+
+          let image = document.createElement('img');
+          image.setAttribute('src', '/assets/img/books/book'+items[i].id+'.png');
+          image.setAttribute('alt', 'item-cover');
+          link.append(image);
+
+          let info = document.createElement('div');
+          info.setAttribute('class', 'mobile-centered fitincorrectly');
+
+          link = document.createElement('a');
+          link.setAttribute('href', '/pages/book.html?id='+items[i].id);
+          link.setAttribute('class', 'item-title');
+
+          //Here we were
+          info.append(link);
+          link.append(items[i].title);
+          let newline = document.createElement('br');
+          info.append(newline);
+
+          for (var j = 0; j < authors.length; j++) {
+            let text = "";
+            let linkAuthor = document.createElement('a');
+            linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
+            
+            text += authors[j].name + ' ';
+            text += authors[j].surname;
+
+            if (authors[j+1]) {
+              text += ', ';
+            }
+            linkAuthor.append(text);
+            info.append(linkAuthor);
+          }
+
+          listItem.append(info);
+
+          let variations = document.createElement('div');
+          let itemsNum = document.createElement('span');
+          itemsNum.setAttribute('class', 'badge');
+          variations.append(itemsNum);
+
+          listItem.append(variations);
+        });
+      }
+    });
+  </script>
+  <script>
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+  //$.get('http://localhost:8080/v2/books')
+    .done(function(json) {
+      $('.badge').text(json.length);
     });
   </script>
 </body>

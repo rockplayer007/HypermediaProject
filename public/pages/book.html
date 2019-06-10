@@ -91,6 +91,25 @@
 	        image.setAttribute('src', '/assets/img/books/book'+id+'.png');
 	        image.setAttribute('alt', 'book-cover');
 	        link.append(image);
+
+	        let addToCartBtn = document.createElement('button');
+	        addToCartBtn.setAttribute('class', 'addBtn');
+	        addToCartBtn.setAttribute('type', 'button');
+	        listItem.append(addToCartBtn);
+		});
+	</script>
+	<script>
+		$('.book-list-container').on('click', '.addBtn', function() {
+			$.ajax({
+				type: "PUT",
+				url: 'https://hypermedia-app.herokuapp.com/v2/user/addBook',
+				success: function() {
+					console.log("Boooook added!!!");
+				},
+				error: function() {
+					console.log("ERROR!!!");
+				}
+			});
 		});
 	</script>
 </body>

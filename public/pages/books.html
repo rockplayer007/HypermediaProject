@@ -17,7 +17,7 @@
 	<div id="header" class="sticky-top">
 		<nav class="navbar navbar-light">
       		<button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
-     		<a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
+          <a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
       		<a class="nav-item nav-link ml-auto nav-right" href="/pages/login.html" title="login">Login</a>
       		<button class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
 		</nav>
@@ -103,7 +103,7 @@
           link.append(image);
 
           let info = document.createElement('div');
-          info.setAttribute('class', 'mobile-centered');
+          info.setAttribute('class', 'mobile-centered fitincorrectly');
 
           link = document.createElement('a');
           link.setAttribute('href', '/pages/book.html?id='+`${id}`);
@@ -116,24 +116,20 @@
           info.append(newline);
           
       		for (var j = 0; j < authors.length; j++) {
-				let text = "";
-				let linkAuthor = document.createElement('a');
-				linkAuthor.setAttribute('href', '/pages/author.html?id='+(j+1));
-				listItem.append(linkAuthor);
+    				let text = "";
+    				let linkAuthor = document.createElement('a');
+    				linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
+    				
+  					text += authors[j].name + ' ';
+  					text += authors[j].surname;
 
-					text += authors[j].name + ' ';
-					text += authors[j].surname;
-
-
-
-					if (authors[j+1]) {
-						text += ', ';
-					}
-				linkAuthor.append(text);
-				info.append(linkAuthor);
+  					if (authors[j+1]) {
+  						text += ', ';
+  					}
+    				linkAuthor.append(text);
+    				info.append(linkAuthor);
       		}
 
-          
           newline = document.createElement('br');
           info.append(newline);
           info.append(`${price}`);
