@@ -10,6 +10,7 @@ module.exports.userBookPUT = function userBookPUT (req, res, next) {
 
 
     User.userBookPUT(req.session.userid, books)
+    //User.userBookPUT("aleale@ale.it", books)
         .then(function (response) {
             utils.writeJson(res, response);
         })
