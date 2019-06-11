@@ -102,6 +102,18 @@
 		let splits = (location.search).split("=");
 		let id = splits[1];
 		$('.book-list-container').on('click', '.addBtn', function() {
+			fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+				method: 'PUT',
+				body: id
+			})
+					.then(response => {
+						console.error('quantity:', JSON.stringify(response))
+					})
+					.catch(error => console.error('Error:', error))
+					.then(response => console.log('Success:', JSON.stringify(response)));
+
+
+			/*
 			$.ajax({
 				type: "PUT",
 				url: 'https://hypermedia-app.herokuapp.com/v2/user/addBook',
@@ -115,6 +127,8 @@
 					console.log("ERROR!!!");
 				}
 			});
+
+			 */
 		});
 	</script>
 </body>
