@@ -99,8 +99,8 @@
 		});
 	</script>
 	<script>
-		let splits = (location.search).split("=");
-		let id = splits[1];
+		let spl = (location.search).split("=");
+		let id = spl[1];
 		$('.book-list-container').on('click', '.addBtn', function() {
 			fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
 				method: 'PUT',
