@@ -101,16 +101,19 @@
 	<script>
 		let spl = (location.search).split("=");
 		let idBook = spl[1];
+		var formData = new FormData();
+		formData.append("books", idBook);
+
 		$('.book-list-container').on('click', '.addBtn', function() {
 			fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
 				method: 'PUT',
-				body: idBook
+				body: formData
 			})
-					.then(response => {
-						console.error('quantity:', JSON.stringify(response))
-					})
-					.catch(error => console.error('Error:', error))
-					.then(response => console.log('Success:', JSON.stringify(response)));
+			.then(response => {
+				console.error('quantity:', JSON.stringify(response))
+			})
+			.catch(error => console.error('Error:', error))
+			.then(response => console.log('Success:', JSON.stringify(response)));
 
 
 			/*
