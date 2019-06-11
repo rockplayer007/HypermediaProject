@@ -99,12 +99,13 @@
 		});
 	</script>
 	<script>
-		let spl = (location.search).split("=");
-		let idBook = spl[1];
-		var formData = new FormData();
-		formData.append("books", idBook);
+
 
 		$('.book-list-container').on('click', '.addBtn', function() {
+			let spl = (location.search).split("=");
+			let idBook = spl[1];
+			var formData = new FormData();
+			formData.append("books", idBook);
 			fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
 				method: 'PUT',
 				body: formData
