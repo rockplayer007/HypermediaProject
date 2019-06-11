@@ -99,10 +99,15 @@
 		});
 	</script>
 	<script>
+		let splits = (location.search).split("=");
+		let id = splits[1];
 		$('.book-list-container').on('click', '.addBtn', function() {
 			$.ajax({
 				type: "PUT",
 				url: 'https://hypermedia-app.herokuapp.com/v2/user/addBook',
+				data: {
+					data: id
+				},
 				success: function() {
 					console.log("Boooook added!!!");
 				},
