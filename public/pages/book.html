@@ -100,11 +100,11 @@
 	</script>
 	<script>
 		let spl = (location.search).split("=");
-		let id = spl[1];
+		let idBook = spl[1];
 		$('.book-list-container').on('click', '.addBtn', function() {
 			fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
 				method: 'PUT',
-				body: id
+				body: idBook
 			})
 					.then(response => {
 						console.error('quantity:', JSON.stringify(response))
