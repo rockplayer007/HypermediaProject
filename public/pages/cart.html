@@ -117,11 +117,11 @@
           target.append(listItem);
 
           let link = document.createElement('a');
-          link.setAttribute('href', '/pages/book.html?id='+items[i].id);
+          link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
           listItem.append(link);
 
           let image = document.createElement('img');
-          image.setAttribute('src', '/assets/img/books/book'+items[i].id+'.png');
+          image.setAttribute('src', '/assets/img/books/book'+items[i].bookId+'.png');
           image.setAttribute('alt', 'item-cover');
           link.append(image);
 
@@ -129,7 +129,7 @@
           info.setAttribute('class', 'mobile-centered fitincorrectly');
 
           link = document.createElement('a');
-          link.setAttribute('href', '/pages/book.html?id='+items[i].id);
+          link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
           link.setAttribute('class', 'item-title');
 
           //Here we were
