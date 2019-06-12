@@ -202,7 +202,7 @@
 				//$.get('http://localhost:8080/v2/users/logged')
 						.done(function(response) {
 							console.log(response);
-							if (response.loggedIn === false) {
+							if (response.loggedIn !== false) {
 								let addToCartBtn = document.createElement('button');
 								addToCartBtn.setAttribute('class', 'addBtn');
 								addToCartBtn.setAttribute('type', 'button');
@@ -242,7 +242,7 @@
 
 		});
 	</script>
-	
+
 
 
 </body>
