@@ -92,6 +92,16 @@
 	        image.setAttribute('alt', 'book-cover');
 	        link.append(image);
 
+	        let info = document.createElement('div');
+
+	        link = document.createElement('a');
+          	link.setAttribute('href', '/pages/book.html?id='+id);
+          	link.setAttribute('class', 'book-title');
+          	info.append(link);
+
+          	link.append(`${title}`);
+          	listItem.append(info);
+
 	        let addToCartBtn = document.createElement('button');
 	        addToCartBtn.setAttribute('class', 'addBtn');
 	        addToCartBtn.setAttribute('type', 'button');
