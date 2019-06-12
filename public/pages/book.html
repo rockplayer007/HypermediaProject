@@ -135,7 +135,11 @@
 
 	          	let pubblicationDate = document.createElement('span');
 	          	pubblicationDate.setAttribute('class', 'pubblication-date');
-	          	pubblicationDate.append(`${date}`);
+
+				let d = new Date(date);
+				let eventDate = d.getDate() + "-" + d.getMonth() + "-" + d.getUTCFullYear();
+
+	          	pubblicationDate.append(`${eventDate}`);
 	          	info.append(pubblicationDate);
 
 	          	link = document.createElement('a');
@@ -224,13 +228,26 @@
 				return response.json();
 			})
 			.then(function(json) {
-				//QUA DEVI MODIFICARE QUELLO CHE TI SERVE
 				console.log("quantity: " + json.quantity);
 			});
 
 
 		});
 	</script>
+	<script>
+		//for hiding the add to cart button
+		$.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
+		//$.get('http://localhost:8080/v2/users/logged')
+				.done(function(response) {
+					console.log(response);
+					if (response.loggedIn === false) {
+						let target = $('.addBtn');
+						target.hide();
+					}
+				});
+	</script>
+
+
 </body>
 
 </html>

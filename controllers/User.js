@@ -8,15 +8,20 @@ var bcrypt = require('bcrypt');
 module.exports.userBookPUT = function userBookPUT (req, res, next) {
     var books = req.swagger.params['books'].value;
 
+    if(req.session.userid === false){
+        utils.writeJson(res, {"loggedIn": false});
+    }
+    else{
+        User.userBookPUT(req.session.userid, books)
+        //User.userBookPUT("aleale@ale.it", books)
+            .then(function (response) {
+                utils.writeJson(res, response);
+            })
+            .catch(function (response) {
+                utils.writeJson(res, response);
+            });
+    }
 
-    User.userBookPUT(req.session.userid, books)
-    //User.userBookPUT("aleale@ale.it", books)
-        .then(function (response) {
-            utils.writeJson(res, response);
-        })
-        .catch(function (response) {
-            utils.writeJson(res, response);
-        });
 
 };
 
