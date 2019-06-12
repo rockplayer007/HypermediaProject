@@ -310,9 +310,60 @@ hr {
 .cart-list-header p {
   text-align: center;
 }
+/*BOOK.html PAGE*/
 .addBtn {
   width: 120px;
   height: 38px;
   background-size: cover;
   background-image: url(/assets/img/buttons/add-to-cart.png);
+}
+.particular-book {
+  border: solid #fff;
+  background-color: #eee;
+  overflow: hidden;
+  margin: 0.5%;
+  padding: 2%;
+}
+.particular-book div {
+  /*float: left;*/
+  /*margin-left: 2%;*/
+}
+.particular-book img {
+  float: left;
+  width: 250px;
+  height: 382px;
+  margin-right: 20px;
+}
+.particular-book a {
+  color: #454545;
+}
+.particular-book a:hover {
+  color: #151515;
+  text-decoration: none;
+}
+.book-title {
+  font-size: 170%;
+}
+.pubblication-date {
+  font-size: 80%;
+}
+.eventBookBtn {
+  width: 80px;
+  height: 34px;
+  background-size: cover;
+  background-image: url(/assets/img/buttons/book-event.png);
+  border-radius: 20px;
+}
+.abstract {
+  font-size: 85%;
+  line-height: 1.2em;
+}
+.imgSpace {
+  height: 100%;
+}
+.bold-info {
+  font-weight: bold;
+}
+.more-info {
+  margin-top: 2%;
 }

@@ -73,39 +73,133 @@
 		$.get(`https://hypermedia-app.herokuapp.com/v2/books/`+id)
 		//$.get(`http://localhost:8080/v2/books/`+id)
 		.done(function(data) {
-			let target = $('.book-list-container');
-			let {title, date, genre, language, abstract, price, isbn, publisher} = data;
+			$.get('https://hypermedia-app.herokuapp.com/v2/books/'+id+'/author')
+			//$.get('http://localhost:8080/v2/books/'+(i+1)+'/author')
+        	.done(function(aut) {
+				let target = $('.book-list-container');
+				let {title, date, genre, language, event, description, price, isbn, publisher} = data[0];
+				let authors = aut;
 
-			//Creates the container for the book element of the list
-	        let listItem = document.createElement('div');
-	        listItem.setAttribute('class', 'book');
-	        target.append(listItem);
+				//Order: title, author, date, book event, description, isbn, publisher, language, price
 
-	        //Creates the link container that wraps up the book cover
-	        let link = document.createElement('a');
-	        link.setAttribute('href', '/pages/book.html?id='+id);
-	        listItem.append(link);
+				//Creates the container for the book element of the list
+		        let listItem = document.createElement('div');
+		        listItem.setAttribute('class', 'particular-book');
+		        target.append(listItem);
 
-	        //Puts the book cover in the link wrapper
-	        let image = document.createElement('img');
-	        image.setAttribute('src', '/assets/img/books/book'+id+'.png');
-	        image.setAttribute('alt', 'book-cover');
-	        link.append(image);
+		        let imgSpace = document.createElement('div');
+		        imgSpace.setAttribute('class', 'imgSpace');
+		        listItem.append(imgSpace);
 
-	        let info = document.createElement('div');
+		        //Creates the link container that wraps up the book cover
+		        let link = document.createElement('a');
+		        link.setAttribute('href', '/pages/book.html?id='+id);
+		        imgSpace.append(link);
 
-	        link = document.createElement('a');
-          	link.setAttribute('href', '/pages/book.html?id='+id);
-          	link.setAttribute('class', 'book-title');
-          	info.append(link);
+		        //Puts the book cover in the link wrapper
+		        let image = document.createElement('img');
+		        image.setAttribute('src', '/assets/img/books/book'+id+'.png');
+		        image.setAttribute('alt', 'book-cover');
+		        link.append(image);
 
-          	link.append(`${title}`);
-          	listItem.append(info);
+		        let info = document.createElement('div');
+		        info.setAttribute('class', 'info');
 
-	        let addToCartBtn = document.createElement('button');
-	        addToCartBtn.setAttribute('class', 'addBtn');
-	        addToCartBtn.setAttribute('type', 'button');
-	        listItem.append(addToCartBtn);
+		        link = document.createElement('a');
+	          	link.setAttribute('href', '/pages/book.html?id='+id);
+	          	link.setAttribute('class', 'book-title');
+	          	info.append(link);
+
+	          	link.append(`${title}`);
+
+	          	let newline = document.createElement('br');
+		        info.append(newline);
+
+		        for (var j = 0; j < authors.length; j++) {
+    				let text = "";
+    				let linkAuthor = document.createElement('a');
+    				linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
+    				
+  					text += authors[j].name + ' ';
+  					text += authors[j].surname;
+
+  					if (authors[j+1]) {
+  						text += ', ';
+  					}
+    				linkAuthor.append(text);
+    				info.append(linkAuthor);
+    			}
+
+	          	newline = document.createElement('br');
+	          	info.append(newline);
+
+	          	let pubblicationDate = document.createElement('span');
+	          	pubblicationDate.setAttribute('class', 'pubblication-date');
+	          	pubblicationDate.append(`${date}`);
+	          	info.append(pubblicationDate);
+
+	          	link = document.createElement('a');
+	          	link.setAttribute('href', '/pages/event.html?id='+`${event}`);
+	          	link.setAttribute('class', 'book-event');
+	          	let bookEventBtn = document.createElement('button');
+	          	bookEventBtn.setAttribute('class', 'eventBookBtn');
+	          	bookEventBtn.setAttribute('type', 'button');
+	          	link.append(bookEventBtn);
+
+	          	newline = document.createElement('br');
+	          	info.append(newline);
+
+	          	info.append(link);
+
+	          	//Here description will be attached to info
+	          	let abstract = document.createElement('div');
+	          	abstract.setAttribute('class', 'abstract');
+	          	abstract.append(`${description}`);
+	          	info.append(abstract);
+
+	          	listItem.append(info);
+
+	          	let moreInfo = document.createElement('div');
+	          	moreInfo.setAttribute('class', 'more-info');
+
+	          	let isbnNumber = document.createElement('span');
+	          	isbnNumber.setAttribute('class', 'bold-info');
+	          	isbnNumber.append("ISBN-13: ");
+	          	moreInfo.append(isbnNumber);
+	          	isbnNumber = document.createElement('span');
+	          	isbnNumber.append(`${isbn}`);
+	          	moreInfo.append(isbnNumber);
+
+	          	newline = document.createElement('br');
+	          	moreInfo.append(newline);
+
+	          	let publisherName = document.createElement('span');
+	          	publisherName.setAttribute('class', 'bold-info');
+	          	publisherName.append("Publisher: ");
+	          	moreInfo.append(publisherName);
+	          	publisherName = document.createElement('span');
+	          	publisherName.append(`${publisher}`);
+	          	moreInfo.append(publisherName);
+
+	          	newline = document.createElement('br');
+	          	moreInfo.append(newline);
+
+	          	let lang = document.createElement('span');
+	          	lang.setAttribute('class', 'bold-info');
+	          	lang.append("Language: ");
+	          	moreInfo.append(lang);
+	          	lang = document.createElement('span');
+	          	lang.append(`${language}`);
+	          	moreInfo.append(lang);
+
+
+	          	listItem.append(moreInfo);
+
+		        let addToCartBtn = document.createElement('button');
+		        addToCartBtn.setAttribute('class', 'addBtn');
+		        addToCartBtn.setAttribute('type', 'button');
+		        listItem.append(addToCartBtn);
+		    });
 		});
 	</script>
 	<script>
