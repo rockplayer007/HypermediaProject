@@ -311,7 +311,8 @@ hr {
   text-align: center;
 }
 .addBtn {
-  width: 70px;
-  height: 22px;
+  width: 120px;
+  height: 38px;
+  background-size: cover;
   background-image: url(/assets/img/buttons/add-to-cart.png);
 }
