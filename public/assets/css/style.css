@@ -314,6 +314,7 @@ hr {
 .addBtn {
   width: 120px;
   height: 38px;
+  margin-top: 1%;
   background-size: cover;
   background-image: url(/assets/img/buttons/add-to-cart.png);
 }
@@ -344,14 +345,18 @@ hr {
 .book-title {
   font-size: 170%;
 }
-.pubblication-date {
-  font-size: 80%;
-}
 .eventBookBtn {
   width: 80px;
   height: 34px;
   background-size: cover;
   background-image: url(/assets/img/buttons/book-event.png);
+  border-radius: 20px;
+}
+.similarBookBtn {
+  width: 142px;
+  height: 34px;
+  background-size: cover;
+  background-image: url(/assets/img/buttons/see-similar-books.png);
   border-radius: 20px;
 }
 .abstract {
@@ -363,6 +368,9 @@ hr {
 }
 .bold-info {
   font-weight: bold;
+}
+.book-price {
+  font-size: 120%;
 }
 .more-info {
   margin-top: 2%;

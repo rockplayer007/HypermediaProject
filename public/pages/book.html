@@ -77,7 +77,7 @@
 			//$.get('http://localhost:8080/v2/books/'+(i+1)+'/author')
         	.done(function(aut) {
 				let target = $('.book-list-container');
-				let {title, date, genre, language, event, description, price, isbn, publisher} = data[0];
+				let {title, date, genre, language, event, description, price, isbn, publisher, field} = data[0];
 				let authors = aut;
 
 				//Order: title, author, date, book event, description, isbn, publisher, language, price
@@ -133,14 +133,10 @@
 	          	newline = document.createElement('br');
 	          	info.append(newline);
 
-	          	let pubblicationDate = document.createElement('span');
-	          	pubblicationDate.setAttribute('class', 'pubblication-date');
-
-				let d = new Date(date);
-				let eventDate = d.getDate() + "-" + d.getMonth() + "-" + d.getUTCFullYear();
-
-	          	pubblicationDate.append(`${eventDate}`);
-	          	info.append(pubblicationDate);
+	          	let bookPrice = document.createElement('span');
+	          	bookPrice.setAttribute('class', 'book-price');
+	          	bookPrice.append(`${price}`);
+	          	info.append(bookPrice);
 
 	          	link = document.createElement('a');
 	          	link.setAttribute('href', '/pages/event.html?id='+`${event}`);
@@ -150,8 +146,27 @@
 	          	bookEventBtn.setAttribute('type', 'button');
 	          	link.append(bookEventBtn);
 
+	          	/*link = document.createElement('a');
+	          	link.setAttribute('href', '#');
+	          	link.setAttribute('class', 'similars');
+	          	let similarsBtn = document.createElement('button');
+	          	similarsBtn.setAttribute('class', 'similarBookBtn');
+	          	similarsBtn.setAttribute('type', 'button');
+	          	link.append(similarsBtn);*/
+	          	//ADD HERE SIMILAR BOOKS CODE
+
 	          	newline = document.createElement('br');
 	          	info.append(newline);
+
+	          	info.append(link);
+
+	          	link = document.createElement('a');
+	          	link.setAttribute('href', '#');
+	          	link.setAttribute('class', 'similars');
+	          	let similarsBtn = document.createElement('button');
+	          	similarsBtn.setAttribute('class', 'similarBookBtn');
+	          	similarsBtn.setAttribute('type', 'button');
+	          	link.append(similarsBtn);
 
 	          	info.append(link);
 
@@ -165,6 +180,17 @@
 
 	          	let moreInfo = document.createElement('div');
 	          	moreInfo.setAttribute('class', 'more-info');
+
+	          	let bookGenre = document.createElement('span');
+	          	bookGenre.setAttribute('class', 'bold-info');
+	          	bookGenre.append("Genre: ");
+	          	moreInfo.append(bookGenre);
+	          	bookGenre = document.createElement('span');
+	          	bookGenre.append(`${genre}`);
+	          	moreInfo.append(bookGenre);
+
+	          	newline = document.createElement('br');
+	          	moreInfo.append(newline);
 
 	          	let isbnNumber = document.createElement('span');
 	          	isbnNumber.setAttribute('class', 'bold-info');
@@ -196,21 +222,32 @@
 	          	lang.append(`${language}`);
 	          	moreInfo.append(lang);
 
+	          	newline = document.createElement('br');
+	          	moreInfo.append(newline);
+
+	          	let pubblicationDate = document.createElement('span');
+	          	pubblicationDate.setAttribute('class', 'bold-info');
+	          	pubblicationDate.append("Pubblication date: ");
+	          	moreInfo.append(pubblicationDate);
+	          	pubblicationDate = document.createElement('span');
+	          	pubblicationDate.setAttribute('class', 'pubblication-date');
+	          	let d = new Date(date);
+				let eventDate = d.getDate() + "-" + d.getMonth() + "-" + d.getUTCFullYear();
+	          	pubblicationDate.append(eventDate);
+	          	moreInfo.append(pubblicationDate);
 
 	          	listItem.append(moreInfo);
 				$.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
 				//$.get('http://localhost:8080/v2/users/logged')
-						.done(function(response) {
-							console.log(response);
-							if (response.loggedIn !== false) {
-								let addToCartBtn = document.createElement('button');
-								addToCartBtn.setAttribute('class', 'addBtn');
-								addToCartBtn.setAttribute('type', 'button');
-								listItem.append(addToCartBtn);
-							}
-						});
-
-
+				.done(function(response) {
+					console.log(response);
+					if (response.loggedIn !== false) {
+						let addToCartBtn = document.createElement('button');
+						addToCartBtn.setAttribute('class', 'addBtn');
+						addToCartBtn.setAttribute('type', 'button');
+						listItem.append(addToCartBtn);
+					}
+				});
 		    });
 		});
 	</script>
@@ -238,8 +275,6 @@
 			.then(function(json) {
 				console.log("quantity: " + json.quantity);
 			});
-
-
 		});
 	</script>
 
