@@ -35,6 +35,9 @@
         <div class="cart-list-container">
           
         </div>
+        <div class="cart-list-checkout">
+          
+        </div>
 			</div>
 		</div>
     <!-- MENU CONTENT -->
@@ -113,7 +116,7 @@
 
             //item-img
             let itemImg = document.createElement('div');
-            itemImg.setAttribute('class', 'item-img')
+            itemImg.setAttribute('class', 'item-img mobile-centered')
 
             let link = document.createElement('a');
             link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
@@ -127,7 +130,7 @@
 
             //item-essentials
             let essentials = document.createElement('div');
-            essentials.setAttribute('class', 'item-essentials');
+            essentials.setAttribute('class', 'item-essentials mobile-centered');
 
             link = document.createElement('a');
             link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
@@ -158,14 +161,14 @@
 
             //item-price
             let itemPrice = document.createElement('div');
-            itemPrice.setAttribute('class', 'item-price');
+            itemPrice.setAttribute('class', 'item-price mobile-centered');
             itemPrice.append(item[0].price);
 
             listItem.append(itemPrice);
 
             //item-variations
             let variations = document.createElement('div');
-            variations.setAttribute('class', 'item-variations');
+            variations.setAttribute('class', 'item-variations mobile-centered');
 
             let deleteBtn = document.createElement('button');
             deleteBtn.setAttribute('class', 'plus-button delete-quantity');
@@ -174,7 +177,7 @@
             variations.append(deleteBtn);
 
             let itemsNum = document.createElement('span');
-            itemsNum.setAttribute('class', 'badge quantity');
+            itemsNum.setAttribute('class', 'badge quantity quantity'+items[i].bookId);
             itemsNum.append(items[i].quantity);
             variations.append(itemsNum);
 
@@ -188,6 +191,15 @@
           
           });
         });
+      }
+      if (items.length === 0) {
+        target.append("YOUR CART IS EMPTY!!!");
+      } else {
+        let targettino = $('.cart-list-checkout');
+        let checkoutBtn = document.createElement('button');
+        checkoutBtn.setAttribute('class', 'checkoutBtn');
+        checkoutBtn.setAttribute('type', 'button');
+        targettino.append(checkoutBtn);
       }
     });
   </script>
@@ -217,13 +229,9 @@
       })
       .then(function(json) {
         console.log("quantity: " + json.quantity);
-        $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
-        .done(function(deltaquantity) {
-          let newDelta = deltaquantity[0].quantity;
-          $('.badge').text(newDelta);
+        $('.badge').text(json.quantity);
         });
       });
-    });
   </script>
   <script>
     $('.cart-list-container').on('click', '.delete-quantity', function(xxx) {
@@ -247,7 +255,7 @@
         $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
         .done(function(deltaquantity) {
           let newDelta = deltaquantity[0].quantity;
-          $('.badge').text(newDelta);
+          $('.badge'+idBook).text(newDelta);
         });
       });
     });
