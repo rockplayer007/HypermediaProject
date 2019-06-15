@@ -165,7 +165,10 @@
                     .done(() => {
                         let target = $('#cartbutton');
                         target.hide();
-                        $('#loginbutton').html("Login");
+                        let button = $('#loginbutton');
+                        button.html("Login");
+                        document.getElementById('loginbutton').setAttribute('href', 'pages/login.html');
+                        document.getElementById('loginbutton').setAttribute('title', 'login');
                     });
             }
 
