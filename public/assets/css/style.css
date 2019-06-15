@@ -314,13 +314,14 @@ hr {
   width: 100%;
 }
 .item {
-  width: 100%;
   clear: both;
-  margin-bottom: 2%
+  margin-bottom: 2%;
 }
 .item-img {
   float: left;
+  margin-left: 2%;
   margin-right: 3%;
+  margin-bottom: 0.5%;
 }
 .item-img img {
   width: 140px;
@@ -342,16 +343,17 @@ hr {
 .item-price {
   float: left;
   width: 10%;
+  font-size: 120%;
 }
 .item-variations {
-
+  float: left;
 }
 .plus-button {
   border: 2px solid lightgrey;
   background-color: #fff;
   font-size: 16px;
-  height: 2.5em;
-  width: 2.5em;
+  height: 2em;
+  width: 2em;
   border-radius: 999px;
   position: relative;
   
@@ -378,6 +380,41 @@ hr {
 }
 .quantity {
   font-size: 120%;
+}
+.cart-list-checkout {
+  clear: left;
+}
+.cart-list-conteiner:last-child .item-img {
+  margin-bottom: 5%;
+}
+.checkoutBtn {
+  width: 214px;
+  height: 34px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 13%;
+  background-size: cover;
+  background-image: url(/assets/img/buttons/proceed-to-check-out.png);
+  border-radius: 20px;
+}
+@media (max-width: 768px) {
+  .item img {
+    width: 160px;
+    height: 246px;
+    margin-bottom: 2.5%;
+  }
+  .item div {
+    float: none;
+  }
+  .mobile-centered {
+    text-align: center;
+    width: auto;
+    margin-right: auto;
+  }
+  .item-variations {
+    margin-bottom: 10%;
+  }
 }
 /*BOOK.html PAGE*/
 .addBtn {

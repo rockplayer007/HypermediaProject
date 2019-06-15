@@ -35,6 +35,9 @@
         <div class="cart-list-container">
           
         </div>
+        <div class="cart-list-checkout">
+          
+        </div>
 			</div>
 		</div>
     <!-- MENU CONTENT -->
@@ -113,7 +116,7 @@
 
             //item-img
             let itemImg = document.createElement('div');
-            itemImg.setAttribute('class', 'item-img')
+            itemImg.setAttribute('class', 'item-img mobile-centered')
 
             let link = document.createElement('a');
             link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
@@ -127,7 +130,7 @@
 
             //item-essentials
             let essentials = document.createElement('div');
-            essentials.setAttribute('class', 'item-essentials');
+            essentials.setAttribute('class', 'item-essentials mobile-centered');
 
             link = document.createElement('a');
             link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
@@ -158,14 +161,14 @@
 
             //item-price
             let itemPrice = document.createElement('div');
-            itemPrice.setAttribute('class', 'item-price');
+            itemPrice.setAttribute('class', 'item-price mobile-centered');
             itemPrice.append(item[0].price);
 
             listItem.append(itemPrice);
 
             //item-variations
             let variations = document.createElement('div');
-            variations.setAttribute('class', 'item-variations');
+            variations.setAttribute('class', 'item-variations mobile-centered');
 
             let deleteBtn = document.createElement('button');
             deleteBtn.setAttribute('class', 'plus-button delete-quantity');
@@ -174,7 +177,7 @@
             variations.append(deleteBtn);
 
             let itemsNum = document.createElement('span');
-            itemsNum.setAttribute('class', 'badge quantity quantity'+ items[i].bookId);
+            itemsNum.setAttribute('class', 'badge quantity quantity'+items[i].bookId);
             itemsNum.append(items[i].quantity);
             variations.append(itemsNum);
 
@@ -189,7 +192,18 @@
           });
         });
       }
+
       calculate();
+
+      if (items.length === 0) {
+        target.append("YOUR CART IS EMPTY!!!");
+      } else {
+        let targettino = $('.cart-list-checkout');
+        let checkoutBtn = document.createElement('button');
+        checkoutBtn.setAttribute('class', 'checkoutBtn');
+        checkoutBtn.setAttribute('type', 'button');
+        targettino.append(checkoutBtn);
+      }
     });
   </script>
   <script>
@@ -201,29 +215,27 @@
   </script>
   <script>
     $('.cart-list-container').on('click', '.add-quantity', function() {
-      let idBook = this.getAttribute("name");
-      console.log("book id:  " + idBook);
-      var body = "books=";
-      body += idBook;
-      console.log("body: " + body);
-      //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
-      fetch('http://localhost:8080/v2/user/addBook', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: body
-      })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(json) {
-		  console.log("quantity: " + json.quantity);
-
-		  $('.quantity'+ idBook).text(json.quantity);
-
-      });
-    });
+		let idBook = this.getAttribute("name");
+		console.log("book id:  " + idBook);
+		var body = "books=";
+		body += idBook;
+		console.log("body: " + body);
+		//fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+		fetch('http://localhost:8080/v2/user/addBook', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: body
+		})
+				.then(function (response) {
+					return response.json();
+				})
+				.then(function (json) {
+					console.log("quantity: " + json.quantity);
+					$('.quantity' + idBook).text(json.quantity);
+				});
+	});
   </script>
   <script>
     $('.cart-list-container').on('click', '.delete-quantity', function() {
@@ -234,22 +246,13 @@
       //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
       fetch('http://localhost:8080/v2/users/books/'+idBook, {
         method: 'DELETE',
-		  /*
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: body
-
-		   */
       })
       .then(function(response) {
         return response.json();
       })
       .then(function(json) {
         console.log("quantity: " + json.quantity);
-
         $('.quantity'+ idBook).text(json.quantity);
-
       });
     });
   </script>
