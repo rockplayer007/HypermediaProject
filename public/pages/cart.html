@@ -216,12 +216,9 @@
         return response.json();
       })
       .then(function(json) {
-        console.log("quantity: " + json.quantity);
-        $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
-        .done(function(deltaquantity) {
-          let newDelta = deltaquantity[0].quantity;
-          $('.badge').text(newDelta);
-        });
+		  console.log("quantity: " + json.quantity);
+		  $('.badge').text(json.quantity);
+
       });
     });
   </script>
