@@ -16,10 +16,10 @@
 	<!-- HEADER -->
 	<div id="header" class="sticky-top">
 		<nav class="navbar navbar-light">
-      <button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
-      <a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
-      <a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login">Login</a>
-      <button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
+			<button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
+			<a class="navbar-brand nav-left" href="index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
+			<a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login">Login</a>
+			<button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
 		</nav>
 	</div>
 	<!-- CONTENT -->
@@ -66,39 +66,25 @@
       }
     });
   </script>
-  <script>
-    $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
-	//$.get('http://localhost:8080/v2/users/logged')
-    .done(function(response) {
-      console.log(response);
-      if (response.loggedIn === false) {
-        let target = $('#cartbutton');
-        target.hide();
-      }
-      else{
-          let target = $('#loginbutton');
-          target.html("Logout");
-		  document.getElementById('loginbutton').setAttribute('href', '#');
-		  document.getElementById('loginbutton').setAttribute('title', 'logout');
+	<script>
+		$.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
+		//$.get('http://localhost:8080/v2/users/logged')
+				.done(function(response) {
+					console.log(response);
+					if (response.loggedIn === false) {
+						let target = $('#cartbutton');
+						target.hide();
+					}
+					else{
+						let target = $('#loginbutton');
+						target.html("Logout");
+						document.getElementById('loginbutton').setAttribute('href', '/index.html');
+						document.getElementById('loginbutton').setAttribute('title', 'logout');
 
-      }
-    });
-  </script>
-  <script>
-    $('.loginbutton').on('click', function() {
-      let name = document.getElementById('loginbutton');
-      if (name.textContent === "Logout") {
-        $.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
-		//$.get('http://localhost:8080/v2/users/logout')
-        .done(() => {
-        	let target = $('#cartbutton');
-        	target.hide();
-        	$('#loginbutton').html("Login");
-        });
-      }
+					}
+				});
+	</script>
 
-    });
-  </script>
   <script>
     $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
     //$.get('http://localhost:8080/v2/users/books')
