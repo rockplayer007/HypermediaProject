@@ -138,9 +138,39 @@
       }
     });
 </script>
-<script>
+    <script>
+        $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
+        //$.get('http://localhost:8080/v2/users/logged')
+            .done(function(response) {
+                console.log(response);
+                if (response.loggedIn === false) {
+                    let target = $('#cartbutton');
+                    target.hide();
+                }
+                else{
+                    let target = $('#loginbutton');
+                    target.html("Logout");
+                    document.getElementById('loginbutton').setAttribute('href', '#');
+                    document.getElementById('loginbutton').setAttribute('title', 'logout');
 
-</script>
+                }
+            });
+    </script>
+    <script>
+        $('.loginbutton').on('click', function() {
+            let name = document.getElementById('loginbutton');
+            if (name.textContent === "Logout") {
+                $.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
+                //$.get('http://localhost:8080/v2/users/logout')
+                    .done(() => {
+                        let target = $('#cartbutton');
+                        target.hide();
+                        $('#loginbutton').html("Login");
+                    });
+            }
+
+        });
+    </script>
 </body>
 
 </html>

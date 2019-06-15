@@ -100,8 +100,8 @@
     });
   </script>
   <script>
-    $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
-  //$.get('http://localhost:8080/v2/books')
+    //$.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+    $.get('http://localhost:8080/v2/users/books')
     .done(function(booksjson) {
       let items = booksjson;
 		console.log("the id is:  "+ items);
