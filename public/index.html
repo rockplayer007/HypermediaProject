@@ -114,8 +114,9 @@
         .done(() => {
 			let target = $('#cartbutton');
 			target.hide();
-			target.html("Login");
-			document.getElementById('loginbutton').setAttribute('href', 'login.html');
+			let button = $('#loginbutton');
+			button.html("Login");
+			document.getElementById('loginbutton').setAttribute('href', 'pages/login.html');
 			document.getElementById('loginbutton').setAttribute('title', 'login');
 		});
       }
