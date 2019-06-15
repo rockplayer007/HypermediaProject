@@ -75,25 +75,76 @@
 			$.get('https://hypermedia-app.herokuapp.com/v2/events/'+id +'/book' )
 			.done(function(book) {
 				let target = $('.event-list-container');
-				let {name, bookId, date, location, description} = data;
+				let {name, bookId, date, location, description} = data[0];
 
 				let {title} = book;
 
 				//Creates the container for the event element of the list
 				let listItem = document.createElement('div');
-				listItem.setAttribute('class', 'event');
+				listItem.setAttribute('class', 'particular-event');
 				target.append(listItem);
 
-				//Creates the link container that wraps up the event portrait
-				let link = document.createElement('a');
-				link.setAttribute('href', '/pages/event.html?id=' + id);
-				listItem.append(link);
+				let eventTitle = document.createElement('span');
+				eventTitle.setAttribute('class', 'mobile-centered-event event-title');
+				eventTitle.append(`${name}`);
+				listItem.append(eventTitle);
+
+				let essentials = document.createElement('div');
+				essentials.setAttribute('class', 'event-essentials');
+				listItem.append(essentials);
 
 				//Puts the event portrait in the link wrapper
 				let image = document.createElement('img');
 				image.setAttribute('src', '/assets/img/events/event' + id + '.png');
 				image.setAttribute('alt', 'event-portrit');
-				link.append(image);
+				essentials.append(image);
+
+				let eventTime = document.createElement('span');
+	          	eventTime.setAttribute('class', 'bold-info aside aside-bigger');
+	          	eventTime.append("Time:");
+	          	essentials.append(eventTime);
+
+	          	let newline = document.createElement('br');
+	          	essentials.append(newline);
+
+	          	eventTime = document.createElement('span');
+	          	eventTime.setAttribute('class', 'aside');
+	          	let d = new Date(date);
+				let eventDate = d.getDate() + "-" + d.getMonth() + "-" + d.getUTCFullYear();
+	          	eventTime.append(eventDate);
+	          	essentials.append(eventTime);
+
+	          	newline = document.createElement('br');
+	          	essentials.append(newline);
+
+	          	let eventLoc = document.createElement('span');
+	          	eventLoc.setAttribute('class', 'bold-info aside aside-bigger');
+	          	eventLoc.append("Location:");
+	          	essentials.append(eventLoc);
+
+	          	newline = document.createElement('br');
+	          	essentials.append(newline);
+
+	          	eventLoc = document.createElement('span');
+	          	eventLoc.setAttribute('class', 'aside');
+	          	eventLoc.append(`${location}`);
+	          	essentials.append(eventLoc);
+
+	          	link = document.createElement('a');
+	          	link.setAttribute('href', '/pages/book.html?id='+`${bookId}`);
+	          	link.setAttribute('class', 'aside book-event');
+	          	let aboutBookBtn = document.createElement('button');
+	          	aboutBookBtn.setAttribute('class', 'bookAboutBtn');
+	          	aboutBookBtn.setAttribute('type', 'button');
+	          	link.append(aboutBookBtn);
+	          	essentials.append(link);
+
+	          	let eventDescr = document.createElement('div');
+	          	eventDescr.setAttribute('class', 'event-abstract');
+	          	listItem.append(eventDescr);
+	          	let abstract = document.createElement('span');
+	          	abstract.append(`${description}`);
+	          	eventDescr.append(abstract);
 			});
 		});
 	</script>

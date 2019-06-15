@@ -325,10 +325,6 @@ hr {
   margin: 0.5%;
   padding: 2%;
 }
-.particular-book div {
-  /*float: left;*/
-  /*margin-left: 2%;*/
-}
 .particular-book img {
   float: left;
   width: 250px;
@@ -374,4 +370,42 @@ hr {
 }
 .more-info {
   margin-top: 2%;
+}
+/*EVENT.html PAGE*/
+.particular-event {
+  border: solid #fff;
+  background-color: #eee;
+  overflow: hidden;
+  margin: 0.5%;
+  padding: 2%;
+}
+.event-title {
+  display: block;
+  font-weight: bold;
+  color: #454545;
+  font-size: 150%;
+  margin-bottom: 4%;
+}
+.event-essentials img {
+  float: left;
+  margin-bottom: 4%;
+}
+.aside-bigger {
+  font-size: 120%;
+}
+.aside {
+  margin-left: 2%;
+}
+.aside-far {
+  margin-top: 8%;
+}
+.bookAboutBtn {
+  width: 214px;
+  height: 34px;
+  background-size: cover;
+  background-image: url(/assets/img/buttons/see-more-information-about-the-book.png);
+  border-radius: 20px;
+}
+.event-abstract {
+  clear: left;
 }
