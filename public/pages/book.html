@@ -256,10 +256,8 @@
 		$('.book-list-container').on('click', '.addBtn', function() {
 			let spl = (location.search).split("=");
 			let idBook = spl[1];
-			var formData = new FormData();
 			var body = "books=";
 			body += idBook;
-			formData.append("books", idBook);
 			console.log("body: " + body);
 			fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
 			//fetch('http://localhost:8080/v2/user/addBook', {

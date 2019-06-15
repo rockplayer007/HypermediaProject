@@ -100,80 +100,108 @@
     });
   </script>
   <script>
-    //$.get('https://hypermedia-app.herokuapp.com/v2/users/books')
-    $.get('http://localhost:8080/v2/users/books')
+    //Retrieves cart content
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+    //$.get('http://localhost:8080/v2/users/books')
     .done(function(booksjson) {
+
       let items = booksjson;
-		console.log("the id is:  "+ items);
-      let target = $('.cart-list-container');
+		  console.log("the id is:  "+ items);
+      var target = $('.cart-list-container');
+
       for(let i = 0; i< items.length; i++) {
       	console.log("id is:  "+ items[i].bookId);
-        $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].bookId+'/author')
-        .done(function(authorsjson) {
-          let authors = authorsjson;
+        //Retrieves cart item book info
+        $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].bookId)
+        .done(function(bookinfo) {
 
-          let listItem = document.createElement('div');
-          listItem.setAttribute('class', 'item');
-          target.append(listItem);
+          let item = bookinfo;
+          //Retrieves cart item author info
+          $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].bookId+'/author')
+          .done(function(authorsjson) {
 
-          //item-img
-          let itemImg = document.createElement('div');
-          itemImg.setAttribute('class', 'item-img')
+            let authors = authorsjson;
 
-          let link = document.createElement('a');
-          link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
-          itemImg.append(link);
+            let listItem = document.createElement('div');
+            listItem.setAttribute('class', 'item');
+            target.append(listItem);
 
-          let image = document.createElement('img');
-          image.setAttribute('src', '/assets/img/books/book'+items[i].bookId+'.png');
-          image.setAttribute('alt', 'item-image');
-          link.append(image);
+            //item-img
+            let itemImg = document.createElement('div');
+            itemImg.setAttribute('class', 'item-img')
 
-          //item-essentials
-          let essentials = document.createElement('div');
-          listItem.setAttribute('class', 'item-essentials');
+            let link = document.createElement('a');
+            link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
+            itemImg.append(link);
 
-          link = document.createElement('a');
-          link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
-          link.setAttribute('class', 'item-essentials-title');
-          essentials.append(link);
+            let image = document.createElement('img');
+            image.setAttribute('src', '/assets/img/books/book'+items[i].bookId+'.png');
+            image.setAttribute('alt', 'item-image');
+            link.append(image);
+            listItem.append(itemImg);
 
-          link.append(items[i].title);
+            //item-essentials
+            let essentials = document.createElement('div');
+            essentials.setAttribute('class', 'item-essentials');
 
-          let newline = document.createElement('br');
-          essentials.append(newline);
+            link = document.createElement('a');
+            link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
+            link.setAttribute('class', 'item-essentials-title');
+            essentials.append(link);
 
-          for (var j = 0; j < authors.length; j++) {
-            let text = "";
-            let linkAuthor = document.createElement('a');
-            linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
-            
-            text += authors[j].name + ' ';
-            text += authors[j].surname;
+            link.append(item[0].title);
 
-            if (authors[j+1]) {
-              text += ', ';
+            let newline = document.createElement('br');
+            essentials.append(newline);
+
+            for (var j = 0; j < authors.length; j++) {
+              let text = "";
+              let linkAuthor = document.createElement('a');
+              linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
+              
+              text += authors[j].name + ' ';
+              text += authors[j].surname;
+
+              if (authors[j+1]) {
+                text += ', ';
+              }
+              linkAuthor.append(text);
+              essentials.append(linkAuthor);
             }
-            linkAuthor.append(text);
-            essentials.append(linkAuthor);
-          }
 
-          listItem.append(essentials);
+            listItem.append(essentials);
 
-          //item-price
-          let itemPrice = document.createElement('div');
-          itemPrice.setAttribute('class', 'item-price');
-          itemPrice.append(items[i].price);
+            //item-price
+            let itemPrice = document.createElement('div');
+            itemPrice.setAttribute('class', 'item-price');
+            itemPrice.append(item[0].price);
 
-          listItem.append(itemPrice);
+            listItem.append(itemPrice);
 
-          //item-variations
-          let variations = document.createElement('div');
-          let itemsNum = document.createElement('span');
-          itemsNum.setAttribute('class', 'badge');
-          variations.append(itemsNum);
+            //item-variations
+            let variations = document.createElement('div');
+            variations.setAttribute('class', 'item-variations');
 
-          listItem.append(variations);
+            let deleteBtn = document.createElement('button');
+            deleteBtn.setAttribute('class', 'plus-button delete-quantity');
+            deleteBtn.setAttribute('name', items[i].bookId);
+            deleteBtn.append("-");
+            variations.append(deleteBtn);
+
+            let itemsNum = document.createElement('span');
+            itemsNum.setAttribute('class', 'badge quantity');
+            itemsNum.append(items[i].quantity);
+            variations.append(itemsNum);
+
+            let addBtn = document.createElement('button');
+            addBtn.setAttribute('class', 'plus-button add-quantity');
+            addBtn.setAttribute('name', items[i].bookId);
+            addBtn.append("+");
+            variations.append(addBtn);
+
+            listItem.append(variations);
+          
+          });
         });
       }
     });
@@ -183,6 +211,60 @@
   //$.get('http://localhost:8080/v2/books')
     .done(function(json) {
       $('.badge').text(json.length);
+    });
+  </script>
+  <script>
+    $('.cart-list-container').on('click', '.add-quantity', function(xxx) {
+      let idBook = xxx.name;
+      var body = "books=";
+      body += idBook;
+      console.log("body: " + body);
+      fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+      //fetch('http://localhost:8080/v2/user/addBook', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: body
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        console.log("quantity: " + json.quantity);
+        $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+        .done(function(deltaquantity) {
+          let newDelta = deltaquantity[0].quantity;
+          $('.badge').text(newDelta);
+        });
+      });
+    });
+  </script>
+  <script>
+    $('.cart-list-container').on('click', '.delete-quantity', function(xxx) {
+      let idBook = xxx.name;
+      var body = "books=";
+      body += idBook;
+      console.log("body: " + body);
+      fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+      //fetch('http://localhost:8080/v2/user/addBook', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: body
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        console.log("quantity: " + json.quantity);
+        $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+        .done(function(deltaquantity) {
+          let newDelta = deltaquantity[0].quantity;
+          $('.badge').text(newDelta);
+        });
+      });
     });
   </script>
 </body>
