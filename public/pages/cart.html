@@ -211,13 +211,14 @@
     });
   </script>
   <script>
-    $('.cart-list-container').on('click', '.add-quantity', function(xxx) {
-      let idBook = xxx.name;
+    $('.cart-list-container').on('click', '.add-quantity', function() {
+      let idBook = this.getAttribute("name");
+      console.log("book id:  " + idBook);
       var body = "books=";
       body += idBook;
       console.log("body: " + body);
-      fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
-      //fetch('http://localhost:8080/v2/user/addBook', {
+      //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+      fetch('http://localhost:8080/v2/user/addBook', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -228,35 +229,26 @@
         return response.json();
       })
       .then(function(json) {
-        console.log("quantity: " + json.quantity);
-        $('.badge').text(json.quantity);
-        });
+		    console.log("quantity: " + json.quantity);
+		    $('.quantity'+ idBook).text(json.quantity);
       });
   </script>
   <script>
-    $('.cart-list-container').on('click', '.delete-quantity', function(xxx) {
-      let idBook = xxx.name;
+    $('.cart-list-container').on('click', '.delete-quantity', function() {
+      let idBook = this.getAttribute("name");
       var body = "books=";
       body += idBook;
       console.log("body: " + body);
-      fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
-      //fetch('http://localhost:8080/v2/user/addBook', {
+      //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+      fetch('http://localhost:8080/v2/users/books/'+idBook, {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: body
       })
       .then(function(response) {
         return response.json();
       })
       .then(function(json) {
         console.log("quantity: " + json.quantity);
-        $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
-        .done(function(deltaquantity) {
-          let newDelta = deltaquantity[0].quantity;
-          $('.badge'+idBook).text(newDelta);
-        });
+        $('.quantity'+ idBook).text(json.quantity);
       });
     });
   </script>
