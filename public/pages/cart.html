@@ -174,7 +174,7 @@
             variations.append(deleteBtn);
 
             let itemsNum = document.createElement('span');
-            itemsNum.setAttribute('class', 'badge quantity');
+            itemsNum.setAttribute('class', 'badge quantity quantity'+ items[i].bookId);
             itemsNum.append(items[i].quantity);
             variations.append(itemsNum);
 
@@ -205,8 +205,8 @@
       var body = "books=";
       body += idBook;
       console.log("body: " + body);
-      fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
-      //fetch('http://localhost:8080/v2/user/addBook', {
+      //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+      fetch('http://localhost:8080/v2/user/addBook', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -218,35 +218,37 @@
       })
       .then(function(json) {
 		  console.log("quantity: " + json.quantity);
-		  $('.badge').text(json.quantity);
+
+		  $('.quantity'+ idBook).text(json.quantity);
 
       });
     });
   </script>
   <script>
     $('.cart-list-container').on('click', '.delete-quantity', function() {
-      let idBook = this.getAttribute();
+      let idBook = this.getAttribute("name");
       var body = "books=";
       body += idBook;
       console.log("body: " + body);
-      fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
-      //fetch('http://localhost:8080/v2/user/addBook', {
+      //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+      fetch('http://localhost:8080/v2/users/books/'+idBook, {
         method: 'DELETE',
+		  /*
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: body
+
+		   */
       })
       .then(function(response) {
         return response.json();
       })
       .then(function(json) {
         console.log("quantity: " + json.quantity);
-        $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
-        .done(function(deltaquantity) {
-          let newDelta = deltaquantity[0].quantity;
-          $('.badge').text(newDelta);
-        });
+
+        $('.quantity'+ idBook).text(json.quantity);
+
       });
     });
   </script>
