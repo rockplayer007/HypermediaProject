@@ -189,6 +189,7 @@
           });
         });
       }
+      calculate();
     });
   </script>
   <script>
@@ -252,6 +253,44 @@
       });
     });
   </script>
+
+<script>
+	//to calculate the total price
+	function calculate() {
+		$.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+		//$.get('http://localhost:8080/v2/users/books')
+			.done(function(booksjson) {
+
+				let items = booksjson;
+				let total = 0;
+
+				for (let i = 0; i < items.length; i++) {
+					let {bookId, quantity} = items[i];
+
+					fetch('https://hypermedia-app.herokuapp.com/v2/books/'+ bookId)
+					.then(function(response) {
+						return response.json();
+					})
+					.then(function(book) {
+
+						var number = parseInt(book[0].price.replace(/[^0-9.-]+/g,""));
+
+						total += parseInt(quantity)*number;
+
+					})
+					.then(function () {
+						if(i === items.length - 1){
+							console.log("total2: "+ total);
+						}
+					});
+
+
+				}
+
+
+			});
+	}
+</script>
 </body>
 
 </html>
