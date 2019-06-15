@@ -17,9 +17,9 @@
     <div id="header" class="sticky-top">
         <nav class="navbar navbar-light">
             <button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
-            <a class="navbar-brand nav-left" href="index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
-            <a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="pages/login.html" title="login">Login</a>
-            <button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="pages/cart.html" title="cart"><img src="assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
+            <a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
+            <a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login">Login</a>
+            <button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
         </nav>
     </div>
 	<!-- CONTENT -->
@@ -29,7 +29,7 @@
 			<!-- VENUE OF BuuK BACKGROUND LOGO -->
 			<div id="main-bg-content">
 				<div class="book-list-header">
-					<p>Books</p>
+					<p>All the books in the store</p>
 				</div>
 				<div class="book-list-container">
 
@@ -165,7 +165,10 @@
                     .done(() => {
                         let target = $('#cartbutton');
                         target.hide();
-                        $('#loginbutton').html("Login");
+                        let button = $('#loginbutton');
+                        button.html("Login");
+                        document.getElementById('loginbutton').setAttribute('href', '/pages/login.html');
+                        document.getElementById('loginbutton').setAttribute('title', 'login');
                     });
             }
 
