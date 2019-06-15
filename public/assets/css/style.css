@@ -310,6 +310,26 @@ hr {
 .cart-list-header p {
   text-align: center;
 }
+.cart-list-container {
+  position: relative;
+}
+.item-img {
+  float: left;
+}
+.item-img img {
+  width: 140px;
+  height: 215px;
+}
+.item-essentials {
+  float: left;
+}
+.item-price {
+  float: left;
+  width: 10%;
+}
+.item-variations {
+  width: 10%;
+}
 /*BOOK.html PAGE*/
 .addBtn {
   width: 120px;

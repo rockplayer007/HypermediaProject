@@ -116,27 +116,32 @@
           listItem.setAttribute('class', 'item');
           target.append(listItem);
 
+          //item-img
+          let itemImg = document.createElement('div');
+          itemImg.setAttribute('class', 'item-img')
+
           let link = document.createElement('a');
           link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
-          listItem.append(link);
+          itemImg.append(link);
 
           let image = document.createElement('img');
           image.setAttribute('src', '/assets/img/books/book'+items[i].bookId+'.png');
-          image.setAttribute('alt', 'item-cover');
+          image.setAttribute('alt', 'item-image');
           link.append(image);
 
-          let info = document.createElement('div');
-          info.setAttribute('class', 'mobile-centered fitincorrectly');
+          //item-essentials
+          let essentials = document.createElement('div');
+          listItem.setAttribute('class', 'item-essentials');
 
           link = document.createElement('a');
           link.setAttribute('href', '/pages/book.html?id='+items[i].bookId);
-          link.setAttribute('class', 'item-title');
+          link.setAttribute('class', 'item-essentials-title');
+          essentials.append(link);
 
-          //Here we were
-          info.append(link);
           link.append(items[i].title);
+
           let newline = document.createElement('br');
-          info.append(newline);
+          essentials.append(newline);
 
           for (var j = 0; j < authors.length; j++) {
             let text = "";
@@ -150,11 +155,19 @@
               text += ', ';
             }
             linkAuthor.append(text);
-            info.append(linkAuthor);
+            essentials.append(linkAuthor);
           }
 
-          listItem.append(info);
+          listItem.append(essentials);
 
+          //item-price
+          let itemPrice = document.createElement('div');
+          itemPrice.setAttribute('class', 'item-price');
+          itemPrice.append(items[i].price);
+
+          listItem.append(itemPrice);
+
+          //item-variations
           let variations = document.createElement('div');
           let itemsNum = document.createElement('span');
           itemsNum.setAttribute('class', 'badge');
