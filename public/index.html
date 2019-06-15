@@ -17,7 +17,7 @@
 	<div id="header" class="sticky-top">
 		<nav class="navbar navbar-light">
 		  <button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
-		  <a class="navbar-brand nav-left" href="index.html"><img src="assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
+		  <a class="navbar-brand nav-left" href="index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
 		  <a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="pages/login.html" title="login">Login</a>
 		  <button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="pages/cart.html" title="cart"><img src="assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
 		</nav>
@@ -30,20 +30,20 @@
 			<div id="main-bg-content" class="container justify-content-center align-items-center">
 				<!-- CAROUSEL OF BOOKS-->
 				<div id="books-container" class="row justify-content-center">
-				  <a href="1st-book-link" title="1st-book-name">
-            <img src="1st-book-image" alt="1st-book-name" />
+				  <a title="1st-book-name">
+					  <img  alt="1st-book-name" />
 				  </a>
-				  <a href="2nd-book-link" title="2nd-book-name">
-            <img src="2nd-book-image" alt="2nd-book-name" />
+				  <a  title="2nd-book-name">
+					  <img  alt="2nd-book-name" />
 				  </a>
-				  <a href="3rd-book-link" title="3rd-book-name">
-            <img src="3rd-book-image" alt="3rd-book-name" />
+				  <a  title="3rd-book-name">
+					  <img  alt="3rd-book-name" />
 				  </a>
-				  <a href="4th-book-link" title="4th-book-name">
-            <img src="4th-book-image" alt="4th-book-name" />
+				  <a  title="4th-book-name">
+					  <img alt="4th-book-name" />
 				  </a>
-				  <a href="5th-book-link" title="5th-book-name">
-            <img src="5th-book-image" alt="5th-book-name" />
+				  <a  title="5th-book-name">
+					  <img  alt="5th-book-name" />
 				  </a>
         </div>
 			</div>
@@ -114,7 +114,8 @@
         .done(() => {
 			let target = $('#cartbutton');
 			target.hide();
-			document.getElementById('loginbutton').setAttribute('href', 'pages/login.html');
+			target.html("Login");
+			document.getElementById('loginbutton').setAttribute('href', 'login.html');
 			document.getElementById('loginbutton').setAttribute('title', 'login');
 		});
       }
