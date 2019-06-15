@@ -199,8 +199,9 @@
     });
   </script>
   <script>
-    $('.cart-list-container').on('click', '.add-quantity', function(xxx) {
-      let idBook = xxx.name;
+    $('.cart-list-container').on('click', '.add-quantity', function() {
+      let idBook = this.getAttribute("name");
+      console.log("book id:  " + idBook);
       var body = "books=";
       body += idBook;
       console.log("body: " + body);
@@ -223,8 +224,8 @@
     });
   </script>
   <script>
-    $('.cart-list-container').on('click', '.delete-quantity', function(xxx) {
-      let idBook = xxx.name;
+    $('.cart-list-container').on('click', '.delete-quantity', function() {
+      let idBook = this.getAttribute();
       var body = "books=";
       body += idBook;
       console.log("body: " + body);
