@@ -476,6 +476,24 @@ hr {
 }
 .more-info {
   margin-top: 2%;
+}@media (max-width: 768px) {
+  .info {
+    text-align: center;
+  }
+  .particular-book img {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .addBtn {
+    float: none;
+    display: block;
+    margin: 4% auto 8% auto;
+  }
+  .book-list-container {
+    margin-bottom: 0;
+  }
 }
 /*EVENT.html PAGE*/
 .particular-event {
