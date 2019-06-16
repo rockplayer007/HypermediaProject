@@ -225,7 +225,7 @@
   </script>
   <script>
     $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
-  //$.get('http://localhost:8080/v2/books')
+    //$.get('http://localhost:8080/v2/books')
     .done(function(json) {
       $('.badge').text(json.length);
     });
@@ -238,8 +238,8 @@
 		var body = "books=";
 		body += idBook;
 
-		//fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
-		fetch('http://localhost:8080/v2/user/addBook', {
+		fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
+		//fetch('http://localhost:8080/v2/user/addBook', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
@@ -262,8 +262,8 @@
       let idBook = this.getAttribute("name");
       var body = "books=";
 
-      //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
-      fetch('http://localhost:8080/v2/users/books/'+idBook, {
+      fetch('https://hypermedia-app.herokuapp.com/v2/users/books/'+idBook, {
+      //fetch('http://localhost:8080/v2/users/books/'+idBook, {
         method: 'DELETE',
       })
       .then(function(response) {
@@ -338,8 +338,8 @@
 <script>
 	$('.cart-list-checkout').on('click', '.checkoutBtn', function() {
 
-		//fetch("https://hypermedia-app.herokuapp.com/v2/users/books", {
-		fetch("http://localhost:8080/v2/users/books", {
+		fetch("https://hypermedia-app.herokuapp.com/v2/users/books", {
+		//fetch("http://localhost:8080/v2/users/books", {
 			method: 'DELETE'
 		}).then(function(response) {
 			return response.json();
