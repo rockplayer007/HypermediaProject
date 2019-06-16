@@ -586,6 +586,9 @@ hr {
   margin-top: 3%;
   margin-left: 10% !important;
 }
+.works a {
+  font-weight: normal;
+}
 @media (max-width: 768px) {
   .biography {
     width: auto;
