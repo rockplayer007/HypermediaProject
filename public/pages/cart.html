@@ -262,7 +262,7 @@
       let idBook = this.getAttribute("name");
       var body = "books=";
 
-      fetch('https://hypermedia-app.herokuapp.com/v2/users/books' + idBook, {
+      fetch('https://hypermedia-app.herokuapp.com/v2/users/books/'+idBook, {
       //fetch('http://localhost:8080/v2/users/books/'+idBook, {
         method: 'DELETE',
       })
