@@ -43,7 +43,30 @@ a:hover {
   width: 160px;
   height: 20px;
 }
+.menu-footer {
+  width: 100%;
+  position: absolute;
+  bottom: 5%;
+}
+.menu-footer a:first-child {
+  margin-left: 33%;
+  position: relative;
+}
+.menu-footer a:last-child {
+  float: right;
+  margin-right: 42%;
+  position: relative;
+}
 @media (max-width: 768px) {
+.menu-footer a:first-child {
+  margin-left: 31%;
+  position: relative;
+}
+.menu-footer a:last-child {
+  float: right;
+  margin-right: 40%;
+  position: relative;
+}
   #books-container a {
     width: 75%;
     height: 15%;
@@ -67,9 +90,15 @@ a:hover {
   background: transparent;
   border: 0;
 }
-.navbar-cart-icon {
-  width: 25px;
-  height: 25px;
+[class$='list-header'] p {
+  margin-top: 1.5rem;
+  font-size: 200%;
+  text-align: center;
+  color: #001;
+}
+.cart-list-header p {
+  margin-top: 0;
+  font-size: 100%;
 }
 /*BOOKS.html PAGE*/
 .book-list-container{
@@ -310,6 +339,9 @@ hr {
 .cart-list-header p {
   text-align: center;
 }
+.cart-separee {
+  width: 50%;
+}
 .cart-list-container {
   width: 100%;
 }
@@ -384,9 +416,10 @@ hr {
 }
 .cart-list-checkout {
   clear: left;
-}
-.cart-list-conteiner:last-child .item-img {
-  margin-bottom: 5%;
+  text-align: center;
+  margin-top: 5%;
+  font-size: 135%;
+  font-weight: bold;
 }
 .checkoutBtn {
   width: 214px;
@@ -466,8 +499,15 @@ hr {
   font-size: 85%;
   line-height: 1.2em;
 }
+.particular-book .genre-link {
+  color: #777;
+}
+.info a {
+  color: #666;
+}
 .imgSpace {
   height: 100%;
+  width: 30%;
 }
 .bold-info {
   font-weight: bold;
@@ -477,6 +517,33 @@ hr {
 }
 .more-info {
   margin-top: 2%;
+}
+.info {
+  float: left;
+  width: 60%;
+}
+@media (max-width: 768px) {
+  .info {
+    text-align: center;
+    width: auto;
+  }
+  .imgSpace {
+    width: auto;
+  }
+  .particular-book img {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .addBtn {
+    float: none;
+    display: block;
+    margin: 4% auto 8% auto;
+  }
+  .book-list-container {
+    margin-bottom: 0;
+  }
 }
 /*EVENT.html PAGE*/
 .particular-event {
@@ -515,4 +582,82 @@ hr {
 }
 .event-abstract {
   clear: left;
+}
+/*AUTHOR.html PAGE*/
+.card {
+  width: 170px;
+  border: none;
+  background-color: #EEE;
+  text-align: center;
+  font-size: 110%;
+  font-weight: 550;
+  margin-left: 10% !important;
+  margin-top: 5% !important;
+  float: left;
+}
+.particular-author div {
+  margin-left: 0;
+}
+.biography {
+  width: 50%;
+  margin-top: 5%;
+  margin-left: 5% !important;
+}
+.works {
+  clear: left;
+  font-weight: 555;
+  margin-top: 3%;
+  margin-left: 10% !important;
+}
+.works a {
+  font-weight: normal;
+}
+@media (max-width: 768px) {
+  .biography {
+    width: auto;
+  }
+  .card {
+    width: auto;
+    margin-left: 0 !important;
+  }
+}
+/*THEMES.html PAGE*/
+.theme-list-container {
+  margin-left: 8%;
+  margin-top: 4%;
+}
+.theme {
+  margin-bottom: 2%
+}
+.theme p:first-letter {
+  font-size: 140%;
+}
+.theme a {
+  text-decoration: none;
+  display: inline-block;
+}
+.theme span {
+  margin-left: 2%;
+}
+.hr-themes {
+  width: 75%;
+  margin-left: 0;
+}
+/*LITERARYGENRES.html PAGE*/
+.genre-list-container {
+  margin-left: 8%;
+  margin-top: 4%;
+}
+.genre {
+  margin-bottom: 2%
+}
+.genre p:first-letter {
+  font-size: 140%;
+}
+.genre a {
+  text-decoration: none;
+  display: inline-block;
+}
+.genre span {
+  margin-left: 2%;
 }

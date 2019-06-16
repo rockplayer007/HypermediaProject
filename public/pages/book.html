@@ -19,7 +19,7 @@
 			<button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
 			<a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
 			<a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login">Login</a>
-			<button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart"><img src="/assets/img/buttons/shopping-cart.svg" class="navbar-cart-icon" />Cart</a></button>
+			<button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart">Cart</a></button>
 		</nav>
 	</div>
 	<!-- CONTENT -->
@@ -44,6 +44,12 @@
 				<li><a href="/pages/literarygenres.html">Literary genres</a></li>
 				<li><a href="/pages/authors.html">Authors</a></li>
 			</ul>
+			<div class="menu-footer">
+        		<div class="footer-links">
+          			<a href="#">FAQs</a>
+          			<a href="pages/us.html">Us</a>
+        		</div>
+      		</div>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -178,13 +184,17 @@
 	          	let moreInfo = document.createElement('div');
 	          	moreInfo.setAttribute('class', 'more-info');
 
+	          	let linkGenre = document.createElement('a');
+	          	linkGenre.setAttribute('href', '/pages/genre.html?genre='+`${genre}`);
+	          	linkGenre.setAttribute('class', 'genre-link');
 	          	let bookGenre = document.createElement('span');
 	          	bookGenre.setAttribute('class', 'bold-info');
 	          	bookGenre.append("Genre: ");
 	          	moreInfo.append(bookGenre);
 	          	bookGenre = document.createElement('span');
 	          	bookGenre.append(`${genre}`);
-	          	moreInfo.append(bookGenre);
+	          	linkGenre.append(bookGenre);
+	          	moreInfo.append(linkGenre);
 
 	          	newline = document.createElement('br');
 	          	moreInfo.append(newline);
@@ -233,7 +243,7 @@
 	          	pubblicationDate.append(eventDate);
 	          	moreInfo.append(pubblicationDate);
 
-	          	listItem.append(moreInfo);
+	          	info.append(moreInfo);
 				$.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
 				//$.get('http://localhost:8080/v2/users/logged')
 				.done(function(response) {
@@ -242,7 +252,7 @@
 						let addToCartBtn = document.createElement('button');
 						addToCartBtn.setAttribute('class', 'addBtn');
 						addToCartBtn.setAttribute('type', 'button');
-						listItem.append(addToCartBtn);
+						info.append(addToCartBtn);
 					}
 				});
 		    });
