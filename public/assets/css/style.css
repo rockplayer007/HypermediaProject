@@ -71,6 +71,12 @@ a:hover {
   width: 25px;
   height: 25px;
 }
+[class$='list-header'] p {
+  margin-top: 1.5rem;
+  font-size: 200%;
+  text-align: center;
+  color: #001;
+}
 /*BOOKS.html PAGE*/
 .book-list-container{
   background-color: #888;
@@ -384,9 +390,10 @@ hr {
 }
 .cart-list-checkout {
   clear: left;
-}
-.cart-list-conteiner:last-child .item-img {
-  margin-bottom: 5%;
+  text-align: center;
+  margin-top: 5%;
+  font-size: 135%;
+  font-weight: bold;
 }
 .checkoutBtn {
   width: 214px;

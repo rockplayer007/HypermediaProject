@@ -202,17 +202,18 @@
         target.append("YOUR CART IS EMPTY!!!");
       } else {
         let targettino = $('.cart-list-checkout');
-        let checkoutBtn = document.createElement('button');
 
+        let totalPrice = document.createElement('p');
+        totalPrice.setAttribute('class', 'price-id');
+        totalPrice.setAttribute('id', 'priceId');
+        targettino.append(totalPrice);
+
+        let checkoutBtn = document.createElement('button');
         checkoutBtn.setAttribute('class', 'checkoutBtn');
         checkoutBtn.setAttribute('type', 'button');
         targettino.append(checkoutBtn);
-		let totalPrice = document.createElement('p');
-		totalPrice.setAttribute('class', 'item-price');
-		totalPrice.setAttribute('id', 'priceId');
-        targettino.append(totalPrice);
-		calculateFirst();
 
+		    calculateFirst();
       }
     });
   </script>
@@ -287,7 +288,7 @@
 		}
 
 		let tg = $('#priceId');
-		tg.html('$' + total.toFixed(2));
+		tg.html('Total price: $' + total.toFixed(2));
 		console.log("total: "+ total.toFixed(2));
 
 	}
@@ -320,7 +321,7 @@
 				.then(function () {
 					if(i === items.length - 1){
 						let tg = $('#priceId');
-						tg.html('$' + total.toFixed(2));
+						tg.html('Total price: $' + total.toFixed(2));
 					}
 				});
 
