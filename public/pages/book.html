@@ -178,13 +178,17 @@
 	          	let moreInfo = document.createElement('div');
 	          	moreInfo.setAttribute('class', 'more-info');
 
+	          	let linkGenre = document.createElement('a');
+	          	linkGenre.setAttribute('href', '/pages/genre.html?genre='+`${genre}`);
+	          	linkGenre.setAttribute('class', 'genre-link');
 	          	let bookGenre = document.createElement('span');
 	          	bookGenre.setAttribute('class', 'bold-info');
 	          	bookGenre.append("Genre: ");
 	          	moreInfo.append(bookGenre);
 	          	bookGenre = document.createElement('span');
 	          	bookGenre.append(`${genre}`);
-	          	moreInfo.append(bookGenre);
+	          	linkGenre.append(bookGenre);
+	          	moreInfo.append(linkGenre);
 
 	          	newline = document.createElement('br');
 	          	moreInfo.append(newline);

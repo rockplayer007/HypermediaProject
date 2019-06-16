@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- TODO: modify display: none; w/ z-index & opacity modificators -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <title>BuuK - books</title>
+    <title>BuuK - themes</title>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
     <div id="main-content">
         <!-- VENUE OF BuuK BACKGROUND LOGO -->
         <div id="main-bg-content">
-            <div class="book-list-header">
+            <div class="theme-list-header">
                 <p>All the book's themes</p>
             </div>
             <div class="theme-list-container">
@@ -83,10 +83,25 @@
                 link.setAttribute('href', '/pages/theme.html?theme='+theme);
                 listItem.append(link);
 
-                link.append(theme);
+                let themeName = document.createElement('p');
+                link.append(themeName);
+                themeName.append(theme);
+
+                $.get('https://hypermedia-app.herokuapp.com/v2/books/themes/'+theme)
+                .done(function(num) {
+                    let quantityEl = document.createElement('span');
+                    quantityEl.setAttribute('class', 'badge');
+                    quantityEl.append("(" + num.length + (num.length === 1 ? " book)" : " books)"));
+                    listItem.append(quantityEl);
+                });
 
                 target.append(listItem);
 
+                if (themes[i+1]) {
+                    let hrLine = document.createElement('hr');
+                    hrLine.setAttribute('class', 'hr-themes');
+                    target.append(hrLine);
+                }
             }
         });
 </script>

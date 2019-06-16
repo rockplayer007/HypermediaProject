@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- TODO: modify display: none; w/ z-index & opacity modificators -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <title>BuuK - theme</title>
+    <title>BuuK - literary genres</title>
 </head>
 
 <body>
@@ -28,10 +28,10 @@
     <div id="main-content">
         <!-- VENUE OF BuuK BACKGROUND LOGO -->
         <div id="main-bg-content">
-            <div class="book-list-header">
-
+            <div class="genre-list-header">
+                <p>All the literary genres</p>
             </div>
-            <div class="book-list-container">
+            <div class="genre-list-container">
 
             </div>
         </div>
@@ -66,86 +66,42 @@
     });
 </script>
 <script>
-
-    //Gets the id of the element
-    let splits = (location.search).split("=");
-    let theme = splits[1];
-
-
-    $.get('https://hypermedia-app.herokuapp.com/v2/books/themes/'+ theme)
+    $.get('https://hypermedia-app.herokuapp.com/v2/books/genres')
     //$.get('http://localhost:8080/v2/books')
-        .done(function(json) {
-            //json arrives as array
-            let books = json;
+        .done(function(genres) {
 
-            let header = $('.book-list-header');
-            let headerTitle = document.createElement('p');
-            headerTitle.append(books[0].theme);
-            header.append(headerTitle);
+            let target = $('.genre-list-container');
+            for(let i = 0; i< genres.length; i++){
+                let {genre} = genres[i];
 
-            let target = $('.book-list-container');
+                let listItem = document.createElement('div');
+                listItem.setAttribute('class', 'genre');
+                target.append(listItem);
 
+                //Creates the link container that wraps up the book cover
+                let link = document.createElement('a');
+                link.setAttribute('href', '/pages/genre.html?genre='+genre);
+                listItem.append(link);
 
-            for(let i = 0; i< books.length; i++) {
+                let genreName = document.createElement('p');
+                link.append(genreName);
+                genreName.append(genre);
 
-                $.get('https://hypermedia-app.herokuapp.com/v2/books/'+ books[i].id+'/author')
-                //$.get('http://localhost:8080/v2/books/'+(i+1)+'/author')
-                    .done(function(aut) {
+                $.get('https://hypermedia-app.herokuapp.com/v2/books/genres/'+genre)
+                .done(function(num) {
+                    let quantityEl = document.createElement('span');
+                    quantityEl.setAttribute('class', 'badge');
+                    quantityEl.append("(" + num.length + (num.length === 1 ? " book)" : " books)"));
+                    listItem.append(quantityEl);
+                });
 
-                        let authors = aut ;
+                target.append(listItem);
 
-                        //Needs to be fixed from here on
-                        let {id, title, price} = books[i];
-
-                        //Creates the container for the book element of the list
-                        let listItem = document.createElement('div');
-                        listItem.setAttribute('class', 'book');
-                        target.append(listItem);
-
-                        //Creates the link container that wraps up the book cover
-                        let link = document.createElement('a');
-                        link.setAttribute('href', '/pages/book.html?id='+`${id}`);
-                        listItem.append(link);
-
-                        //Puts the book cover in the link wrapper
-                        let image = document.createElement('img');
-                        image.setAttribute('src', '/assets/img/books/book'+`${id}`+'.png');
-                        image.setAttribute('alt', 'book-cover');
-                        link.append(image);
-
-                        let info = document.createElement('div');
-                        info.setAttribute('class', 'mobile-centered fitincorrectly');
-
-                        link = document.createElement('a');
-                        link.setAttribute('href', '/pages/book.html?id='+`${id}`);
-                        link.setAttribute('class', 'book-title');
-
-                        //Here we were
-                        info.append(link);
-                        link.append(`${title}`);
-                        let newline = document.createElement('br');
-                        info.append(newline);
-
-                        for (var j = 0; j < authors.length; j++) {
-                            let text = "";
-                            let linkAuthor = document.createElement('a');
-                            linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
-
-                            text += authors[j].name + ' ';
-                            text += authors[j].surname;
-
-                            if (authors[j+1]) {
-                                text += ', ';
-                            }
-                            linkAuthor.append(text);
-                            info.append(linkAuthor);
-                        }
-
-                        newline = document.createElement('br');
-                        info.append(newline);
-                        info.append(`${price}`);
-                        listItem.append(info);
-                    });
+                if (genres[i+1]) {
+                    let hrLine = document.createElement('hr');
+                    hrLine.setAttribute('class', 'hr-themes');
+                    target.append(hrLine);
+                }
             }
         });
 </script>

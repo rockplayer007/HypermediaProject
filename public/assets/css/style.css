@@ -320,6 +320,9 @@ hr {
 .cart-list-header p {
   text-align: center;
 }
+.cart-separee {
+  width: 50%;
+}
 .cart-list-container {
   width: 100%;
 }
@@ -477,6 +480,12 @@ hr {
   font-size: 85%;
   line-height: 1.2em;
 }
+.particular-book .genre-link {
+  color: #777;
+}
+.info a {
+  color: #777;
+}
 .imgSpace {
   height: 100%;
   width: 30%;
@@ -580,4 +589,53 @@ hr {
   font-weight: 555;
   margin-top: 3%;
   margin-left: 10% !important;
+}
+@media (max-width: 768px) {
+  .biography {
+    width: auto;
+  }
+  .card {
+    width: auto;
+    margin-left: 0 !important;
+  }
+}
+/*THEMES.html PAGE*/
+.theme-list-container {
+  margin-left: 8%;
+  margin-top: 4%;
+}
+.theme {
+  margin-bottom: 2%
+}
+.theme p:first-letter {
+  font-size: 140%;
+}
+.theme a {
+  text-decoration: none;
+  display: inline-block;
+}
+.theme span {
+  margin-left: 2%;
+}
+.hr-themes {
+  width: 75%;
+  margin-left: 0;
+}
+/*LITERARYGENRES.html PAGE*/
+.genre-list-container {
+  margin-left: 8%;
+  margin-top: 4%;
+}
+.genre {
+  margin-bottom: 2%
+}
+.genre p:first-letter {
+  font-size: 140%;
+}
+.genre a {
+  text-decoration: none;
+  display: inline-block;
+}
+.genre span {
+  margin-left: 2%;
 }

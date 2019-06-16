@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- TODO: modify display: none; w/ z-index & opacity modificators -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <title>BuuK - theme</title>
+    <title>BuuK - genre</title>
 </head>
 
 <body>
@@ -69,10 +69,10 @@
 
     //Gets the id of the element
     let splits = (location.search).split("=");
-    let theme = splits[1];
+    let genre = splits[1];
 
 
-    $.get('https://hypermedia-app.herokuapp.com/v2/books/themes/'+ theme)
+    $.get('https://hypermedia-app.herokuapp.com/v2/books/genres/'+ genre)
     //$.get('http://localhost:8080/v2/books')
         .done(function(json) {
             //json arrives as array
@@ -80,7 +80,7 @@
 
             let header = $('.book-list-header');
             let headerTitle = document.createElement('p');
-            headerTitle.append(books[0].theme);
+            headerTitle.append(books[0].genre);
             header.append(headerTitle);
 
             let target = $('.book-list-container');
