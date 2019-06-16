@@ -349,6 +349,7 @@ hr {
   float: left;
 }
 .plus-button {
+  outline: none !important;
   border: 2px solid lightgrey;
   background-color: #fff;
   font-size: 16px;

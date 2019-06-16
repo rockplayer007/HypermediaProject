@@ -89,16 +89,19 @@
 	</script>
 
   <script>
-    $.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+    fetch('https://hypermedia-app.herokuapp.com/v2/users/books')
     //$.get('http://localhost:8080/v2/users/books')
-    .done(function(booksjson) {
+	.then(function(response) {
+		return response.json();
+	})
+    .then(function(booksjson) {
 
       let items = booksjson;
-		  console.log("the id is:  "+ items);
+
       var target = $('.cart-list-container');
 
       for(let i = 0; i< items.length; i++) {
-      	console.log("id is:  "+ items[i].bookId);
+
         //Retrieves cart item book info
         $.get('https://hypermedia-app.herokuapp.com/v2/books/'+items[i].bookId)
         .done(function(bookinfo) {
@@ -193,16 +196,23 @@
         });
       }
 
-      calculate();
+
 
       if (items.length === 0) {
         target.append("YOUR CART IS EMPTY!!!");
       } else {
         let targettino = $('.cart-list-checkout');
         let checkoutBtn = document.createElement('button');
+
         checkoutBtn.setAttribute('class', 'checkoutBtn');
         checkoutBtn.setAttribute('type', 'button');
         targettino.append(checkoutBtn);
+		let totalPrice = document.createElement('p');
+		totalPrice.setAttribute('class', 'item-price');
+		totalPrice.setAttribute('id', 'priceId');
+        targettino.append(totalPrice);
+		calculateFirst();
+
       }
     });
   </script>
@@ -214,12 +224,13 @@
     });
   </script>
   <script>
+	  //for adding books
     $('.cart-list-container').on('click', '.add-quantity', function() {
 		let idBook = this.getAttribute("name");
 		console.log("book id:  " + idBook);
 		var body = "books=";
 		body += idBook;
-		console.log("body: " + body);
+
 		//fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
 		fetch('http://localhost:8080/v2/user/addBook', {
 			method: 'PUT',
@@ -228,21 +239,22 @@
 			},
 			body: body
 		})
-				.then(function (response) {
-					return response.json();
-				})
-				.then(function (json) {
-					console.log("quantity: " + json.quantity);
-					$('.quantity' + idBook).text(json.quantity);
-				});
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (json) {
+			//console.log("quantity: " + json.quantity);
+			$('.quantity' + idBook).text(json.quantity);
+		})
+		.then(() => calculate());
 	});
   </script>
   <script>
+	  //for deleting books
     $('.cart-list-container').on('click', '.delete-quantity', function() {
       let idBook = this.getAttribute("name");
       var body = "books=";
-      body += idBook;
-      console.log("body: " + body);
+
       //fetch('https://hypermedia-app.herokuapp.com/v2/user/addBook', {
       fetch('http://localhost:8080/v2/users/books/'+idBook, {
         method: 'DELETE',
@@ -251,48 +263,85 @@
         return response.json();
       })
       .then(function(json) {
-        console.log("quantity: " + json.quantity);
+        //console.log("quantity: " + json.quantity);
         $('.quantity'+ idBook).text(json.quantity);
-      });
+      })
+		.then(() => calculate());
     });
   </script>
 
 <script>
 	//to calculate the total price
 	function calculate() {
+		let total = 0.00;
+		let elements = document.getElementsByClassName("item");
+		for(let i=0; i< elements.length; i++) {
+			let price = elements[i].getElementsByClassName('item-price')[0].textContent;
+			let quantity = elements[i].getElementsByClassName('badge')[0].textContent;
+
+			let number = parseFloat(price.replace(/[^0-9.-]+/g,"")).toPrecision(2);
+			total += parseInt(quantity)*number;
+			console.log("price: " + number);
+			console.log("quantity: " + quantity);
+			console.log("book name price: " + quantity*number);
+		}
+
+		let tg = $('#priceId');
+		tg.html('$' + total.toFixed(2));
+		console.log("total: "+ total.toFixed(2));
+
+	}
+
+</script>
+<script>
+	//to calculate the total price
+	function calculateFirst() {
 		$.get('https://hypermedia-app.herokuapp.com/v2/users/books')
 		//$.get('http://localhost:8080/v2/users/books')
-			.done(function(booksjson) {
+		.done(function(booksjson) {
 
-				let items = booksjson;
-				let total = 0;
+			let items = booksjson;
+			let total = 0;
 
-				for (let i = 0; i < items.length; i++) {
-					let {bookId, quantity} = items[i];
+			for (let i = 0; i < items.length; i++) {
+				let {bookId, quantity} = items[i];
 
-					fetch('https://hypermedia-app.herokuapp.com/v2/books/'+ bookId)
-					.then(function(response) {
-						return response.json();
-					})
-					.then(function(book) {
+				fetch('https://hypermedia-app.herokuapp.com/v2/books/'+ bookId)
+				.then(function(response) {
+					return response.json();
+				})
+				.then(function(book) {
 
-						var number = parseInt(book[0].price.replace(/[^0-9.-]+/g,""));
+					var number = parseFloat(book[0].price.replace(/[^0-9.-]+/g,"")).toPrecision(2);
 
-						total += parseInt(quantity)*number;
+					total += parseInt(quantity)*number;
 
-					})
-					.then(function () {
-						if(i === items.length - 1){
-							console.log("total2: "+ total);
-						}
-					});
+				})
+				.then(function () {
+					if(i === items.length - 1){
+						let tg = $('#priceId');
+						tg.html('$' + total.toFixed(2));
+					}
+				});
 
-
-				}
-
-
-			});
+			}
+		});
 	}
+</script>
+<script>
+	$('.cart-list-checkout').on('click', '.checkoutBtn', function() {
+
+		//fetch("https://hypermedia-app.herokuapp.com/v2/users/books", {
+		fetch("http://localhost:8080/v2/users/books", {
+			method: 'DELETE'
+		}).then(function(response) {
+			return response.json();
+		})
+		.then(function(json) {
+			alert("THANK YOU FOR YOUR PURCHASE")
+			window.location.href = '/index.html'
+		})
+	});
 </script>
 </body>
 

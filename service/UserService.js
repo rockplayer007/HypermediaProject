@@ -248,29 +248,3 @@ exports.usersIdCartBookDELETE = function(userEmail, bookId) {
 
 };
 
-
-/**
- * Find user with email
- * Returns a single user
- *
- * email String of user to get
- * returns User
- **/
-/*
-exports.usersIdGET = function(email) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "email" : "harry.potter@gmail.com",
-      "password" : "wingardiumleviosa"
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
- */
-
