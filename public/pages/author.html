@@ -73,17 +73,20 @@
 		$.get(`https://hypermedia-app.herokuapp.com/v2/authors/`+id)
 		.done(function(data) {
 			let target = $('.author-list-container');
-			let {name, surname, biography} = data;
+			let {name, surname, biography} = data[0];
 
 			//Creates the container for the author element of the list
 	        let listItem = document.createElement('div');
-	        listItem.setAttribute('class', 'author');
+	        listItem.setAttribute('class', 'author particular-author');
 	        target.append(listItem);
+
+	        let cardAuthor = document.createElement('div');
+	        cardAuthor.setAttribute('class', 'card');
 
 	        //Creates the link container that wraps up the author portrait
 	        let link = document.createElement('a');
 	        link.setAttribute('href', '/pages/author.html?id='+id);
-	        listItem.append(link);
+	        cardAuthor.append(link);
 
 	        //Puts the author portrait in the link wrapper
 	        let image = document.createElement('img');
@@ -91,17 +94,37 @@
 	        image.setAttribute('alt', 'author-portrit');
 	        link.append(image);
 
+	        let cardAuthorName = document.createElement('div');
+	        cardAuthorName.setAttribute('class', 'card-body');
+	        cardAuthorName.append(`${name}`+ " " + `${surname}`);
+	        cardAuthor.append(cardAuthorName);
+
+	        listItem.append(cardAuthor);
+
+	        let autBiography = document.createElement('div');
+	        autBiography.setAttribute('class', 'biography');
+	        autBiography.append(`${name}` + " " + `${surname}` + " " + `${biography}`);
+	        listItem.append(autBiography);
+
+	        let works = document.createElement('div');
+	        works.setAttribute('class', 'works');
+	        works.append("Works: ");
+	        listItem.append(works);
+	        link = document.createElement('a');
+	        works.append(link);
+
 			$.get(`https://hypermedia-app.herokuapp.com/v2/authors/`+id + '/books')
 			.done(function(books) {
 
 				for(var i = 0; i < books.length ; i++){
 					let book = books[i];
-
-					//TODO fill here
+					link.setAttribute('href', '/pages/book.html?id='+book.id);
+					link.append(book.title);
+					if (books[i+1]) {
+  						works.append(', ');
+  					}
 				}
 			});
-
-
 		});
 	</script>
 

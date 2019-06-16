@@ -233,7 +233,7 @@
 	          	pubblicationDate.append(eventDate);
 	          	moreInfo.append(pubblicationDate);
 
-	          	listItem.append(moreInfo);
+	          	info.append(moreInfo);
 				$.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
 				//$.get('http://localhost:8080/v2/users/logged')
 				.done(function(response) {
@@ -242,7 +242,7 @@
 						let addToCartBtn = document.createElement('button');
 						addToCartBtn.setAttribute('class', 'addBtn');
 						addToCartBtn.setAttribute('type', 'button');
-						listItem.append(addToCartBtn);
+						info.append(addToCartBtn);
 					}
 				});
 		    });

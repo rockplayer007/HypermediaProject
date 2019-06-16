@@ -77,6 +77,10 @@ a:hover {
   text-align: center;
   color: #001;
 }
+.cart-list-header p {
+  margin-top: 0;
+  font-size: 100%;
+}
 /*BOOKS.html PAGE*/
 .book-list-container{
   background-color: #888;
@@ -475,6 +479,7 @@ hr {
 }
 .imgSpace {
   height: 100%;
+  width: 30%;
 }
 .bold-info {
   font-weight: bold;
@@ -484,9 +489,18 @@ hr {
 }
 .more-info {
   margin-top: 2%;
-}@media (max-width: 768px) {
+}
+.info {
+  float: left;
+  width: 60%;
+}
+@media (max-width: 768px) {
   .info {
     text-align: center;
+    width: auto;
+  }
+  .imgSpace {
+    width: auto;
   }
   .particular-book img {
     float: none;
@@ -540,4 +554,30 @@ hr {
 }
 .event-abstract {
   clear: left;
+}
+/*AUTHOR.html PAGE*/
+.card {
+  width: 170px;
+  border: none;
+  background-color: #EEE;
+  text-align: center;
+  font-size: 110%;
+  font-weight: 550;
+  margin-left: 10% !important;
+  margin-top: 5% !important;
+  float: left;
+}
+.particular-author div {
+  margin-left: 0;
+}
+.biography {
+  width: 50%;
+  margin-top: 5%;
+  margin-left: 5% !important;
+}
+.works {
+  clear: left;
+  font-weight: 555;
+  margin-top: 3%;
+  margin-left: 10% !important;
 }
