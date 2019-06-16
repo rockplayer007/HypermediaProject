@@ -118,7 +118,8 @@ module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 
 module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
 
-    User.usersIdCartDELETE(req.session.userid)
+    //User.usersIdCartDELETE(req.session.userid)
+    User.usersIdCartDELETE("aleale@ale.it")
         .then(function (response) {
             utils.writeJson(res, response);
         })
