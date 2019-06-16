@@ -18,7 +18,7 @@ schemes:
 
 tags:
   - name: "book"
-    description: "Books availble"
+    description: "Books available"
   - name: "event"
     description: "Events of the books"
   - name: "author"
@@ -62,10 +62,11 @@ paths:
           type: "integer"
           format: "int64"
       responses:
-        '200':
+        200:
           description: "operation was successful"
           schema:
             $ref: '#/definitions/Book'
+      x-swagger-router-controller: "Book"
 
   /books/{id}/author:
     get:
@@ -85,6 +86,7 @@ paths:
           description: "successful operation"
           schema:
             $ref: '#/definitions/Author'
+      x-swagger-router-controller: "Book"
 
   /books/{id}/event:
     get:
@@ -122,6 +124,74 @@ paths:
           description: "successful operation"
           schema:
             $ref: '#/definitions/Book'
+      x-swagger-router-controller: "Book"
+  /books/themes:
+    get:
+      tags:
+        - "book"
+      summary: "Get all the themes that are present"
+      operationId: "booksThemesGET"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "All themes"
+      x-swagger-router-controller: "Book"
+
+  /books/themes/{theme}:
+    get:
+      tags:
+        - "book"
+      summary: "Get books with a given theme"
+      operationId: "booksByThemeGET"
+      parameters:
+        - name: "theme"
+          in: "path"
+          description: "theme of the book you want"
+          required: true
+          type: "string"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "successful operation"
+      x-swagger-router-controller: "Book"
+
+  /books/genres:
+    get:
+      tags:
+        - "book"
+      summary: "Get all the genres that are present"
+      operationId: "booksGenresGET"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "successful operation"
+      x-swagger-router-controller: "Book"
+
+  /books/genres/{genre}:
+    get:
+      tags:
+        - "book"
+      summary: "Get books with a given genre"
+      operationId: "booksByGenreGET"
+      parameters:
+        - name: "genre"
+          in: "path"
+          description: "genre of the book you want"
+          required: true
+          type: "string"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+      x-swagger-router-controller: "Book"
 
   /events:
     get:
@@ -161,7 +231,7 @@ paths:
           description: "operation was successful"
           schema:
             $ref: '#/definitions/Event'
-
+      x-swagger-router-controller: "Event"
   /events/{id}/book:
     get:
       tags:
@@ -180,7 +250,7 @@ paths:
           description: "successful operation"
           schema:
             $ref: '#/definitions/Book'
-
+      x-swagger-router-controller: "Event"
 
   /authors:
     get:
@@ -198,7 +268,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Author'
-
+      x-swagger-router-controller: "Author"
   /authors/{id}:
     get:
       tags:
@@ -219,6 +289,7 @@ paths:
           description: "successful operation"
           schema:
             $ref: '#/definitions/Author'
+      x-swagger-router-controller: "Author"
 
   /authors/{id}/books:
     get:
@@ -242,7 +313,7 @@ paths:
             type: "array"
             items:
               $ref: '#/definitions/Book'
-
+      x-swagger-router-controller: "Author"
   /user/login:
     post:
       tags:
@@ -293,42 +364,52 @@ paths:
           description: "registration status"
       x-swagger-router-controller: "User"
 
-  /users/{id}/books:
+  /users/books:
     get:
       tags:
         - "user"
-      summary: "Get the cart of an user"
+      summary: "Get the cart of the currently logged user"
       operationId: "usersIdCartGET"
       produces:
         - "application/json"
-      parameters:
-        - name: "id"
-          in: "path"
-          description: "id of the user to get the cart from"
-          required: true
-          type: "string"
       responses:
         '200':
           description: "successful operation"
           schema:
             $ref: '#/definitions/Book'
+      x-swagger-router-controller: "User"
 
     delete:
       tags:
         - "user"
-      summary: "Delete the cart of an user"
+      summary: "Delete the cart of the current logged in user"
       operationId: "usersIdCartDELETE"
+      produces:
+        - "application/json"
+      responses:
+        '200':
+          description: "operation status"
+      x-swagger-router-controller: "User"
+
+  /users/books/{id}:
+    delete:
+      tags:
+        - "user"
+      summary: "Decrease the quantity of the given"
+      operationId: "usersIdCartBookDELETE"
       produces:
         - "application/json"
       parameters:
         - name: "id"
           in: "path"
-          description: "id of the user to delte the cart from"
+          description: "id of the book to decrease the qunatity"
           required: true
-          type: "string"
+          type: "integer"
+          format: "int64"
       responses:
         '200':
           description: "operation status"
+      x-swagger-router-controller: "User"
 
 
   /users/logout:
@@ -344,6 +425,7 @@ paths:
       responses:
         default:
           description: "logout status"
+      x-swagger-router-controller: "User"
 
   /users/logged:
     get:
@@ -358,6 +440,7 @@ paths:
       responses:
         default:
           description: "logged"
+      x-swagger-router-controller: "User"
 
   /user/addBook:
     put:
@@ -370,11 +453,6 @@ paths:
       produces:
         - "application/json"
       parameters:
-        - name: "userEmail"
-          in: "formData"
-          description: "Email of the user that wants a book"
-          required: true
-          type: "string"
         - name: "books"
           in: "formData"
           description: "id of the book that the user wants"

@@ -29,7 +29,7 @@
         <!-- VENUE OF BuuK BACKGROUND LOGO -->
         <div id="main-bg-content">
             <div class="book-list-header">
-
+                <p>Our best sellers</p>
             </div>
             <div class="book-list-container">
 
@@ -66,91 +66,90 @@
     });
 </script>
 <script>
-
-    //Gets the id of the element
-    let splits = (location.search).split("=");
-    let id = splits[1];
-
-
-    $.get('https://hypermedia-app.herokuapp.com/v2/books/' + id + '/similar/')
+    var books = [];
+    $.get('https://hypermedia-app.herokuapp.com/v2/books/4')
     //$.get('http://localhost:8080/v2/books')
         .done(function(json) {
-            //json arrives as array
-            let books = json;
+            books.push(json[0]);
+            $.get('https://hypermedia-app.herokuapp.com/v2/books/3')
+            //$.get('http://localhost:8080/v2/books')
+                .done(function(json) {
+                    books.push(json[0]);
 
-            $.get('https://hypermedia-app.herokuapp.com/v2/books/' + id).done(function (buuk) {
-                let header = $('.book-list-header');
-                let headerTitle = document.createElement('p');
-                headerTitle.append("Similar to: " + buuk[0].title);
-                header.append(headerTitle);
-            });
-
-
-            let target = $('.book-list-container');
+                    $.get('https://hypermedia-app.herokuapp.com/v2/books/5')
+                    //$.get('http://localhost:8080/v2/books')
+                        .done(function(json) {
+                            books.push(json[0]);
 
 
-            for(let i = 0; i< books.length; i++) {
+                            let target = $('.book-list-container');
+                            console.log("books: " + books[0].title);
 
-                $.get('https://hypermedia-app.herokuapp.com/v2/books/'+ books[i].id+'/author')
-                //$.get('http://localhost:8080/v2/books/'+(i+1)+'/author')
-                    .done(function(aut) {
+                            for(let i = 0; i< books.length; i++) {
 
-                        let authors = aut ;
+                                $.get('https://hypermedia-app.herokuapp.com/v2/books/'+(i+1)+'/author')
+                                //$.get('http://localhost:8080/v2/books/'+(i+1)+'/author')
+                                    .done(function(aut) {
 
-                        //Needs to be fixed from here on
-                        let {id, title, price} = books[i];
+                                        let authors = aut ;
 
-                        //Creates the container for the book element of the list
-                        let listItem = document.createElement('div');
-                        listItem.setAttribute('class', 'book');
-                        target.append(listItem);
+                                        //Needs to be fixed from here on
+                                        let {id, title, price} = books[i];
 
-                        //Creates the link container that wraps up the book cover
-                        let link = document.createElement('a');
-                        link.setAttribute('href', '/pages/book.html?id='+`${id}`);
-                        listItem.append(link);
+                                        //Creates the container for the book element of the list
+                                        let listItem = document.createElement('div');
+                                        listItem.setAttribute('class', 'book');
+                                        target.append(listItem);
 
-                        //Puts the book cover in the link wrapper
-                        let image = document.createElement('img');
-                        image.setAttribute('src', '/assets/img/books/book'+`${id}`+'.png');
-                        image.setAttribute('alt', 'book-cover');
-                        link.append(image);
+                                        //Creates the link container that wraps up the book cover
+                                        let link = document.createElement('a');
+                                        link.setAttribute('href', '/pages/book.html?id='+`${id}`);
+                                        listItem.append(link);
 
-                        let info = document.createElement('div');
-                        info.setAttribute('class', 'mobile-centered fitincorrectly');
+                                        //Puts the book cover in the link wrapper
+                                        let image = document.createElement('img');
+                                        image.setAttribute('src', '/assets/img/books/book'+`${id}`+'.png');
+                                        image.setAttribute('alt', 'book-cover');
+                                        link.append(image);
 
-                        link = document.createElement('a');
-                        link.setAttribute('href', '/pages/book.html?id='+`${id}`);
-                        link.setAttribute('class', 'book-title');
+                                        let info = document.createElement('div');
+                                        info.setAttribute('class', 'mobile-centered fitincorrectly');
 
-                        //Here we were
-                        info.append(link);
-                        link.append(`${title}`);
-                        let newline = document.createElement('br');
-                        info.append(newline);
+                                        link = document.createElement('a');
+                                        link.setAttribute('href', '/pages/book.html?id='+`${id}`);
+                                        link.setAttribute('class', 'book-title');
 
-                        for (var j = 0; j < authors.length; j++) {
-                            let text = "";
-                            let linkAuthor = document.createElement('a');
-                            linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
+                                        //Here we were
+                                        info.append(link);
+                                        link.append(`${title}`);
+                                        let newline = document.createElement('br');
+                                        info.append(newline);
 
-                            text += authors[j].name + ' ';
-                            text += authors[j].surname;
+                                        for (var j = 0; j < authors.length; j++) {
+                                            let text = "";
+                                            let linkAuthor = document.createElement('a');
+                                            linkAuthor.setAttribute('href', '/pages/author.html?id='+authors[j].id);
 
-                            if (authors[j+1]) {
-                                text += ', ';
+                                            text += authors[j].name + ' ';
+                                            text += authors[j].surname;
+
+                                            if (authors[j+1]) {
+                                                text += ', ';
+                                            }
+                                            linkAuthor.append(text);
+                                            info.append(linkAuthor);
+                                        }
+
+                                        newline = document.createElement('br');
+                                        info.append(newline);
+                                        info.append(`${price}`);
+                                        listItem.append(info);
+                                    });
                             }
-                            linkAuthor.append(text);
-                            info.append(linkAuthor);
-                        }
-
-                        newline = document.createElement('br');
-                        info.append(newline);
-                        info.append(`${price}`);
-                        listItem.append(info);
-                    });
-            }
+                        });
+                });
         });
+
 </script>
 <script>
     $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
