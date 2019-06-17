@@ -65,6 +65,7 @@ exports.bookIdGET = function(id) {
  **/
 exports.booksGET = function() {
   return sqlDb("books")
+      .orderBy('id')
     .then(data => {
       return data
     });
@@ -82,6 +83,7 @@ exports.booksIdAuthorGET = function(id) {
     //needed for multiple authors
     return sqlDb
         .from("books")
+        .orderBy('authors.id')
         .join('writes', 'books.id', 'writes.bookId')
         .join('authors', 'authors.id', 'writes.authorId')
         .select("authors.id", "name", "surname", "biography")
@@ -125,6 +127,7 @@ exports.booksIdSimilarGET = function(id) {
 
     return sqlDb
         .from("books")
+        .orderBy('id')
         .where({"id" : id})
         .select("genre")
         .then(data => {
@@ -198,6 +201,6 @@ exports.booksGenresGET = function() {
     return sqlDb("books")
         .distinct("genre")
         .then(data => {
-            return data
+            return data;
         });
 };
