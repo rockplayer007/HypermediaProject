@@ -62,7 +62,7 @@ a:hover {
   position: absolute;
   right: 20%;
 }
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-height: 321px) {
   .menu-footer a:last-child {
     position: absolute;
     right: 14%;
@@ -80,19 +80,19 @@ a:hover {
   }
   #second-book {
     position: absolute;
-    top: 22%;
+    top: 18%;
   }
   #third-book {
     position: absolute;
-    top: 30%;
+    top: 26%;
   }
   #fourth-book {
     position: absolute;
-    top: 38%;
+    top: 34%;
   }
   #fifth-book {
     position: absolute;
-    top: 46%;
+    top: 42%;
   }
   #books-container {
     margin-left: 13.5%;
@@ -656,6 +656,12 @@ hr {
 }
 .event-abstract {
   clear: left;
+}
+@media (max-width: 768px) {
+  .event-essentials img {
+    width: 300px;
+    height: 168px;
+  }
 }
 /*AUTHOR.html PAGE*/
 .card {
