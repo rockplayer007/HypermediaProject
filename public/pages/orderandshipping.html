@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="author" content="Ferraiuolo-Roland-Meng" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  	<!-- TODO: modify display: none; w/ z-index & opacity modificators -->
+  	<link rel="stylesheet" href="/assets/css/style.css">
+	<title>BuuK - order & shipping</title>
+</head>
+
+<body>
+	<!-- HEADER -->
+	<div id="header" class="sticky-top">
+		<nav class="navbar navbar-light">
+		  	<button class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
+		  	<a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" /></a>
+		  	<a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login">Login</a>
+		  	<button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart">Cart</a></button>
+		</nav>
+	</div>
+	<!-- CONTENT -->
+	<div id="content">
+		<!-- PAGE CONTENT -->
+		<div id="main-content">
+			<!-- VENUE OF BuuK BACKGROUND LOGO -->
+			<div id="main-bg-content">
+				<div class="order-and-shipping-header">
+                	<p>Order & Shipping info</p>
+            	</div>
+				<div class="order-and-shipping-container">
+					<div class="lateral-links">
+						<ul>
+							<li><a href="#" id="couriers">Our couriers</a></li>
+							<li><a href="#" id="return-good">How to return a good</a></li>
+							<li><a href="#" id="delivery-times">Delivery times</a></li>
+							<li><a href="#" id="procedures">Delivery procedures</a></li>
+						</ul>
+					</div>
+					<div class="vl"></div>
+					<div class="info-shows">
+						<p id="info-shows">Select a topic from the left</p>
+					</div>
+				</div>
+			</div>
+		</div>
+    	<!-- MENU CONTENT -->
+		<div id="menu-content">
+			<ul id="menu-list">
+        		<li><a href="/pages/books.html">Books</a></li>
+				<li><a href="/pages/bestsellers.html">Bestsellers</a></li>
+				<li><a href="/pages/ourfavouritereadings.html">Our favourite readings</a></li>
+				<li><a href="/pages/events.html">Events</a></li>
+				<li><a href="/pages/themes.html">Themes</a></li>
+				<li><a href="/pages/literarygenres.html">Literary genres</a></li>
+				<li><a href="/pages/authors.html">Authors</a></li>
+			</ul>
+      		<div class="menu-footer">
+        		<div class="footer-links">
+          			<a href="#">FAQs</a>
+          			<a href="/pages/us.html" class="middle-foolink">Us</a>
+          			<a href="/pages/orderandshipping.html">Shipping info</a>
+        		</div>
+      		</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+    $('.navbar-toggler').on('click', function() {
+      var $main = $('#main-content');
+      var $menu = $('#menu-content');
+
+      if ($menu.is(":hidden")) {
+        $main.hide();
+        $menu.fadeIn(400);
+      } else {
+        $menu.hide();
+        $main.fadeIn(400);
+      }
+    });
+  </script>
+  <script>
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
+	//$.get('http://localhost:8080/v2/users/logged')
+    .done(function(response) {
+      console.log(response);
+      if (response.loggedIn === false) {
+        let target = $('#cartbutton');
+        target.hide();
+      }
+      else{
+          let target = $('#loginbutton');
+          target.html("Logout");
+		  document.getElementById('loginbutton').setAttribute('href', '#');
+		  document.getElementById('loginbutton').setAttribute('title', 'logout');
+
+      }
+    });
+  </script>
+  <script>
+    $('.loginbutton').on('click', function() {
+      let name = document.getElementById('loginbutton');
+      if (name.textContent === "Logout") {
+        $.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
+		//$.get('http://localhost:8080/v2/users/logout')
+        .done(() => {
+			let target = $('#cartbutton');
+			target.hide();
+			let button = $('#loginbutton');
+			button.html("Login");
+			document.getElementById('loginbutton').setAttribute('href', 'pages/login.html');
+			document.getElementById('loginbutton').setAttribute('title', 'login');
+		});
+      }
+
+    });
+  </script>
+  <script>
+  	$('li a').on('click', function (e) {
+  		let $target = $('#info-shows');
+      if (e.target.getAttribute('class') !== "link-selected") {
+        let text;
+        $('li > a').removeAttr('class');
+    		switch(e.target.textContent) {
+    			case "Our couriers":
+            text = "Our couriers are the fastest in the whole world. As a particular logistics service, the express courier service has seen considerable growth recently, which resulted in an unprecedented fierce competition. Besides, the development of information and communication technologies has enabled express company to manage their service. With the purpose of improving service quality and operation efficiency for express company, we focus on the problem of intercity express courier routing in courier-triggered pickup service. A novel pickup policy for courier routing is proposed based on the idea of centrality measures and the nearest-neighbour (NN) policy by considering the un-serviced customer requests as a globally coupled network. This policy enables to dispatch the idle courier to the more central request location, which allows the courier to easily serve the neighbouring requests around the central request location, thus securing both global and local performance. We also propose a simple prototype of real-time fleet management system where the proposed pickup policy is embedded into it.";
+    				$target.hide().html(text).fadeIn();
+            e.target.setAttribute('class', 'link-selected');
+    				break;
+    			case "How to return a good":
+            text = "Need To Return Something? We hope you love your new purchase. However, if you change your mind, many sellers accept returns. All business sellers who accept returns give you at least 14 calendar days to let them know if you’d like to return something. Check out the publisher on the detailed item page. This will also tell you who is responsible for paying returns postage costs. If you receive an item that’s damaged or wasn’t as described in the listing, you’re covered for the purchase price and original postage under the warranty when you pay with your credit card.";
+            $target.hide().html(text).fadeIn();
+            e.target.setAttribute('class', 'link-selected');
+    				break;
+    			case "Delivery times":
+            text = "Estimated delivery dates are based on: A) DISPATCH TIME - Sellers set their dispatch time. This can range from the same working day, to up to 30 business days from when they receive payment; B) POSTAGE OR COURIER SERVICES – Delivery times can vary depending on which service is used. Most sellers offer a variety of delivery options, so you can choose the service you prefer when you're checking out; C) CLEARED PAYMENT – If you're using a payment method such as a bank transfer, where the money isn't available to the seller immediately, the seller may wait until the payment is in their account before they send your item";
+            $target.hide().html(text).fadeIn();
+            e.target.setAttribute('class', 'link-selected');
+    				break;
+          case "Delivery procedures":
+            text = "When purchasing from an overseas seller, keep in mind that international delivery can cost more and possibly take longer to get to you than when you buy from a domestic seller. In some cases, you may also have to pay import charges. If your seller is using our global shipping programme, all the logistical challenges of international postage, such as customs clearance, will be taken care of for you. You'll pay any import charges up front, so you won't pay anything extra when your item's delivered. You'll also benefit from international tracking. If your seller doesn't participate in the programme, you can still buy from them. However, how you pay fees and import charges will differ.";
+            $target.hide().html(text).fadeIn();
+            e.target.setAttribute('class', 'link-selected');
+            break;
+    		}
+      }
+  	});
+  </script>
+</body>
+
+</html>

@@ -46,7 +46,7 @@ a:hover {
 .menu-footer {
   width: 100%;
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
   left: 0%;
 }
 .menu-footer a:first-child {
@@ -98,7 +98,7 @@ a:hover {
 }
 .cart-list-header p {
   margin-top: 0;
-  font-size: 100%;
+  font-size: 115%;
 }
 /*BOOKS.html PAGE*/
 .book-list-container{
@@ -345,6 +345,13 @@ hr {
 .cart-list-container {
   width: 100%;
 }
+.cart-empty {
+  font-size: 180%;
+  font-weight: bold;
+  margin-top: 20%;
+  text-align: center;
+  color: #a22;
+}
 .item {
   clear: both;
   margin-bottom: 2%;
@@ -431,6 +438,11 @@ hr {
   background-size: cover;
   background-image: url(/assets/img/buttons/proceed-to-check-out.png);
   border-radius: 20px;
+}
+@media (max-width: 990px) {
+  .item-essentials {
+    width: 40%;
+  }
 }
 @media (max-width: 768px) {
   .item img {
@@ -695,4 +707,47 @@ hr {
     height: 270px;
     width: 85%;
   }
+}
+/*ORDERANDSHIPPING.html PAGE*/
+.order-and-shipping-header {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 200%;
+  text-align: center;
+  color: #001;
+}
+.lateral-links {
+  width: 32%;
+  height: 100%;
+  float: left;
+}
+.lateral-links ul {
+  list-style-type: circle;
+}
+.lateral-links li {
+  margin-top: 30%;
+}
+.info-shows {
+  display: block;
+  float: left;
+  width: 58%;
+  height: 400px;
+  margin-top: 4%;
+  overflow: scroll;
+}
+.info-shows p {
+  margin: 10% 5%;
+  text-align: center;
+}
+.vl {
+  border-left: 1px solid #555;
+  height: 400px;
+  float: left;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 4%;
+}
+.link-selected {
+  color: #000;
+  font-weight: bold;
 }
