@@ -725,7 +725,7 @@ hr {
   list-style-type: circle;
 }
 .lateral-links li {
-  margin-top: 30%;
+  margin-top: 20%;
 }
 .info-shows {
   display: block;
@@ -733,7 +733,7 @@ hr {
   width: 58%;
   height: 400px;
   margin-top: 4%;
-  overflow: scroll;
+  overflow: auto;
 }
 .info-shows p {
   margin: 10% 5%;
