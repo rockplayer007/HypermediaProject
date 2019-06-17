@@ -18,7 +18,7 @@ We hereby declare that this is a private repository and, upon request, we will g
 *Describe here, with a diagram, the components of your web application and how they interact. Highlight which parts belong to the application layer, data layer or presentation layer. How did you ensure that HTML is not rendered server side?*
 
 
-The HTML is not rendered server side. As a matter of fact in the front end the HTML pages make use of the provide APIs and with appropriate JavaScript code we retrieve only the necessary information to populate the HTML page.
+The HTML is not rendered server side. As a matter of fact in the front end the HTML pages make use of the provided APIs and with appropriate JavaScript code we retrieve only the necessary information to populate the HTML page.
 
 ![Alt text](web%20architecture.svg)
 ### API
@@ -29,7 +29,7 @@ The HTML is not rendered server side. As a matter of fact in the front end the H
 - **Stateless**: this principle is not fully respected as we store the the user's session on the server. Doing so allows to keep track of the logged-in state and can give to the user his own information, such us the books he added to his personal cart.
 - **Cacheable**: we opted not to cache any information.
 - **Layered system**: there was no need to consider this, so there is no intermediate layer between the server and the client
-- **Code on demand**: clearly this has not been taken into consideration.
+- **Code on demand**: clearly this has not been taken into consideration as the website does not render server side.
 - **Uniform interface**: this made the collaboration between all the components, so this principle has been followed
 #### OpenAPI Resource models
 *Describe here synthetically, which models you have introduced for resources.*
@@ -72,7 +72,7 @@ We used PostgreSQL as a relational database, because it is free and open source.
 ## Other information
 ### Task assignment
 *Describe here how development tasks have been subdivided among members of the group:*
-- Xin worked on design document (100%) and usability report(90%）and the original version of design on website (100%) provide pictures to front end(5%)
+- Xin worked on design document (100%) and usability report (90%）and the original version of design on website (100%) provide pictures to front end (5%)
 - Roland worked completely on the backend part (100%), helped to join the front end with the backend (20%), fixed in overall some bugs in front end and helped for the usability report (5%)
 - Alessandro worked the most on the front end (100%), on the IDM documents (100%) and gave consulting for design realization.
 ### Analysis of existing API

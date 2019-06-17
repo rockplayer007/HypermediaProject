@@ -66,7 +66,7 @@ module.exports.userIsLoggedGET = function userIsLoggedGET (req, res, next) {
     User.userIsLoggedGET()
         .then(function (response) {
 
-            if(req.session.userid === false){
+            if(req.session.userid === false || req.session.userid === ""){
                 utils.writeJson(res, {"loggedIn" : false});
             }
             else{
