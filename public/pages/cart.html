@@ -234,7 +234,8 @@
         checkoutBtn.setAttribute('class', 'checkoutBtn');
         checkoutBtn.setAttribute('type', 'button');
         targettino.append(checkoutBtn);
-        $(calculateFirst());
+        $(window).on("load", calculateFirst());
+
       }
 
     });
