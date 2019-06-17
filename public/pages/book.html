@@ -145,6 +145,8 @@
 
 	          	if(event === 0){
 	          		//no event available
+	          		newline = document.createElement('br');
+	          		info.append(newline);
 				}
 	          	else{
 	          		link = document.createElement('a');
@@ -154,6 +156,11 @@
 					bookEventBtn.setAttribute('class', 'eventBookBtn');
 					bookEventBtn.setAttribute('type', 'button');
 					link.append(bookEventBtn);
+					
+					newline = document.createElement('br');
+	          		info.append(newline);
+
+	          		info.append(link);
 				}
 
 
@@ -167,10 +174,7 @@
 	          	link.append(similarsBtn);*/
 	          	//ADD HERE SIMILAR BOOKS CODE
 
-	          	newline = document.createElement('br');
-	          	info.append(newline);
-
-	          	info.append(link);
+	          	
 
 	          	link = document.createElement('a');
 	          	link.setAttribute('href', '/pages/similar.html?id=' + id);
