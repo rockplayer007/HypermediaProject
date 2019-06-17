@@ -94,6 +94,24 @@
 					}
 				});
 	</script>
+	<script>
+		$('.loginbutton').on('click', function() {
+			let name = document.getElementById('loginbutton');
+			if (name.textContent === "Logout") {
+				$.get('https://hypermedia-app.herokuapp.com/v2/users/logout')
+				//$.get('http://localhost:8080/v2/users/logout')
+				.done(() => {
+					let target = $('#cartbutton');
+					target.hide();
+					let button = $('#loginbutton');
+					button.html("Login");
+					document.getElementById('loginbutton').setAttribute('href', 'pages/login.html');
+					document.getElementById('loginbutton').setAttribute('title', 'login');
+				});
+			}
+
+		});
+	</script>
 
   <script>
     fetch('https://hypermedia-app.herokuapp.com/v2/users/books')

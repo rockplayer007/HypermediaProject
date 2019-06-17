@@ -255,7 +255,6 @@
 				$.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
 				//$.get('http://localhost:8080/v2/users/logged')
 				.done(function(response) {
-					console.log(response);
 					if (response.loggedIn !== false) {
 						let addToCartBtn = document.createElement('button');
 						addToCartBtn.setAttribute('class', 'addBtn');
