@@ -117,16 +117,17 @@
 	        works.setAttribute('class', 'works');
 	        works.append("Works: ");
 	        listItem.append(works);
-	        link = document.createElement('a');
-	        works.append(link);
+
 
 			$.get(`https://hypermedia-app.herokuapp.com/v2/authors/`+id + '/books')
 			.done(function(books) {
 
 				for(var i = 0; i < books.length ; i++){
 					let book = books[i];
+					link = document.createElement('a');
 					link.setAttribute('href', '/pages/book.html?id='+book.id);
 					link.append(book.title);
+					works.append(link);
 					if (books[i+1]) {
   						works.append(', ');
   					}
