@@ -51,6 +51,7 @@ a:hover {
 .menu-footer a:first-child {
   margin-left: 33%;
   position: relative;
+  text-decoration: line-through;
 }
 .menu-footer a:last-child {
   float: right;
@@ -660,4 +661,39 @@ hr {
 }
 .genre span {
   margin-left: 2%;
+}
+/*US.html PAGE*/
+.us-container {
+  text-align: center;
+}
+.us-about {
+  width: 50%;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.us-contact {
+  margin-bottom: 1.5rem;
+}
+.us-contact p:first-of-type {
+  margin-bottom: 0;
+}
+.us-contact hr {
+  margin: 1% auto;
+}
+#map {
+  height: 275px;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3%;
+}
+@media (max-width: 768px) {
+  .us-about {
+    width: 75%;
+  }
+  #map {
+    height: 270px;
+    width: 85%;
+  }
 }

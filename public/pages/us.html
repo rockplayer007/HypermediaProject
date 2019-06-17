@@ -6,9 +6,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="author" content="Ferraiuolo-Roland-Meng" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <!-- TODO: modify display: none; w/ z-index & opacity modificators -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  	<!-- TODO: modify display: none; w/ z-index & opacity modificators -->
+  	<link rel="stylesheet" href="/assets/css/style.css">
 	<title>BuuK - us</title>
 </head>
 
@@ -31,14 +31,19 @@
 				<div class="us-container">
 					<div class="us-about">
 						<h3>About</h3>
+						<p>BuuK is an e-commerce based book store website developed with the only aimed of meet its client's needs. We tried very hard to keep the design as clean as possible, allowing the fastest navigation.</p>
 					</div>
 					<div class="us-contact">
 						<h3>Contact</h3>
-						info@buuk.com - +39 8888888888
+						<p>info@buuk.com</p>
+						<hr />
+						<p>+39 8888888888</p>
 					</div>
 					<div class="us-find">
 						<h3>Find</h3>
+						<div id="map">
 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -64,6 +69,8 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0o_zPU-5eERNMqD85C6VYR5-ciNBd9LI&callback=initMap"
+  type="text/javascript"></script>
   <script>
     $('.navbar-toggler').on('click', function() {
       var $main = $('#main-content');
@@ -113,6 +120,25 @@
       }
 
     });
+  </script>
+  <script>
+  	function initMap() {
+  		let target = document.getElementById('map');
+  		let mapOptions = {
+  			center: new google.maps.LatLng(45.479098, 9.232610),
+  			mapTypeId: google.maps.MapTypeId.ROADMAP,
+  			zoom: 15,
+  			mapTypeControl: true,
+  			mapTypeControlOptions: {
+  				position: google.maps.ControlPosition.TOP_LEFT
+  			},
+  			scaleControl: true,
+  			scaleControlOptions: {
+  				position: google.maps.ControlPosition.BOTTOM_LEFT
+  			}
+  		};
+  		let venueMap = new google.maps.Map(target, mapOptions);
+  	}
   </script>
 </body>
 
