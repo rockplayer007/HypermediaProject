@@ -50,25 +50,23 @@ a:hover {
   left: 0%;
 }
 .menu-footer a:first-child {
-  margin-left: 37%;
-  position: relative;
+  position: absolute;
+  margin-left: 20%;
   text-decoration: line-through;
 }
+.menu-footer .middle-foolink {
+  position: absolute;
+  left: 45%;
+}
 .menu-footer a:last-child {
-  float: right;
-  margin-right: 38%;
-  position: relative;
+  position: absolute;
+  right: 20%;
 }
 @media (max-width: 768px) {
-.menu-footer a:first-child {
-  margin-left: 31%;
-  position: relative;
-}
-.menu-footer a:last-child {
-  float: right;
-  margin-right: 40%;
-  position: relative;
-}
+  .menu-footer a:last-child {
+    position: absolute;
+    right: 14%;
+  }
   #books-container a {
     width: 75%;
     height: 15%;
