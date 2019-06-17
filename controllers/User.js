@@ -8,6 +8,10 @@ var bcrypt = require('bcrypt');
 module.exports.userBookPUT = function userBookPUT (req, res, next) {
     var books = req.swagger.params['books'].value;
 
+    if(req.session.userid === undefined){
+        req.session.userid = false;
+    }
+
     if(req.session.userid === false){
         utils.writeJson(res, {"loggedIn": false});
     }
@@ -58,15 +62,18 @@ module.exports.userLogoutGET = function userLogoutGET (req, res, next) {
           utils.writeJson(res, {"loggedOut": true});
       })
       .catch(function (response) {
-        utils.writeJson(res, {"loggedOut": false});
+        utils.writeJson(res, {"loggedOut": true});
       });
 };
 
 module.exports.userIsLoggedGET = function userIsLoggedGET (req, res, next) {
     User.userIsLoggedGET()
         .then(function (response) {
-
-            if(req.session.userid === false || req.session.userid === ""){
+            
+            if(req.session.userid === undefined){
+                req.session.userid = false;
+            }
+            if(req.session.userid === false){
                 utils.writeJson(res, {"loggedIn" : false});
             }
             else{

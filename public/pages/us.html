@@ -12,7 +12,7 @@
 	<title>BuuK - us</title>
 </head>
 
-<body>
+<body onload="init()">
 	<!-- HEADER -->
 	<div id="header" class="sticky-top">
 		<nav class="navbar navbar-light">
@@ -41,7 +41,9 @@
 					</div>
 					<div class="us-find">
 						<h3>Find</h3>
+
 						<div id="map">
+
 
 						</div>
 					</div>
@@ -70,8 +72,9 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0o_zPU-5eERNMqD85C6VYR5-ciNBd9LI&callback=initMap"
-  type="text/javascript"></script>
+ <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0o_zPU-5eERNMqD85C6VYR5-ciNBd9LI&callback=initMap"
+
+  type="text/javascript"></script>-->
   <script>
     $('.navbar-toggler').on('click', function() {
       var $main = $('#main-content');
@@ -123,6 +126,8 @@
     });
   </script>
   <script>
+
+	  /*
   	function initMap() {
   		let target = document.getElementById('map');
   		let mapOptions = {
@@ -140,7 +145,50 @@
   		};
   		let venueMap = new google.maps.Map(target, mapOptions);
   	}
+
+	   */
   </script>
+
+  <script src="https://www.openlayers.org/api/OpenLayers.js"></script>
+  <script src="https://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+  <script>
+	  // Posizione iniziale della mappa
+	  var lat=45.479098;
+	  var lon=9.232610;
+	  var zoom=13;
+
+	  function init() {
+
+		  map = new OpenLayers.Map ("map", {
+			  controls:[
+				  new OpenLayers.Control.Navigation(),
+				  new OpenLayers.Control.PanZoomBar(),
+				  new OpenLayers.Control.ScaleLine(),
+				  new OpenLayers.Control.Permalink('permalink'),
+				  new OpenLayers.Control.MousePosition(),
+				  new OpenLayers.Control.Attribution()
+			  ],
+			  projection: new OpenLayers.Projection("EPSG:900913"),
+			  displayProjection: new OpenLayers.Projection("EPSG:4326")
+		  } );
+
+		  var mapnik = new OpenLayers.Layer.OSM("OpenStreetMap (Mapnik)");
+
+		  map.addLayer(mapnik);
+
+		  var lonLat = new OpenLayers.LonLat( lon ,lat )
+				  .transform(
+						  new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+						  map.getProjectionObject() // to Spherical Mercator Projection
+				  );
+
+		  map.setCenter (lonLat, zoom);
+
+	  }
+
+  </script>
+
+
 </body>
 
 </html>
