@@ -198,13 +198,9 @@ exports.booksThemesGET = function() {
  * no response value expected for this operation
  **/
 exports.booksGenresGET = function() {
-    console.log("ciaooooooo");
     return sqlDb("books")
         .distinct("genre")
-        .orderBy('id')
         .then(data => {
-            console.log("ciaooooooo");
-            //console.log("genres: " + data);
             return data;
         });
 };
