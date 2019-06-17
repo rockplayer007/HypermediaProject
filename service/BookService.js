@@ -153,7 +153,6 @@ exports.booksIdSimilarGET = function(id) {
  **/
 exports.booksByGenreGET = function(genre) {
     return sqlDb("books")
-        .orderBy('id')
         .where({"genre" : genre})
         .then(data => {
             return data
@@ -169,7 +168,6 @@ exports.booksByGenreGET = function(genre) {
  **/
 exports.booksByThemeGET = function(theme) {
     return sqlDb("books")
-        .orderBy('id')
         .where({"theme" : theme})
         .then(data => {
             return data
@@ -186,7 +184,6 @@ exports.booksByThemeGET = function(theme) {
  **/
 exports.booksThemesGET = function() {
     return sqlDb("books")
-        .orderBy('id')
         .distinct("theme")
         .then(data => {
             return data
@@ -201,10 +198,13 @@ exports.booksThemesGET = function() {
  * no response value expected for this operation
  **/
 exports.booksGenresGET = function() {
+    console.log("ciaooooooo");
     return sqlDb("books")
-        .orderBy('id')
         .distinct("genre")
+        .orderBy('id')
         .then(data => {
-            return data
+            console.log("ciaooooooo");
+            //console.log("genres: " + data);
+            return data;
         });
 };
