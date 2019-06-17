@@ -47,15 +47,16 @@ a:hover {
   width: 100%;
   position: absolute;
   bottom: 5%;
+  left: 0%;
 }
 .menu-footer a:first-child {
-  margin-left: 33%;
+  margin-left: 37%;
   position: relative;
   text-decoration: line-through;
 }
 .menu-footer a:last-child {
   float: right;
-  margin-right: 42%;
+  margin-right: 38%;
   position: relative;
 }
 @media (max-width: 768px) {
