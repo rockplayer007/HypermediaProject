@@ -32,7 +32,7 @@ exports.userBookPUT = function(userEmail,books) {
     function checkBookInDb (sqlDb,book, user){
         return sqlDb("cart")
             .where({userEmail: user,
-                    bookId : book})
+                bookId : book})
             .then(data =>{
                 if(data.length === 0){
                     return 0;
@@ -41,34 +41,42 @@ exports.userBookPUT = function(userEmail,books) {
                     return data[0].quantity;
                 }
 
-        });
+            });
     }
 
-
-    return checkBookInDb(sqlDb, books, userEmail).then( quantity =>{
-        if(quantity === 0){ //book is not it the cart
-            quantity++;
-            return sqlDb("cart")
-                .insert({"userEmail":userEmail ,
-                    "bookId": books,
-                    "quantity":quantity})
-                .then(() => {
-                    return {"quantity": quantity};
-                });
+    return sqlDb
+    .from('books')
+    .select()
+    .where({ id: books })
+    .then(data => {
+        if(data.length === 0){
+            return {"added": false};
         }
         else{
-            quantity++;
-            return sqlDb("cart")
-                .where({"userEmail":userEmail ,
-                    "bookId": books})
-                .update({"quantity":quantity})
-                .then(() => {
-                    return {"quantity": quantity};
-                });
+            return checkBookInDb(sqlDb, books, userEmail).then( quantity =>{
+                if(quantity === 0){ //book is not it the cart
+                    quantity++;
+                    return sqlDb("cart")
+                        .insert({"userEmail":userEmail ,
+                            "bookId": books,
+                            "quantity":quantity})
+                        .then(() => {
+                            return {"quantity": quantity};
+                        });
+                }
+                else{
+                    quantity++;
+                    return sqlDb("cart")
+                        .where({"userEmail":userEmail ,
+                            "bookId": books})
+                        .update({"quantity":quantity})
+                        .then(() => {
+                            return {"quantity": quantity};
+                        });
+                }
+            });
         }
     });
-
-
 
 };
 

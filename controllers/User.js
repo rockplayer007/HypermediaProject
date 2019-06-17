@@ -16,8 +16,8 @@ module.exports.userBookPUT = function userBookPUT (req, res, next) {
         utils.writeJson(res, {"loggedIn": false});
     }
     else{
-        //User.userBookPUT(req.session.userid, books)
-        User.userBookPUT("aleale@ale.it", books)
+        User.userBookPUT(req.session.userid, books)
+        //User.userBookPUT("aleale@ale.it", books)
             .then(function (response) {
                 utils.writeJson(res, response);
             })
@@ -110,8 +110,8 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 
 module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 
-  //User.usersIdCartGET(req.session.userid)
-    User.usersIdCartGET('aleale@ale.it')
+    User.usersIdCartGET(req.session.userid)
+    //User.usersIdCartGET('aleale@ale.it')
       .then(function (response) {
           utils.writeJson(res, response);
       })
@@ -125,8 +125,8 @@ module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 
 module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
 
-    //User.usersIdCartDELETE(req.session.userid)
-    User.usersIdCartDELETE("aleale@ale.it")
+    User.usersIdCartDELETE(req.session.userid)
+    //User.usersIdCartDELETE("aleale@ale.it")
         .then(function (response) {
             utils.writeJson(res, response);
         })
@@ -140,8 +140,8 @@ module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
 module.exports.usersIdCartBookDELETE = function usersIdCartBookDELETE (req, res, next) {
     var id = req.swagger.params['id'].value;
 
-    //User.usersIdCartBookDELETE(req.session.userid, id)
-    User.usersIdCartBookDELETE("aleale@ale.it", id)
+    User.usersIdCartBookDELETE(req.session.userid, id)
+    //User.usersIdCartBookDELETE("aleale@ale.it", id)
         .then(function (response) {
             utils.writeJson(res, response);
         })
