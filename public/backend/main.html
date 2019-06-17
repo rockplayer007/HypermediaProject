@@ -54,7 +54,7 @@ We hereby declare that this is a private repository and, upon request, we will g
 <h2><a id="Specification_15"></a>Specification</h2>
 <h3><a id="Web_Architecture_16"></a>Web Architecture</h3>
 <p><em>Describe here, with a diagram, the components of your web application and how they interact. Highlight which parts belong to the application layer, data layer or presentation layer. How did you ensure that HTML is not rendered server side?</em></p>
-<p>The HTML is not rendered server side. As a matter of fact in the front end the HTML pages make use of the provide APIs and with appropriate JavaScript code we retrieve only the necessary information to populate the HTML page.</p>
+<p>The HTML is not rendered server side. As a matter of fact in the front end the HTML pages make use of the provided APIs and with appropriate JavaScript code we retrieve only the necessary information to populate the HTML page.</p>
 <p><img src="web%20architecture.svg" alt="Alt text"></p>
 <h3><a id="API_23"></a>API</h3>
 <h4><a id="REST_compliance_24"></a>REST compliance</h4>
@@ -64,7 +64,7 @@ We hereby declare that this is a private repository and, upon request, we will g
 <li><strong>Stateless</strong>: this principle is not fully respected as we store the the user’s session on the server. Doing so allows to keep track of the logged-in state and can give to the user his own information, such us the books he added to his personal cart.</li>
 <li><strong>Cacheable</strong>: we opted not to cache any information.</li>
 <li><strong>Layered system</strong>: there was no need to consider this, so there is no intermediate layer between the server and the client</li>
-<li><strong>Code on demand</strong>: clearly this has not been taken into consideration.</li>
+<li><strong>Code on demand</strong>: clearly this has not been taken into consideration as the website does not render server side.</li>
 <li><strong>Uniform interface</strong>: this made the collaboration between all the components, so this principle has been followed</li>
 </ul>
 <h4><a id="OpenAPI_Resource_models_33"></a>OpenAPI Resource models</h4>
@@ -113,7 +113,7 @@ We used PostgreSQL as a relational database, because it is free and open source.
 <h3><a id="Task_assignment_72"></a>Task assignment</h3>
 <p><em>Describe here how development tasks have been subdivided among members of the group:</em></p>
 <ul>
-<li>Xin worked on design document (100%) and usability report(90%）and the original version of design on website (100%) provide pictures to front end(5%)</li>
+<li>Xin worked on design document (100%) and usability report (90%）and the original version of design on website (100%) provide pictures to front end (5%)</li>
 <li>Roland worked completely on the backend part (100%), helped to join the front end with the backend (20%), fixed in overall some bugs in front end and helped for the usability report (5%)</li>
 <li>Alessandro worked the most on the front end (100%), on the IDM documents (100%) and gave consulting for design realization.</li>
 </ul>
