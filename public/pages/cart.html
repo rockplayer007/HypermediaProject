@@ -235,7 +235,7 @@
         checkoutBtn.setAttribute('type', 'button');
         targettino.append(checkoutBtn);
 
-		    calculateFirst();
+        calculateFirst();
       }
     });
   </script>
@@ -324,7 +324,7 @@
 		.done(function(booksjson) {
 
 			let items = booksjson;
-			let total = 0;
+			let total = 0.0;
 
 			for (let i = 0; i < items.length; i++) {
 				let {bookId, quantity} = items[i];
