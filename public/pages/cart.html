@@ -337,7 +337,7 @@
 
 					var number = parseFloat(book[0].price.replace(/[^0-9.-]+/g,"")).toPrecision(2);
 
-					total += parseInt(quantity)*number;
+					total += parseFloat(quantity)*number;
 
 				})
 				.then(function () {
