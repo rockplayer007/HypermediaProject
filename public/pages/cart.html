@@ -319,9 +319,12 @@
 <script>
 	//to calculate the total price
 	function calculateFirst() {
-		$.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+		fetch('https://hypermedia-app.herokuapp.com/v2/users/books')
+		.then(function(response) {
+			return response.json();
+		})
 		//$.get('http://localhost:8080/v2/users/books')
-		.done(function(booksjson) {
+		.then(function(booksjson) {
 
 			let items = booksjson;
 			let total = 0.0;
