@@ -110,8 +110,8 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 
 module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 
-    //User.usersIdCartGET(req.session.userid)
-    User.usersIdCartGET('aleale@ale.it')
+    User.usersIdCartGET(req.session.userid)
+    //User.usersIdCartGET('aleale@ale.it')
       .then(function (response) {
           utils.writeJson(res, response);
       })
