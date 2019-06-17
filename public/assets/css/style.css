@@ -227,9 +227,12 @@ label {
 .login-account-button {
   width: 350px;
   height: 40px;
-  margin: 3%;
   background-color: Transparent;
   outline: none !important;
+}
+.login-account-button-container {
+  margin: 3%;
+  background: transparent;
 }
 .create-account-button {
   width: 351px;
