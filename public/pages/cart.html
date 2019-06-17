@@ -234,9 +234,10 @@
         checkoutBtn.setAttribute('class', 'checkoutBtn');
         checkoutBtn.setAttribute('type', 'button');
         targettino.append(checkoutBtn);
+        $(window).on("load", calculateFirst());
 
-		    calculateFirst();
       }
+
     });
   </script>
   <script>
@@ -319,12 +320,15 @@
 <script>
 	//to calculate the total price
 	function calculateFirst() {
-		$.get('https://hypermedia-app.herokuapp.com/v2/users/books')
+		fetch('https://hypermedia-app.herokuapp.com/v2/users/books')
+		.then(function(response) {
+			return response.json();
+		})
 		//$.get('http://localhost:8080/v2/users/books')
-		.done(function(booksjson) {
+		.then(function(booksjson) {
 
 			let items = booksjson;
-			let total = 0;
+			let total = 0.0;
 
 			for (let i = 0; i < items.length; i++) {
 				let {bookId, quantity} = items[i];
@@ -337,7 +341,7 @@
 
 					var number = parseFloat(book[0].price.replace(/[^0-9.-]+/g,"")).toPrecision(2);
 
-					total += parseInt(quantity)*number;
+					total += parseFloat(quantity)*number;
 
 				})
 				.then(function () {
