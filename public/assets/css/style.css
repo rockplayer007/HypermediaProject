@@ -67,17 +67,62 @@ a:hover {
     position: absolute;
     right: 14%;
   }
-  #books-container a {
-    width: 75%;
-    height: 15%;
-    margin: 3% 50%;
-  }
   #menu-content li {
     margin: 6% 4%;
+  }
+  #books-container img {
+    width: 250px;
+    height: 383px;
+    border: 3px solid #fff;
+  }
+  .container a:first-child {
+    position: absolute;
+  }
+  #second-book {
+    position: absolute;
+    top: 22%;
+  }
+  #third-book {
+    position: absolute;
+    top: 30%;
+  }
+  #fourth-book {
+    position: absolute;
+    top: 38%;
+  }
+  #fifth-book {
+    position: absolute;
+    top: 46%;
+  }
+  #books-container {
+    margin-left: 13.5%;
+    margin-right: 13.5%;
+  }
+  #books-container a {
+    width: auto;
+    margin-top: 0;
   }
   .navbar-brand-icon {
   width: 120px;
   height: 15px;
+  }
+}
+@media (min-height: 1024px) {
+  #books-container {
+    margin-top: 5%;
+    margin-left: 28%;
+  }
+  #books-container img {
+    width: 300px;
+    height: 460px;
+  }
+}
+@media (max-width: 320px) {
+  .navbar {
+    flex-wrap: nowrap;
+  }
+  .nav-right {
+    margin-left: 5% !important;
   }
 }
 .navbar-toggler-icon {
@@ -135,7 +180,7 @@ a:hover {
 }
 .fitincorrectly {
   padding: 0 0 0 200px;
-  position: absolute;
+  /*position: absolute;*/
 }
 @media (max-width: 768px) {
   .mobile-centered.fitincorrectly {
