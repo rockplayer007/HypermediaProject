@@ -124,6 +124,9 @@ a:hover {
   .nav-right {
     margin-left: 5% !important;
   }
+  #books-container {
+    margin-left: 7%;
+  }
 }
 .navbar-toggler-icon {
   width: 40px;
