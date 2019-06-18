@@ -110,14 +110,23 @@ module.exports.userRegisterPOST = function userRegisterPOST (req, res, next) {
 
 module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 
-    User.usersIdCartGET(req.session.userid)
-    //User.usersIdCartGET('aleale@ale.it')
-      .then(function (response) {
-          utils.writeJson(res, response);
-      })
-      .catch(function (response) {
-          utils.writeJson(res, response);
-      });
+    if(req.session.userid === undefined){
+        req.session.userid = false;
+    }
+    if(req.session.userid === false){
+        utils.writeJson(res, {"loggedIn" : false});
+    }
+    else{
+        User.usersIdCartGET(req.session.userid)
+        //User.usersIdCartGET('aleale@ale.it')
+            .then(function (response) {
+                utils.writeJson(res, response);
+            })
+            .catch(function (response) {
+                utils.writeJson(res, response);
+            });
+    }
+
 
 
 };
@@ -125,14 +134,23 @@ module.exports.usersIdCartGET = function usersIdCartGET (req, res, next) {
 
 module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
 
-    User.usersIdCartDELETE(req.session.userid)
-    //User.usersIdCartDELETE("aleale@ale.it")
-        .then(function (response) {
-            utils.writeJson(res, response);
-        })
-        .catch(function (response) {
-            utils.writeJson(res, response);
-        });
+    if(req.session.userid === undefined){
+        req.session.userid = false;
+    }
+    if(req.session.userid === false){
+        utils.writeJson(res, {"loggedIn" : false});
+    }
+    else{
+        User.usersIdCartDELETE(req.session.userid)
+        //User.usersIdCartDELETE("aleale@ale.it")
+            .then(function (response) {
+                utils.writeJson(res, response);
+            })
+            .catch(function (response) {
+                utils.writeJson(res, response);
+            });
+    }
+
 
 };
 
@@ -140,13 +158,23 @@ module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
 module.exports.usersIdCartBookDELETE = function usersIdCartBookDELETE (req, res, next) {
     var id = req.swagger.params['id'].value;
 
-    User.usersIdCartBookDELETE(req.session.userid, id)
-    //User.usersIdCartBookDELETE("aleale@ale.it", id)
+    if(req.session.userid === undefined){
+        req.session.userid = false;
+    }
+    if(req.session.userid === false){
+        utils.writeJson(res, {"loggedIn" : false});
+    }
+    else{
+        User.usersIdCartBookDELETE(req.session.userid, id)
+        //User.usersIdCartBookDELETE("aleale@ale.it", id)
         .then(function (response) {
             utils.writeJson(res, response);
         })
         .catch(function (response) {
             utils.writeJson(res, response);
         });
+    }
+
+
 };
 
