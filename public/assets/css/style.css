@@ -654,6 +654,9 @@ hr {
 .aside-far {
   margin-top: 8%;
 }
+.event-essentials a {
+  display: block;
+}
 .bookAboutBtn {
   width: 214px;
   height: 34px;
