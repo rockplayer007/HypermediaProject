@@ -67,7 +67,7 @@ a:hover {
   right: 20%;
 }
 @media (min-width: 769px) {
-  .container {
+  .container-homepage {
     margin-left: 11% !important;
   }
 }
