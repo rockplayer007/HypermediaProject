@@ -16,6 +16,9 @@ a:hover {
 .nav-left {
   margin: 0 1%;
 }
+.not-logged {
+  display: none;
+}
 .navbar-toggler {
   margin-left: 2%;
 }
