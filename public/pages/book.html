@@ -348,6 +348,8 @@
 						.done(() => {
 							let target = $('#cartbutton');
 							target.hide();
+							target = $('.addBtn');
+							target.hide();
 							let button = $('#loginbutton');
 							button.html("Login");
 							document.getElementById('loginbutton').setAttribute('href', '/pages/login.html');
