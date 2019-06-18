@@ -34,7 +34,9 @@ The HTML is not rendered server side. As a matter of fact in the front end the H
 #### OpenAPI Resource models
 *Describe here synthetically, which models you have introduced for resources.*
 
-All the resources that arrive using the API are Json files. This allows to easily read required data. For the requests in case the extra parameters are required they can be added either in the path (e.g. [GET /books/1](http://hypermedia-app.herokuapp.com/v2/books/1)) or as a formData like we did in the users' POST and PUT request.
+All the resources that arrive using the API are Json files. This allows to easily read required data. For the requests, in case additional parameters are required, they can be added either in the path (e.g. [GET /books/1](http://hypermedia-app.herokuapp.com/v2/books/1)) or as a formData like we did in the users' POST and PUT request.
+In case a wrong request is made, for example a specific book request with an ID that does not exist, the request will answer with an empty json ([GET /books/100](http://hypermedia-app.herokuapp.com/v2/books/100)).
+Another scenario can be that the user's books are requested but the user is not logged in. In that case the GET request will response 
 ### Data model
 *Describe with an ER diagram the model used in the data layer of your web application. How these map to the OpenAPI data model?*
 
