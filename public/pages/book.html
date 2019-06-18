@@ -281,7 +281,6 @@
 
 						let toastBody = document.createElement('div');
 						toastBody.setAttribute('class', 'toast-body');
-						toastBody.append("Quantity in cart: ");
 						divToast.append(toastBody);
 
 						moreInfo.prepend(divToast);
@@ -312,7 +311,7 @@
 			.then(function(json) {
 				console.log("quantity: " + json.quantity);
 				let upQuantity = $('.toast-body');
-				upQuantity.append(json.quantity);
+				upQuantity.text(json.quantity);
 				$('.toast').toast({delay: 3000});
 				$('.toast').toast('show');
 			});
