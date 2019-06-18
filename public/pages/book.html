@@ -327,6 +327,8 @@
       let target = $('.cart-link-a');
       if (response.loggedIn === false) {
         target.hide();
+        target = $('#loginbutton');
+        target.text("Login");
       }
       else{
         target.text("Cart");
