@@ -18,8 +18,8 @@
 		<nav class="navbar navbar-light">
 			<button aria-label="MENU button" class="navbar-toggler navbar-toggler-icon nav-left" type="button"></button>
 			<a class="navbar-brand nav-left" href="/index.html"><img src="/assets/img/buttons/buuk-logo.png" class="navbar-brand-icon" alt="buuk-logo" /></a>
-			<a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login">Login</a>
-			<button id="cartbutton" class="navbar-button" type="button"><a class="nav-item nav-link nav-right" href="/pages/cart.html" title="cart">Cart</a></button>
+			<a id="loginbutton" class="nav-item nav-link ml-auto nav-right loginbutton" href="/pages/login.html" title="login"></a>
+			<button id="cartbutton" class="navbar-button" type="button"><a class="cart-link-a nav-item nav-link nav-right" href="/pages/cart.html" title="cart"></a></button>
 		</nav>
 	</div>
 	<!-- CONTENT -->
@@ -113,23 +113,23 @@
 	</script>
 
 	<script>
-		$.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
-		//$.get('http://localhost:8080/v2/users/logged')
-				.done(function(response) {
-					console.log(response);
-					if (response.loggedIn === false) {
-						let target = $('#cartbutton');
-						target.hide();
-					}
-					else{
-						let target = $('#loginbutton');
-						target.html("Logout");
-						document.getElementById('loginbutton').setAttribute('href', '#');
-						document.getElementById('loginbutton').setAttribute('title', 'logout');
-
-					}
-				});
-	</script>
+    $.get('https://hypermedia-app.herokuapp.com/v2/users/logged')
+  //$.get('http://localhost:8080/v2/users/logged')
+    .done(function(response) {
+      console.log(response);
+      let target = $('.cart-link-a');
+      if (response.loggedIn === false) {
+        target.hide();
+      }
+      else{
+        target.text("Cart");
+        target = $('#loginbutton');
+        target.text("Logout");
+        document.getElementById('loginbutton').setAttribute('href', '#');
+        document.getElementById('loginbutton').setAttribute('title', 'logout');
+      }
+    });
+  </script>
 	<script>
 		$('.loginbutton').on('click', function() {
 			let name = document.getElementById('loginbutton');
