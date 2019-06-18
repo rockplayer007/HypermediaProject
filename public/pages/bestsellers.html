@@ -94,7 +94,7 @@
 
                             for(let i = 0; i< books.length; i++) {
 
-                                $.get('https://hypermedia-app.herokuapp.com/v2/books/'+(i+1)+'/author')
+                                $.get('https://hypermedia-app.herokuapp.com/v2/books/'+books[i].id+'/author')
                                 //$.get('http://localhost:8080/v2/books/'+(i+1)+'/author')
                                     .done(function(aut) {
 
