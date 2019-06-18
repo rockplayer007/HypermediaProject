@@ -121,7 +121,7 @@
       console.log(response);
       let target = $('.cart-link-a');
       if (response.loggedIn === false) {
-        target.addClass("not-logged");
+        target.parent().addClass("not-logged");
         target = $('#loginbutton');
         target.text("Login");
       }
