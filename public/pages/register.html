@@ -76,11 +76,13 @@
       		var $menu = $('#menu-content');
 
       		if ($menu.is(":hidden")) {
+            	document.getElementById('content').setAttribute('class', $(window).scrollTop());
         		$main.hide();
         		$menu.fadeIn(400);
       		} else {
         		$menu.hide();
         		$main.fadeIn(400);
+            	window.scroll(0, document.getElementById('content').getAttribute('class'));
       		}
       	});
 	</script>

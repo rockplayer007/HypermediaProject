@@ -84,16 +84,18 @@
   type="text/javascript"></script>
   <script>
     $('.navbar-toggler').on('click', function() {
-      var $main = $('#main-content');
-      var $menu = $('#menu-content');
+      	var $main = $('#main-content');
+      	var $menu = $('#menu-content');
 
-      if ($menu.is(":hidden")) {
-        $main.hide();
-        $menu.fadeIn(400);
-      } else {
-        $menu.hide();
-        $main.fadeIn(400);
-      }
+      	if ($menu.is(":hidden")) {
+        	document.getElementById('content').setAttribute('class', $(window).scrollTop());
+    		$main.hide();
+    		$menu.fadeIn(400);
+  		} else {
+    		$menu.hide();
+    		$main.fadeIn(400);
+        	window.scroll(0, document.getElementById('content').getAttribute('class'));
+  		}
     });
   </script>
   <script>
