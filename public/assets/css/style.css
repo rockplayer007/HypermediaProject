@@ -630,9 +630,20 @@ hr {
   font-size: 150%;
   margin-bottom: 4%;
 }
-.event-essentials img {
+.event-essentials-info {
   float: left;
-  margin-bottom: 4%;
+}
+.essentials-image {
+  width: 300px;
+  height: 168px;
+  float: left;
+}
+.essentials-info {
+  width: 45%;
+  float: left;
+}
+.essentials-info span:last-of-type {
+  display: block;
 }
 .aside-bigger {
   font-size: 120%;
@@ -653,14 +664,26 @@ hr {
   float: left;
   margin-top: 3%;
   margin-left: 2%;
+  margin-bottom: 3%;
 }
 .event-abstract {
   clear: left;
 }
 @media (max-width: 768px) {
-  .event-essentials img {
-    width: 300px;
-    height: 168px;
+  .event-essentials-info {
+    float: none;
+  }
+  .essentials-image {
+    display: block;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .essentials-info {
+    width: auto;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 /*AUTHOR.html PAGE*/
