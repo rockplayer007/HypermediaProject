@@ -61,7 +61,7 @@ The HTML is not rendered server side. As a matter of fact in the front end the H
 <p><em>Describe here to what extent did you follow REST principles and what are the reasons for which you might have decided to diverge. Note, you must not describe the whole API here, just the design decisions.</em></p>
 <ul>
 <li><strong>Client-server</strong>: Client and Server can work independently. This means that the server stores and manipulates the data, whereas the Client retrieves these data.</li>
-<li><strong>Stateless</strong>: this principle is not fully respected as we store the the user’s session on the server. Doing so allows to keep track of the logged-in state and can give to the user his own information, such us the books he added to his personal cart.</li>
+<li><strong>Stateless</strong>: this principle is not fully respected as we store the user’s session on the server. Doing so allows to keep track of the logged-in state and can give to the user his own information, such us the books he added to his personal cart.</li>
 <li><strong>Cacheable</strong>: we opted not to cache any information.</li>
 <li><strong>Layered system</strong>: there was no need to consider this, so there is no intermediate layer between the server and the client</li>
 <li><strong>Code on demand</strong>: clearly this has not been taken into consideration as the website does not render server side.</li>
@@ -94,7 +94,7 @@ The whole backend part is made in NodeJS. In addition we have used the following
 <p>Describe here:</p>
 <ul>
 <li><em>How did you make sure your web application adheres to the provided OpenAPI specification?</em><br>
-The <a href="https://editor.swagger.io/">Swagger editor</a> it was possible to write OpenAPI specification and later to download the nodejs-server code from the <a href="https://hypermedia-app.herokuapp.com/backend/spec.yaml">YAML file</a></li>
+With the <a href="https://editor.swagger.io/">Swagger editor</a> it was possible to write OpenAPI specification and later to download the nodejs-server code from the <a href="https://hypermedia-app.herokuapp.com/backend/spec.yaml">YAML file</a></li>
 <li><em>Why do you think your web application adheres to common practices to partition the web application (static assets vs. application data)</em><br>
 Because we dynamically fill the HTML pages with the data taken from the database. The other parts of the page like pictures or the layout are static.</li>
 <li><em>Describe synthetically why and how did you manage session state, what are the state change triggering actions (e.g., POST to login etc…).</em><br>

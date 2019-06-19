@@ -23,7 +23,7 @@ The HTML is not rendered server side. As a matter of fact in the front end the H
 #### REST compliance
 *Describe here to what extent did you follow REST principles and what are the reasons for which you might have decided to diverge. Note, you must not describe the whole API here, just the design decisions.*
 - **Client-server**: Client and Server can work independently. This means that the server stores and manipulates the data, whereas the Client retrieves these data. 
-- **Stateless**: this principle is not fully respected as we store the the user's session on the server. Doing so allows to keep track of the logged-in state and can give to the user his own information, such us the books he added to his personal cart.
+- **Stateless**: this principle is not fully respected as we store the user's session on the server. Doing so allows to keep track of the logged-in state and can give to the user his own information, such us the books he added to his personal cart.
 - **Cacheable**: we opted not to cache any information.
 - **Layered system**: there was no need to consider this, so there is no intermediate layer between the server and the client
 - **Code on demand**: clearly this has not been taken into consideration as the website does not render server side.
@@ -53,7 +53,7 @@ The whole backend part is made in NodeJS. In addition we have used the following
 ### Discussion
 Describe here:
 - *How did you make sure your web application adheres to the provided OpenAPI specification?*
-The [Swagger editor](https://editor.swagger.io/) it was possible to write OpenAPI specification and later to download the nodejs-server code from the [YAML file](https://hypermedia-app.herokuapp.com/backend/spec.yaml)
+With the [Swagger editor](https://editor.swagger.io/) it was possible to write OpenAPI specification and later to download the nodejs-server code from the [YAML file](https://hypermedia-app.herokuapp.com/backend/spec.yaml)
 - *Why do you think your web application adheres to common practices to partition the web application (static assets vs. application data)*
 Because we dynamically fill the HTML pages with the data taken from the database. The other parts of the page like pictures or the layout are static.
 - *Describe synthetically why and how did you manage session state, what are the state change triggering actions (e.g., POST to login etc..).*
