@@ -312,7 +312,7 @@
 				console.log("quantity: " + json.quantity);
 				let upQuantity = $('.toast-body');
 				upQuantity.text("In cart: " + json.quantity);
-				$('.toast').fadeIn(400).delay(2500).fadeOut(400);
+				$('.toast').toast({delay: 2500}).toast('show');
 			});
 		});
 	</script>
