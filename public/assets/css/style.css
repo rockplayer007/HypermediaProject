@@ -539,13 +539,7 @@ hr {
 .toast {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.97);
-  z-index: -1;
-}
-.show {
-  z-index: 3000;
-}
-.hide {
-  z-index: -1;
+  display: none;
 }
 .toast-time {
   margin-left: 2%;
@@ -688,7 +682,6 @@ hr {
   display: block;
   float: left;
   margin-top: 3%;
-  margin-left: 2%;
   margin-bottom: 3%;
 }
 .event-abstract {
