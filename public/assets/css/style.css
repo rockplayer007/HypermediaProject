@@ -199,8 +199,10 @@ a:hover {
     position: inherit;
     margin: auto;
   }
+  .book {
+    text-align: center;
+  }
   .book img {
-    display: block;
     float: none;
     margin-bottom: 2.5%;
     margin-left: auto;
@@ -340,11 +342,13 @@ hr {
 }
 @media (max-width: 768px) {
   .author img {
-    display: block;
     float: none;
     margin-bottom: 2.5%;
     margin-left: auto;
     margin-right: auto;
+  }
+  .author {
+    text-align: center;
   }
   .author div {
     float: none;
@@ -366,12 +370,12 @@ hr {
   overflow: hidden;
   margin: 0.5%;
   padding: 2%;
+  text-align: center
 }
 .event div {
   margin-left: 2%;
 }
 .event img {
-  display: block;
   width: 350px;
   height: 196px;
   margin-bottom: 2.5%;
@@ -515,6 +519,7 @@ hr {
     width: 160px;
     height: 246px;
     margin-bottom: 2.5%;
+    margin-left: 0%;
   }
   .item div {
     float: none;
@@ -629,12 +634,13 @@ hr {
   }
   .imgSpace {
     width: auto;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
   .particular-book img {
     float: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-right: 0;
   }
   .addBtn {
     float: none;
@@ -750,10 +756,14 @@ hr {
 @media (max-width: 768px) {
   .biography {
     width: auto;
+    margin-left: 0 !important;
+  }
+  .works {
+    margin-left: 0 !important;
   }
   .card {
-    width: auto;
-    margin-left: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto;
   }
 }
 /*THEMES.html PAGE*/
