@@ -311,7 +311,7 @@
 			.then(function(json) {
 				console.log("quantity: " + json.quantity);
 				let upQuantity = $('.toast-body');
-				upQuantity.text(json.quantity);
+				upQuantity.text("In cart: " + json.quantity);
 				$('.toast').toast({delay: 3000});
 				$('.toast').toast('show');
 			});
