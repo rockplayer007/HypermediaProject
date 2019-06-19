@@ -549,6 +549,11 @@ hr {
   text-align: left;
   width: 80%;
 }
+@media (min-height: 1024px) {
+  .toast {
+    margin-left: 24%;
+  }
+}
 .toast-header small {
   position: absolute;
   right: 3%;
