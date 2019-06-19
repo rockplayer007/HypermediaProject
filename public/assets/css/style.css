@@ -545,6 +545,13 @@ hr {
 .toast-time {
   float: right;
 }
+.toast-header {
+  text-align: left;
+}
+.toast-header small {
+  position: absolute;
+  right: 3%;
+}
 .particular-book {
   border: solid #fff;
   background-color: #eee;
