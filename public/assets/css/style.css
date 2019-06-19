@@ -156,6 +156,47 @@ a:hover {
   margin-top: 0;
   font-size: 115%;
 }
+@media (max-width: 750px) and (max-height: 450px) {
+  #menu-content li {
+    margin: 2% 4%;
+  }
+  #menu-content {
+    margin: 0;
+  }
+  .container a:first-child {
+    position: static;
+  }
+  #second-book {
+    position: static;
+  }
+  #third-book {
+    position: static;
+  }
+  #fourth-book {
+    position: static;
+  }
+  #fifth-book {
+    position: static;
+  }
+  #books-container {
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+  }
+  #books-container a {
+    width: 15%;
+    margin-top: 5%;
+  }
+  #books-container img {
+    width: 120px;
+    height: 184px;
+    border: 3px solid #fff;
+  }
+  .container-homepage {
+    margin-left: 15%;
+    margin-top: 3%;
+  }
+}
 /*BOOKS.html PAGE*/
 .book-list-container{
   background-color: #888;
@@ -371,9 +412,6 @@ hr {
   margin: 0.5%;
   padding: 2%;
   text-align: center
-}
-.event div {
-  margin-left: 2%;
 }
 .event img {
   width: 350px;
