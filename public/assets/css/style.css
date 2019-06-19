@@ -547,6 +547,7 @@ hr {
 }
 .toast-header {
   text-align: left;
+  width: 80%;
 }
 .toast-header small {
   position: absolute;
