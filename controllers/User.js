@@ -37,8 +37,11 @@ module.exports.userLoginPOST = function userLoginPOST (req, res, next) {
 
   User.userLoginPOST(email, hash)
       .then(function (response) {
-
-          if (bcrypt.compareSync(password, response[0].password)) {
+          
+          if(response[0] === undefined){
+              utils.writeJson(res, {"loggedIn": false});
+          }
+          else if (bcrypt.compareSync(password, response[0].password)) {
               req.session.userid = email;
               utils.writeJson(res, {"loggedIn": true});
           } else {
