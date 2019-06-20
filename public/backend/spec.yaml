@@ -106,6 +106,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: '#/definitions/Event'
+
+      x-swagger-router-controller: "Book"
   /books/{id}/similar:
     get:
       tags:
