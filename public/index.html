@@ -87,6 +87,21 @@
     });
   </script>
   <script>
+    $('.container-homepage').on('mouseover', 'img', function(e) {
+      $('div#books-container a').each(function(i) {
+        $(this).attr('style', 'z-index: 0;');
+      });
+      $(this).parent().attr('style', 'z-index: 333;');
+    });
+  </script>
+  <script>
+    $('.container-homepage').on('mouseout', 'img', function(e) {
+      $('div#books-container a').each(function(i) {
+        $(this).attr('style', 'z-index: 0;');
+      });
+    });
+  </script>
+  <script>
     $(function() {
       $('div#books-container a').each(function(i) {
         $(this).attr('href', 'pages/book.html?id='+(i+1));
