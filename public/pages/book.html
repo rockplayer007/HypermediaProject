@@ -102,26 +102,20 @@
 		        imgSpace.setAttribute('class', 'imgSpace');
 		        listItem.append(imgSpace);
 
-		        //Creates the link container that wraps up the book cover
-		        let link = document.createElement('a');
-		        link.setAttribute('href', '/pages/book.html?id='+id);
-		        imgSpace.append(link);
-
 		        //Puts the book cover in the link wrapper
 		        let image = document.createElement('img');
 		        image.setAttribute('src', '/assets/img/books/book'+id+'.png');
 		        image.setAttribute('alt', 'book-cover');
-		        link.append(image);
+		        imgSpace.append(image);
 
 		        let info = document.createElement('div');
 		        info.setAttribute('class', 'info');
 
-		        link = document.createElement('a');
-	          	link.setAttribute('href', '/pages/book.html?id='+id);
-	          	link.setAttribute('class', 'book-title');
-	          	info.append(link);
+		        titleSpan = document.createElement('span');
+	          	titleSpan.setAttribute('class', 'book-title');
+	          	info.append(titleSpan);
 
-	          	link.append(`${title}`);
+	          	titleSpan.append(`${title}`);
 
 	          	let newline = document.createElement('br');
 		        info.append(newline);

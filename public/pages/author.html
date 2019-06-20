@@ -94,16 +94,11 @@
 	        let cardAuthor = document.createElement('div');
 	        cardAuthor.setAttribute('class', 'card');
 
-	        //Creates the link container that wraps up the author portrait
-	        let link = document.createElement('a');
-	        link.setAttribute('href', '/pages/author.html?id='+id);
-	        cardAuthor.append(link);
-
 	        //Puts the author portrait in the link wrapper
 	        let image = document.createElement('img');
 	        image.setAttribute('src', '/assets/img/authors/author'+id+'.png');
-	        image.setAttribute('alt', 'author-portrit');
-	        link.append(image);
+	        image.setAttribute('alt', 'author-portrait');
+	        cardAuthor.append(image);
 
 	        let cardAuthorName = document.createElement('div');
 	        cardAuthorName.setAttribute('class', 'card-body');
