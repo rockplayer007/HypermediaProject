@@ -393,12 +393,12 @@
 <script>
 	$('.cart-list-checkout').on('click', '.checkoutBtn', function() {
 
-    let isZero = document.getElementById('priceId').textContent();
+    let isZero = document.getElementById('priceId').textContent;
 
     if (isZero === "Total price: $0.00") {
 
       alert("YOUR CART IS EMPTY!");
-      
+
     } else {
   		fetch("https://hypermedia-app.herokuapp.com/v2/users/books", {
   		//fetch("http://localhost:8080/v2/users/books", {
