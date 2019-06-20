@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: '1.0.0'
   title: 'BookStore'
-  description: 'This is an online bookstore with books, writers and users'
+  description: 'This is an online bookstore with books, writers, events and users'
   contact:
     email: "maildiroland@yahoo.it"
   license:
