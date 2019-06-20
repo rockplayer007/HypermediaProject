@@ -19,7 +19,7 @@ module.exports.userBookPUT = function userBookPUT (req, res, next) {
         User.userBookPUT(req.session.userid, books)
         //User.userBookPUT("aleale@ale.it", books)
             .then(function (response) {
-                utils.writeJson(res, response);
+                utils.writeJson(res, {"added": true});
             })
             .catch(function (response) {
                 utils.writeJson(res, response);
@@ -147,7 +147,7 @@ module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
         User.usersIdCartDELETE(req.session.userid)
         //User.usersIdCartDELETE("aleale@ale.it")
             .then(function (response) {
-                utils.writeJson(res, response);
+                utils.writeJson(res, {"deleted": true});
             })
             .catch(function (response) {
                 utils.writeJson(res, response);
@@ -171,7 +171,7 @@ module.exports.usersIdCartBookDELETE = function usersIdCartBookDELETE (req, res,
         User.usersIdCartBookDELETE(req.session.userid, id)
         //User.usersIdCartBookDELETE("aleale@ale.it", id)
         .then(function (response) {
-            utils.writeJson(res, response);
+            utils.writeJson(res, {"deleted": true});
         })
         .catch(function (response) {
             utils.writeJson(res, response);
