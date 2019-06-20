@@ -147,7 +147,7 @@ module.exports.usersIdCartDELETE = function usersIdCartDELETE (req, res, next) {
         User.usersIdCartDELETE(req.session.userid)
         //User.usersIdCartDELETE("aleale@ale.it")
             .then(function (response) {
-                utils.writeJson(res, response);
+                utils.writeJson(res, {"deleted": true});
             })
             .catch(function (response) {
                 utils.writeJson(res, response);
@@ -171,6 +171,9 @@ module.exports.usersIdCartBookDELETE = function usersIdCartBookDELETE (req, res,
         User.usersIdCartBookDELETE(req.session.userid, id)
         //User.usersIdCartBookDELETE("aleale@ale.it", id)
         .then(function (response) {
+            if(response[0] === undefined){
+                utils.writeJson(res, {"deleted": false});
+            }
             utils.writeJson(res, response);
         })
         .catch(function (response) {
